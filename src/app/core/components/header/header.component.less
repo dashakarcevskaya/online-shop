@@ -1,0 +1,171 @@
+@import 'variables';
+
+header {
+  height: 105px;
+  margin: 0px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  height: @logo-size;
+  cursor: pointer;
+}
+
+.header-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-actions__icon {
+  font-size: @icon-size;
+  opacity: 0.85;
+  margin-left: 10px;
+  opacity: 0.5;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.icon-button {
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  background: none;
+}
+
+a {
+  text-decoration: none;
+  color: @text-color;
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.header-navigation__list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  li {
+    &:hover {
+      text-decoration: underline;
+    }
+    font-size: 22px;
+  }
+}
+
+.header-navigation__list-items {
+  position: relative;
+  &:hover {
+    .header-navigation__catalog {
+      display: block;
+    }
+  }
+}
+
+.header-navigation__item {
+  padding: 30px;
+}
+
+.header-navigation__catalog {
+  display: none;
+  li {
+    margin: 20px;
+  }
+  box-shadow: 0 0 10px 5px #dddddd;
+  position: absolute;
+  left: 0;
+  top: 40px;
+  background-color: #fafafa;
+  padding: 10px;
+  width: 200px;
+  z-index: 1;
+}
+
+.heade__mobile {
+  display: none;
+}
+
+.header-navigation__mobile {
+  display: none;
+}
+
+.header-actions__mobile-menu {
+  display: none;
+}
+
+.navigation-menu__items-mobile {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  header {
+    padding: 0px 20px;
+    border-bottom: 1px solid #dddddd;
+  }
+}
+
+@media (max-width: 768px) {
+  header {
+    border-bottom: 1px solid #dddddd;
+  }
+
+  .header-navigation {
+    display: none;
+  }
+
+  .header-actions__mobile-menu {
+    display: flex;
+  }
+
+  .header-navigation__mobile {
+    display: flex;
+  }
+
+  .icon-button__mobile {
+    border: 0;
+    outline: 0;
+    background: none;
+  }
+
+  .header {
+    height: 70px;
+    display: flex;
+    padding: 20px;
+  }
+
+  .logo {
+    // display: none;
+  }
+
+  .navigation-menu__mobile {
+    width: 300px;
+    background-color: @menu-color;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    display: none;
+  }
+
+  .navigation-menu__mobile--visible {
+    display: block;
+  }
+
+  .navigation-menu__item-mobile {
+    font-size: 24px;
+    margin: 20px;
+  }
+
+  .navigation-menu__items-mobile {
+    display: block;
+  }
+}

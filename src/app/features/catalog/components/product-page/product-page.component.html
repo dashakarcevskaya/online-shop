@@ -1,0 +1,47 @@
+<div class="product-container" *ngIf="!!($product | async)">
+  <div class="product-caption">
+    <div class="product-image">
+      <img [src]="($product | async).images[0]" />
+    </div>
+    <div class="product-info">
+      <span class="product__brand">{{ ($product | async).brand }} {{ ($product | async).model }}</span>
+      <span class="product__price">{{ ($product | async).price }} руб.</span>
+      <div class="product__quantity">
+        <button
+          type="button"
+          class="quantity-button"
+          (click)="reduceQuantity()">-</button>
+        <input
+          type="text"
+          value="{{ quantity }}"
+          min="1"
+          max="10"
+          name="quantity"
+          class="quantity-input"/>
+        <button
+          type="button"
+          class="quantity-button"
+          (click)="increaseQuantity()">+</button>
+      </div>
+      <button class="product-info__button">Добавить в корзину</button>
+      <button class="product-info__button">Добавить в сранение</button>
+    </div>
+  </div>
+  <div class="product-description">
+    <span class="description__title">Описание</span>
+    <div class="product-description__table">
+      <div *ngFor="let category of $description | async">
+        <div class="product-description__table-title">
+          <span>{{ category.title }}</span>
+        </div>
+        <div *ngFor="let property of category.children">
+          <div class="product-description__table-item">
+            <span>{{ property.name }}</span>
+            <span>{{ property.value }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

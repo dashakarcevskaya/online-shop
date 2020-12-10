@@ -1,0 +1,43 @@
+.filter-container {
+    max-width: 250px;
+    width: 100%;
+    box-shadow: 0 0 10px 5px #dddddd;
+    margin-right: 10px;
+    padding: 20px;
+}
+
+.filter-list {
+    list-style:none;
+    padding: 0;
+}
+
+.filter-list__item {
+    margin-bottom: 6px;
+}
+
+.list-name {
+    font-weight: bold;
+}
+
+.filter-list__item-name {
+    font-size: 15px;
+    margin-left: 10px;
+}
+
+.filter-container__button {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .filter-container {
+        display: none;
+        margin-top: 10px;
+    }
+
+    .filter-container__button {
+        display: flex;
+        margin-bottom: 10px;
+        padding: 0px 32px;
+        margin-top: 10px;
+    }
+}
