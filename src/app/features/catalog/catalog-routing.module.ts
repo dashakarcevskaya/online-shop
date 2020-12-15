@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { from } from 'rxjs';
 import { CatalogComponent } from './components/catalog/catalog.component';
 import { ProductPageComponent } from './components/product-page/product-page.component';
 import { ProductType } from '@core/enums/product-type';
@@ -24,7 +23,9 @@ const routes: Routes = [
   {
     path: 'phone/:id',
     component: ProductPageComponent,
-    data: { productType: ProductType.Phone }
+    data: {
+      productType: ProductType.Phone
+    }
   },
   {
     path: 'headphones/:id',
@@ -38,6 +39,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class CatalogRoutingModule {
-  params: any;
-  snapshot: any;
 }

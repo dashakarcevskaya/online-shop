@@ -1,0 +1,22 @@
+<div class="sign-in_form">
+    <div class="sign-in_form-title">
+        <span>Вход в личный кабинет</span>
+    </div>
+    <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="login-form_email">
+            <label>E-mail<span class="required-field" title="Обязательно для заполнения">*</span></label>
+            <input type="email" maxlength="50" required class="login-form_email-input" formControlName="login">
+        </div>
+        <div class="login-form_password">
+            <label>Пароль<span class="required-field" title="Обязательно для заполнения">*</span></label>
+            <input type="password" required class="login-form_password-input" formControlName="password">
+        </div>
+        <div class="login-form_submit-button">
+            <button type="submit" class="login-form_button" [disabled]="!loginForm.valid">Войти</button>
+            <a class="login-form__password-restore" href="#">Восстановить пароль</a>
+            <a class="login-form__register" href="/sign-up-page">Зарегистрироваться</a>
+        </div>
+    </form>
+    <!-- <button (click)="logOut()">Выйти</button> -->
+</div>
+

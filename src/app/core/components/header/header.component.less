@@ -3,7 +3,7 @@
 header {
   height: 105px;
   margin: 0px;
-  padding: 0;
+  padding: 0px 50px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -22,7 +22,7 @@ header {
 .header-actions__icon {
   font-size: @icon-size;
   opacity: 0.85;
-  margin-left: 10px;
+  margin-left: 20px;
   opacity: 0.5;
   cursor: pointer;
   &:hover {
@@ -35,6 +35,27 @@ header {
   outline: 0;
   cursor: pointer;
   background: none;
+}
+
+.header-actions__icon-user {
+  background: url('./header-icons/user.svg') no-repeat center;
+}
+
+.header-actions__icon-compare {
+  background: url('./header-icons/compare.svg') no-repeat center;
+}
+
+.header-actions__icon-search {
+  background: url('./header-icons/search.svg') no-repeat center;
+}
+
+.header-actions__icon-cart {
+  background: url('./header-icons/cart.svg') no-repeat center;
+}
+
+.header-actions__icon {
+  width: 22px;
+  height: 22px;
 }
 
 a {
@@ -122,6 +143,7 @@ ul {
   }
 
   .header-actions__mobile-menu {
+    background: url('./header-icons/bars.svg') no-repeat center;
     display: flex;
   }
 
@@ -136,13 +158,10 @@ ul {
   }
 
   .header {
-    height: 70px;
+    height: 65px;
     display: flex;
     padding: 20px;
-  }
-
-  .logo {
-    // display: none;
+    width: 101%;
   }
 
   .navigation-menu__mobile {
@@ -156,6 +175,16 @@ ul {
     display: none;
   }
 
+  .navigation-menu__mobile-overlay {
+    background: grey;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    z-index: 0;
+  }
+
   .navigation-menu__mobile--visible {
     display: block;
   }
@@ -167,5 +196,46 @@ ul {
 
   .navigation-menu__items-mobile {
     display: block;
+    z-index: 1;
+  }
+
+  .logo {
+    height: 30px;
+  }
+
+}
+
+@media (max-width: 960px) {
+  .header-navigation__item {
+    padding: 14px;
+    font-size: 20px;
+  }
+
+  .logo {
+    height: 33px;
+  }
+}
+
+
+@media (max-width: 420px) {
+  .logo {
+    height: 23px;
+  }
+
+  .header-actions__icon {
+    font-size: 17px;
+    height: 20px;
+    width: 20px;
+  }
+
+  .header {
+    height: 50px;
+  }
+}
+
+@media (max-width: 320px) {
+  .header-actions__icon {
+    height: 18px;
+    width: 18px;
   }
 }

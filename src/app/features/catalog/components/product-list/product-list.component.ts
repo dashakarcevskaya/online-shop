@@ -1,23 +1,32 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+
+import { Observable } from 'rxjs';
+
 import { ProductService } from '@services/product.service';
 import { ProductShortDescriptionService } from '../../services/product-short-description.service';
-import { map } from 'rxjs/operators';
 
 import { ProductType } from '@core/enums/product-type';
 import { Product } from '@core/types/product';
-import { from, Observable } from 'rxjs';
+import { Searcher } from '@core/entities/searcher';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.less']
 })
-export class ProductListComponent implements OnInit {
-  public $products: Observable<Product[]>;
+export class ProductListComponent {
+  @Input()
+  products$: Observable<Product[]>;
+  @Input()
+  hasMore$: Observable<boolean>;
+
+  @Output()
+  loadedMore = new EventEmitter<void>();
+
   public productType: ProductType;
   public shortDescription: string;
-  @Input() ref;
+  public searcher: Searcher;
 
   constructor(
     private productService: ProductService,
@@ -25,14 +34,6 @@ export class ProductListComponent implements OnInit {
     private shordDescriptionService: ProductShortDescriptionService
   ) {
     this.productType = (this.route.data as any).value.productType;
-  }
-
-  ngOnInit(): void {
-    this.retrieveProducts();
-  }
-
-  public retrieveProducts(): void {
-    this.$products = this.productService.getAll(this.productType);
   }
 
   public createUrl(product: Product): string {
@@ -45,5 +46,9 @@ export class ProductListComponent implements OnInit {
 
   public createTitle(product: Product): string {
     return `${product.brand} ${product.model}`;
+  }
+
+  public loadMore(): void {
+    this.loadedMore.emit();
   }
 }

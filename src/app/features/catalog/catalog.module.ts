@@ -7,21 +7,21 @@ import { ProductDescriptionService } from './services/product-description.servic
 import { ProductShortDescriptionService } from './services/product-short-description.service';
 import { MappingTextService } from './services/mapping-text.service';
 
-// import { ProductComponent } from '../../components/product/product.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { FilterComponent } from './components/filter/filter.component';
 import { CatalogComponent } from './components/catalog/catalog.component';
 import { ProductPageComponent } from './components/product-page/product-page.component';
+import { SortComponent } from './components/sort/sort.component';
 
 @NgModule({
   declarations: [
-    // ProductComponent,
     ProductListComponent,
     ProductCardComponent,
     FilterComponent,
     CatalogComponent,
-    ProductPageComponent
+    ProductPageComponent,
+    SortComponent
   ],
   providers: [
     ProductDescriptionService,

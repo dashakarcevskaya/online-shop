@@ -1,11 +1,11 @@
 <div class="product-list">
   <app-product-card
-    *ngFor="let product of $products | async"
+    *ngFor="let product of products$ | async"
     [href]="createUrl(product)"
     [title]="createTitle(product)"
     [image]="product.images[0]"
     [description]="createShortDescription(product)"
-    [price]="product.price"
-  ></app-product-card>
+    [price]="product.price"></app-product-card>
+  <button (click)="loadMore()" *ngIf="hasMore$ | async" class="product-list_button">Следующие 5 товаров</button>
 </div>
-<button>Show more</button>
+

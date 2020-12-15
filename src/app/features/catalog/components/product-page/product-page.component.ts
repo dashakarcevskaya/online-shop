@@ -1,12 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ProductService } from '@services/product.service';
 import { ProductDescriptionService } from '../../services/product-description.service';
 import { ProductDescription } from '../../types/product-description';
 import { ActivatedRoute } from '@angular/router';
-import * as firebase from 'firebase';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { map, first, concatAll } from 'rxjs/operators';
-import { Input } from '@angular/core';
+import { map, concatAll } from 'rxjs/operators';
 
 import { ProductType } from '@core/enums/product-type';
 import { Product } from '@core/types/product';
@@ -23,9 +20,9 @@ export class ProductPageComponent {
   public productType: ProductType;
   public description: ProductDescription;
 
-  public $productId: Observable<string>;
-  public $product: Observable<Product>;
-  public $description: Observable<ProductDescription>;
+  public productId$: Observable<string>;
+  public product$: Observable<Product>;
+  public description$: Observable<ProductDescription>;
 
   constructor(
     private productService: ProductService,
@@ -34,14 +31,14 @@ export class ProductPageComponent {
   ) {
     this.productType = (this.route.data as any).value.productType;
 
-    this.$productId = this.route.params.pipe(map((params) => params.id));
-    this.$product = this.$productId.pipe(
+    this.productId$ = this.route.params.pipe(map((params) => params.id));
+    this.product$ = this.productId$.pipe(
       map((id) => {
         return this.productService.getById(this.productType, id);
       }),
       concatAll()
     );
-    this.$description = this.$product.pipe(
+    this.description$ = this.product$.pipe(
       map((product) =>
         productDescriptionService.mapProductToDescription(product)
       )

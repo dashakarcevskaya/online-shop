@@ -2,7 +2,6 @@ import { HeadphonesPurpose } from '../enums/headphones-purpose';
 import { HeadphonesKind } from '../enums/headphones-kind';
 
 import { Product } from './product';
-import { from } from 'rxjs';
 
 export type Headphones = Product & {
   kind: HeadphonesKind;

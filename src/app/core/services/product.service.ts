@@ -1,15 +1,15 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   AngularFirestore,
-  AngularFirestoreCollection,
-  AngularFirestoreDocument,
-  DocumentChangeAction
+  AngularFirestoreCollection
 } from '@angular/fire/firestore';
 import { ProductType } from '../enums/product-type';
+
 import { Product } from '../types/product';
-import { Phone } from '../types/phone';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+
+import { Searcher } from '../entities/searcher';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +29,7 @@ export class ProductService {
     );
   }
 
-  private getDbPath(productType: ProductType) {
+  private getDbPath(productType: ProductType): string {
     switch (productType) {
       case ProductType.Phone:
         return '/phones';
@@ -65,5 +65,9 @@ export class ProductService {
           ...doc.data()
         }))
       );
+  }
+
+  public createSearcher(type: ProductType): Searcher {
+    return new Searcher(this.db, this.getDbPath(type), type);
   }
 }

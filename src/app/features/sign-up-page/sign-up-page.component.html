@@ -1,0 +1,19 @@
+<div class="sign-up_form">
+    <div class="sign-up_form-title">
+        <span>Вход в личный кабинет</span>
+    </div>
+    <form class="register-form" [formGroup]="registerForm" >
+        <div class="register-form_email">
+            <label>E-mail<span class="required-field" title="Обязательно для заполнения">*</span></label>
+            <input type="email" maxlength="50" required class="register-form_email-input" formControlName="email">
+        </div>
+        <div class="register-form_password">
+            <label>Пароль<span class="required-field" title="Обязательно для заполнения">*</span></label>
+            <input type="password" required class="register-form_password-input" formControlName="password">
+        </div>
+        <div class="register-form_submit-button">
+            <button type="submit" class="register-form_button" [disabled]="!registerForm.valid" (click)="registerUser()">Зарегистрироваться</button>
+            <a class="register-form__register" href="/sign-in-page">У меня уже есть аккаунт</a>
+        </div>
+    </form>
+</div>

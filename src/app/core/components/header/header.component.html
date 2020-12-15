@@ -25,11 +25,10 @@
       </li>
       <li>
         <a href="#" class="header-navigation__item header-contacts__contacts">О нас</a>
-      </li>
-      
+      </li>      
     </ul>
   </div>
-
+  <div *ngIf="display" class="navigation-menu__mobile-overlay" (click)="toggle()"></div>
   <div [ngClass]="{'navigation-menu__mobile--visible': display}" class="navigation-menu__mobile">
     <ul class="navigation-menu__items-mobile">
       <li *ngFor="let item of catalog" class="navigation-menu__item-mobile">
@@ -37,32 +36,17 @@
       </li>
     </ul>
   </div>
-
   <div class="header-actions">
-    <div class="header-actions__icon header-actions__icon-search">
-      <button class="icon-button">
-        <fa-icon [icon]="faSearch" title="Search"></fa-icon>
-      </button>
-    </div>
-    <div class="header-actions__icon header-actions__icon-compare">
-      <button class="icon-button">
-        <fa-icon [icon]="faChartBar" title="Compare"></fa-icon>
-      </button>
-    </div>
-    <div class="header-actions__icon header-actions__icon-user">
-      <button class="icon-button">
-        <fa-icon [icon]="faUser"></fa-icon>
-      </button>
-    </div>
-    <div class="header-actions__icon header-actions__icon-cart">
-      <button class="icon-button">
-        <fa-icon [icon]="faShoppingCart" title="Cart"></fa-icon>
-      </button>
-    </div>
-    <div class="header-actions__icon header-actions__mobile-menu">
-      <button class="icon-button__mobile" (click)="toggle()">
-        <fa-icon [icon]="faBars"></fa-icon>
-      </button>
-    </div>
+    <a href="#">
+      <div class="header-actions__icon header-actions__icon-search"></div>
+    </a>
+    <a routerLink="/compare-page" routerLinkActive="active">
+      <div class="header-actions__icon header-actions__icon-compare"></div>
+    </a>
+    <a routerLink="/sign-in-page" routerLinkActive="active">
+      <div class="header-actions__icon header-actions__icon-user"></div>
+    </a>
+    <div class="header-actions__icon header-actions__icon-cart"></div>
+    <div class="header-actions__icon header-actions__mobile-menu" (click)="toggle()"></div>
   </div>
 </header>
