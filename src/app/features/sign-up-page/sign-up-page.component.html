@@ -1,15 +1,22 @@
 <div class="sign-up_form">
     <div class="sign-up_form-title">
-        <span>Вход в личный кабинет</span>
+        <span>Регистрация</span>
     </div>
     <form class="register-form" [formGroup]="registerForm" >
         <div class="register-form_email">
             <label>E-mail<span class="required-field" title="Обязательно для заполнения">*</span></label>
             <input type="email" maxlength="50" required class="register-form_email-input" formControlName="email">
+            <div [ngClass]="{'register-form_error': login.invalid}">
+                <span class="register-form_error-message" *ngIf="login.errors?.required">Обязательное поле</span>
+                <span class="register-form_error-message" *ngIf="login.errors?.email">Неверный email</span>
+            </div>
         </div>
         <div class="register-form_password">
             <label>Пароль<span class="required-field" title="Обязательно для заполнения">*</span></label>
             <input type="password" required class="register-form_password-input" formControlName="password">
+        </div>
+        <div *ngIf="errorMessage" class="sign-up_error-container">
+            <span class="sign-up_error-message">Аккаунт с таким именем уже существует</span>
         </div>
         <div class="register-form_submit-button">
             <button type="submit" class="register-form_button" [disabled]="!registerForm.valid" (click)="registerUser()">Зарегистрироваться</button>

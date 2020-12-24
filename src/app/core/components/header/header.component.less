@@ -17,6 +17,13 @@ header {
 .header-actions {
   display: flex;
   justify-content: space-between;
+  // &__compare-quantity {
+  //   background: red;
+  //   width: 10px;
+  //   height: 10px;
+  //   border-radius: 10px;
+  //   position: absolute;
+  // }
 }
 
 .header-actions__icon {
@@ -25,6 +32,8 @@ header {
   margin-left: 20px;
   opacity: 0.5;
   cursor: pointer;
+  width: 22px;
+  height: 22px;
   &:hover {
     opacity: 0.9;
   }
@@ -53,10 +62,6 @@ header {
   background: url('./header-icons/cart.svg') no-repeat center;
 }
 
-.header-actions__icon {
-  width: 22px;
-  height: 22px;
-}
 
 a {
   text-decoration: none;
@@ -161,7 +166,7 @@ ul {
     height: 65px;
     display: flex;
     padding: 20px;
-    width: 101%;
+    width: 100%;
   }
 
   .navigation-menu__mobile {

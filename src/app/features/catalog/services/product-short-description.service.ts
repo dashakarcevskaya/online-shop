@@ -3,9 +3,7 @@ import { ProductType } from '@core/enums/product-type';
 import { HeadphonesPurpose } from '@core/enums/headphones-purpose';
 import { Product } from '@core/types/product';
 import { Phone } from '@core/types/phone';
-import { Tv } from '@core/types/tv';
 import { Headphones } from '@core/types/headphones';
-import { from } from 'rxjs';
 
 @Injectable()
 export class ProductShortDescriptionService {

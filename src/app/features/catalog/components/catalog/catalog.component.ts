@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '@services/product.service';
 import { ProductType } from '@core/enums/product-type';
 import { SortType } from '@core/enums/sort-type';
+import { CompareService } from '@core/services/compare.service';
 
 @Component({
   selector: 'app-catalog',
@@ -20,7 +21,8 @@ export class CatalogComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private compareService: CompareService
   ) {
     this.productType = (this.route.data as any).value.productType;
   }
@@ -30,6 +32,12 @@ export class CatalogComponent implements OnInit {
     this.products$ = this.searcher.getLoadedItems();
     this.hasMore$ = this.searcher.hasMore();
     this.loadMore();
+    // this.searcher.setFilters([
+    //   { field: 'brand', value: 'Samsung' },
+    //   { field: 'memory', value: 12 },
+    //   { field: 'year', value: 2020 },
+    //   { field: 'accumulator', value: 5000 }
+    // ]);
   }
 
   public loadMore(): void {
@@ -38,5 +46,14 @@ export class CatalogComponent implements OnInit {
 
   public onChange(value: SortType): void {
     this.searcher.changeSortType(value);
+  }
+
+  public getCompareItemsAmount(): number {
+    return this.compareService.products.length;
+  }
+
+  public clearCompareList(): void {
+    this.compareService.removeAllProducts();
+    console.log(this.compareService.products);
   }
 }

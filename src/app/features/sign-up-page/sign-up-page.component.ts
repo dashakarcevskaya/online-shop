@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-// import { AngularFireAuth } from '@angular/fire/auth';
 import {
+  AbstractControl,
   FormBuilder,
-  FormControl,
   FormGroup,
   Validators
 } from '@angular/forms';
@@ -23,12 +22,13 @@ export class SignUpPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.initRegisterForm();
+  }
+
+  public initRegisterForm() {
     this.registerForm = this.fb.group({
-      email: new FormControl('', Validators.required),
-      password: new FormControl('', [
-        Validators.required,
-        Validators.minLength(6)
-      ])
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(7)]]
     });
   }
 
@@ -37,5 +37,17 @@ export class SignUpPageComponent implements OnInit {
       this.registerForm.value.email,
       this.registerForm.value.password
     );
+  }
+
+  get login(): AbstractControl {
+    return this.registerForm.get('login');
+  }
+
+  get password(): AbstractControl {
+    return this.registerForm.get('password');
+  }
+
+  get errorMessage(): string {
+    return this.auth.errorMessage;
   }
 }

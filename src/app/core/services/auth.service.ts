@@ -13,25 +13,24 @@ export class AuthService {
   public signIn(email: string, password: string): void {
     this.firebaseAuth
       .signInWithEmailAndPassword(email, password)
-      .then(() => this.router.navigate(['main-page']))
+      .then(() => this.router.navigate(['user-account']))
       .catch((response) => {
         this.errorMessage = response.message;
       });
   }
 
-  // public signOut(): Promise<void> {
-  //   return this.firebaseAuth.signOut();
-  // }
-
   public createUser(email: string, password: string) {
     this.firebaseAuth
       .createUserWithEmailAndPassword(email, password)
-      .then(() => this.router.navigate(['main-page']));
+      .then(() => this.router.navigate(['main-page']))
+      .catch((response) => {
+        this.errorMessage = response.message;
+      });
+    console.log(this.errorMessage);
   }
 
   public isLoggedIn() {
-    const isLogin = this.firebaseAuth.currentUser ? true : false;
-    return isLogin;
+    return this.firebaseAuth.currentUser !== null;
   }
 
   // public logOut(): void {

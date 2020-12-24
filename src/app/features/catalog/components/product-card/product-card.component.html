@@ -4,7 +4,7 @@
     </div>
     <div class="catalog-item__description-container">
         <div class="catalog-item__description">
-            <a [href]="href" class="catalog-item__title">{{ title }}</a>
+            <a routerLink="{{ href }}" class="catalog-item__title">{{ title }}</a>
             <span class="catalog-item__description-text"> {{ description }}</span>    
         </div>
         <div class="catalog-item__price-container">
@@ -14,7 +14,7 @@
             <button class="catalog-item__button">
                 В корзину
             </button>
-            <button class="catalog-item__button">
+            <button class="catalog-item__button" (click)="addToCompare()" [disabled]="!canAddToCompare">
                 В сравнение
             </button>
         </div>

@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CompareService } from '@core/services/compare.service';
 
 @Component({
   selector: 'app-product-card',
@@ -6,6 +7,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./product-card.component.less']
 })
 export class ProductCardComponent {
+  constructor(private compareService: CompareService) {}
   @Input()
   href: string;
   @Input()
@@ -16,4 +18,12 @@ export class ProductCardComponent {
   description: string;
   @Input()
   price: number;
+  @Input()
+  canAddToCompare: boolean;
+  @Output()
+  addedToCompare = new EventEmitter<void>();
+
+  public addToCompare(): void {
+    this.addedToCompare.emit();
+  }
 }

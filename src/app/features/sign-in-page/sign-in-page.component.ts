@@ -3,7 +3,7 @@ import {
   FormGroup,
   FormBuilder,
   Validators,
-  FormControl
+  AbstractControl
 } from '@angular/forms';
 import { AuthService } from '@services/auth.service';
 
@@ -16,28 +16,39 @@ export class SignInPageComponent implements OnInit {
   public loginForm: FormGroup;
 
   constructor(private fb: FormBuilder, private authService: AuthService) {}
-  public login: string;
-  public password: string;
 
   ngOnInit(): void {
     this.initForm();
   }
 
-  initForm() {
+  public initForm() {
     this.loginForm = this.fb.group({
-      login: new FormControl('', Validators.required),
-      password: new FormControl('', [
-        Validators.required,
-        Validators.minLength(6)
-      ])
+      login: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(7)]]
     });
   }
 
-  onSubmit(): void {
+  public onSubmit(): void {
     this.authService.signIn(
       this.loginForm.value.login,
       this.loginForm.value.password
     );
+  }
+
+  public error(): boolean {
+    return this.authService.isLoggedIn();
+  }
+
+  get login(): AbstractControl {
+    return this.loginForm.get('login');
+  }
+
+  get password(): AbstractControl {
+    return this.loginForm.get('password');
+  }
+
+  get errorMessage(): string {
+    return this.authService.errorMessage;
   }
 
   // logOut(): void {

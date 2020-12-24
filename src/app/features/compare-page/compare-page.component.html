@@ -1,1 +1,39 @@
-<p>compare-page works!</p>
+<div class="compare-container">
+  <div *ngFor="let product of getProducts()" class="compare-container__product">
+    <div class="compare-container__image">
+      <img class="compare-container__product-image" [src]="product.images[0]" />
+    </div>
+    <div *ngFor="let category of getProductDescription(product)">
+      <div class="compare-container__table-title">
+        <span>{{ category.title }}</span>
+      </div>
+      <div *ngFor="let property of category.children">
+        <div
+          class="compare-container__table-item"
+          [ngClass]="{
+            'compare-container__table-item--different': getDifferentProductProperties().includes(
+              property.name
+            )
+          }"
+        >
+          <span>{{ property.name }}</span>
+          <span>{{ property.value }}</span>
+        </div>
+      </div>
+    </div>
+    <button
+      class="compare-container__button_clear"
+      (click)="removeProduct(product)"
+    >
+      Удалить из сравнения
+    </button>
+  </div>
+  <div
+    [ngClass]="{
+      'compare-container__message_visible': getProducts().length === 0,
+      'compare-container__message_hidden': getProducts().length !== 0
+    }"
+  >
+    <span>Нет товаров в сравнении</span>
+  </div>
+</div>

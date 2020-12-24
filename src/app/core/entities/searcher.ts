@@ -10,21 +10,28 @@ import { Product } from '@core/types/product';
 import { ProductType } from '@core/enums/product-type';
 import { SortType } from '@core/enums/sort-type';
 
+type FilterQuery = { field: string; value: any };
+
 export class Searcher {
-  private lastItem$ = new BehaviorSubject<QueryDocumentSnapshot<Product>>(null);
-  private items$ = new BehaviorSubject<DocumentChangeAction<Product>[]>([]);
+  private lastItem: QueryDocumentSnapshot<Product> = null;
+  private items$ = new BehaviorSubject<{
+    items: DocumentChangeAction<Product>[];
+    firstLoad: boolean;
+  }>({ items: [], firstLoad: true });
   private loadedItems$: Observable<Product[]>;
   private hasMore$ = new BehaviorSubject(false);
   private load$ = new Subject<void>();
 
-  private orderBy = 'year';
-  private orderDirection: 'asc' | 'desc' = 'desc';
+  private orderBy = null;
+  private orderDirection: 'asc' | 'desc';
+
+  private filters: Array<FilterQuery> = [];
 
   constructor(
     private db: AngularFirestore,
     private dbPath: string,
     private productType: ProductType,
-    private limit = 5
+    private limit = 7
   ) {
     this.init();
   }
@@ -35,33 +42,51 @@ export class Searcher {
         switchMap(() => {
           return this.db
             .collection<Product>(this.dbPath, (ref) => {
-              const startAfter = this.lastItem$.getValue();
-              const query = ref
-                .orderBy(this.orderBy, this.orderDirection)
-                .limit(this.limit + 1);
-              return startAfter ? query.startAfter(startAfter) : query;
+              let query = ref.limit(this.limit + 1);
+              if (this.orderBy) {
+                query = query.orderBy(this.orderBy, this.orderDirection);
+              }
+              if (this.lastItem) {
+                query = query.startAfter(this.lastItem);
+              }
+              if (this.filters.length > 0) {
+                query = this.filters.reduce(
+                  (acc, item) => acc.where(item.field, '==', item.value),
+                  query
+                );
+              }
+              return query;
             })
             .snapshotChanges();
         })
       )
-      .subscribe((items) => this.items$.next(items));
+      .subscribe((items) =>
+        this.items$.next({ items, firstLoad: !this.lastItem })
+      );
 
-    this.items$.subscribe((items) => {
+    this.items$.subscribe(({ items }) => {
       if (items.length > 0) {
-        this.lastItem$.next(items[items.length - 2].payload.doc);
+        this.lastItem = items[items.length - 2].payload.doc;
         this.hasMore$.next(items.length === this.limit + 1);
       }
     });
 
     this.loadedItems$ = this.items$.pipe(
-      map((items) => {
-        return items.map((item) => {
+      map(({ items, firstLoad }) => {
+        const products = items.map((item) => {
           const data = item.payload.doc.data();
           const id = item.payload.doc.id;
           return { id, type: this.productType, ...data };
         });
+        return { firstLoad, items: products };
       }),
-      scan((acc, items) => [...acc, ...items.slice(0, this.limit)], [])
+      scan(
+        (acc, { items, firstLoad }) =>
+          firstLoad
+            ? items.slice(0, this.limit)
+            : [...acc, ...items.slice(0, this.limit)],
+        []
+      )
     );
   }
 
@@ -80,8 +105,8 @@ export class Searcher {
   public changeSortType(sortType: SortType): void {
     switch (sortType) {
       case SortType.Default:
-        this.orderBy = 'year';
-        this.orderDirection = 'desc';
+        this.orderBy = null;
+        this.orderDirection = null;
         break;
       case SortType.PriceAsc:
         this.orderBy = 'price';
@@ -92,7 +117,13 @@ export class Searcher {
         this.orderDirection = 'desc';
         break;
     }
-    this.lastItem$.next(null);
+    this.lastItem = null;
     this.load$.next();
   }
+
+  // public setFilters(filters: FilterQuery[]): void {
+  //   this.filters = filters;
+  //   this.lastItem = null;
+  //   this.load$.next();
+  // }
 }

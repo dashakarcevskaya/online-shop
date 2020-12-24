@@ -48,7 +48,7 @@ export class ProductService {
         items.map((item) => {
           const data = item.payload.doc.data();
           const id = item.payload.doc.id;
-          return { id, type, ...data };
+          return { id, type, ...data } as Product;
         })
       )
     );
@@ -71,3 +71,13 @@ export class ProductService {
     return new Searcher(this.db, this.getDbPath(type), type);
   }
 }
+
+// const filter = {
+//   name: 'Брэнд',
+//   productType: 'phone',
+//   field: 'brand',
+//   options: [
+//     { name: 'Apple', value: 'Apple' },
+//     { name: 'Samsung', value: 'Samsung' }
+//   ]
+// };

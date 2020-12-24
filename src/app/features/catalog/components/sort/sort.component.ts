@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { SortType } from '@core/enums/sort-type';
-// import { Searcher } from '@core/entities/searcher';
 import { sort } from './sortTypes';
 
 @Component({

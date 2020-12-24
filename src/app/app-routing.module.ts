@@ -35,6 +35,13 @@ const routes: Routes = [
       import('./features/compare-page/compare-page.module').then(
         (m) => m.ComparePageModule
       )
+  },
+  {
+    path: 'user-account',
+    loadChildren: () =>
+      import('./features/user-account/user-account.module').then(
+        (m) => m.UserAccountModule
+      )
   }
 ];
 

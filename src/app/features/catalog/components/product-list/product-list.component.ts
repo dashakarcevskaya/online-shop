@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Observable } from 'rxjs';
 
+import { CompareService } from '@core/services/compare.service';
 import { ProductService } from '@services/product.service';
 import { ProductShortDescriptionService } from '../../services/product-short-description.service';
 
@@ -20,7 +21,6 @@ export class ProductListComponent {
   products$: Observable<Product[]>;
   @Input()
   hasMore$: Observable<boolean>;
-
   @Output()
   loadedMore = new EventEmitter<void>();
 
@@ -31,13 +31,14 @@ export class ProductListComponent {
   constructor(
     private productService: ProductService,
     private route: ActivatedRoute,
-    private shordDescriptionService: ProductShortDescriptionService
+    private shordDescriptionService: ProductShortDescriptionService,
+    private compareService: CompareService
   ) {
     this.productType = (this.route.data as any).value.productType;
   }
 
   public createUrl(product: Product): string {
-    return `catalog/${this.productType}/${product.id}`;
+    return `/catalog/${this.productType}/${product.id}`;
   }
 
   public createShortDescription(product: Product): string {
@@ -50,5 +51,17 @@ export class ProductListComponent {
 
   public loadMore(): void {
     this.loadedMore.emit();
+  }
+
+  public trackByFn(index, item) {
+    return item.id;
+  }
+
+  public addToCompare(product: Product): void {
+    this.compareService.addProduct(product);
+  }
+
+  public canAddToCompare(product: Product): boolean {
+    return this.compareService.canAddProduct(product);
   }
 }

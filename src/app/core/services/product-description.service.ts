@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 import { ProductType } from '@core/enums/product-type';
 import { Product } from '@core/types/product';
@@ -8,9 +8,10 @@ import { Headphones } from '@core/types/headphones';
 import { MappingTextService } from './mapping-text.service';
 
 import { ProductDescription } from '../types/product-description';
-import { from } from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ProductDescriptionService {
   constructor(private mappingService: MappingTextService) {}
 
