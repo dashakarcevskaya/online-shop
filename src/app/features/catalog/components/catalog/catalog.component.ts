@@ -56,4 +56,8 @@ export class CatalogComponent implements OnInit {
     this.compareService.removeAllProducts();
     console.log(this.compareService.products);
   }
+
+  public updateSearchValue(value: string): void {
+    this.searcher.changeSearchString(value);
+  }
 }

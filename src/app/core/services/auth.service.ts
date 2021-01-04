@@ -7,33 +7,60 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private firebaseAuth: AngularFireAuth, private router: Router) {}
+  constructor(private firebaseAuth: AngularFireAuth, private router: Router) {
+    this.firebaseAuth.user.subscribe((user) => {
+      this.currentUserId = user?.uid || null;
+      this.currentUserEmail = user?.email || null;
+    });
+  }
   public errorMessage = '';
+  public currentUserId: string;
+  public currentUserEmail: string;
 
   public signIn(email: string, password: string): void {
     this.firebaseAuth
       .signInWithEmailAndPassword(email, password)
-      .then(() => this.router.navigate(['user-account']))
+      .then(() => {
+        this.router.navigate(['user-account']);
+      })
       .catch((response) => {
         this.errorMessage = response.message;
       });
   }
 
-  public createUser(email: string, password: string) {
+  public signOut(): void {
     this.firebaseAuth
-      .createUserWithEmailAndPassword(email, password)
-      .then(() => this.router.navigate(['main-page']))
+      .signOut()
+      .then(() => {
+        this.router.navigate(['sign-in-page']);
+      })
       .catch((response) => {
         this.errorMessage = response.message;
       });
-    console.log(this.errorMessage);
+  }
+
+  public async createUser(email: string, password: string): Promise<string> {
+    try {
+      const credentials = await this.firebaseAuth.createUserWithEmailAndPassword(
+        email,
+        password
+      );
+      this.router.navigate(['user-account']);
+      return credentials.user.uid;
+    } catch (e) {
+      this.errorMessage = e.message;
+    }
   }
 
   public isLoggedIn() {
     return this.firebaseAuth.currentUser !== null;
   }
 
-  // public logOut(): void {
-  //   this.firebaseAuth.signOut();
-  // }
+  public getUserId(): string {
+    return this.currentUserId;
+  }
+
+  public getUserEmail(): string {
+    return this.currentUserEmail;
+  }
 }

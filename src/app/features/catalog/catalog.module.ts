@@ -12,6 +12,8 @@ import { FilterComponent } from './components/filter/filter.component';
 import { CatalogComponent } from './components/catalog/catalog.component';
 import { ProductPageComponent } from './components/product-page/product-page.component';
 import { SortComponent } from './components/sort/sort.component';
+import { SearchLineComponent } from './components/search-line/search-line.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,9 +22,10 @@ import { SortComponent } from './components/sort/sort.component';
     FilterComponent,
     CatalogComponent,
     ProductPageComponent,
-    SortComponent
+    SortComponent,
+    SearchLineComponent
   ],
   providers: [ProductShortDescriptionService, MappingTextService],
-  imports: [CommonModule, CatalogRoutingModule]
+  imports: [CommonModule, CatalogRoutingModule, FormsModule]
 })
 export class CatalogModule {}

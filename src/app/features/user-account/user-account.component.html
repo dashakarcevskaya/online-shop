@@ -1,1 +1,39 @@
-<p>user-account works!</p>
+<div class="user-information_container">
+    <span class="user-information_title">Личный кабинет</span>
+    <div class="user-information">
+        <div class="user-information__name">
+            <div>
+                <span class="user-information_item-title">Имя:</span>
+                <span class="user-information_item-value">{{currentUser.name | capitalize}}</span>
+                <button class="user-information__edit-button" (click)="showNameEditor()">
+                    <div class="user-information__edit"></div>
+                </button>
+            </div>
+            <div class="user-information_change-items" [ngClass]="{'user-information_change-items__visible': isChangeName}">
+                <input type="text" title="Введите новое имя" class="user-information_change-input" [(ngModel)]="userName">
+                <button class="user-information_change-button" (click)="changeUserName()">Изменить</button>
+            </div>
+        </div>
+        <div class="user-information__surname">
+            <div>
+                <span class="user-information_item-title">Фамилия:</span>
+                <span class="user-information_item-value">{{currentUser.surname | capitalize}}</span>
+                <button class="user-information__edit-button" (click)="showSurnameEditor()">
+                    <div class="user-information__edit"></div>
+                </button>    
+            </div>
+                <div class="user-information_change-items" [ngClass]="{'user-information_change-items__visible': isChangeSurname}">
+                <input type="text" title="Введите новое имя" class="user-information_change-input" [(ngModel)]="userSurname">
+                <button class="user-information_change-button" (click)="changeUserSurname()">Изменить</button>
+            </div>  
+        </div>
+        <div class="user-information__surname">
+            <div>
+                <span class="user-information_item-title">Почта:</span>
+                <span class="user-information_item-value">{{getUserEmail()}}</span>
+            </div>
+        </div>
+    </div>
+
+    <button (click)="logOut()" class="user-information_button">Выйти</button>
+</div>

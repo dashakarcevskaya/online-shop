@@ -28,7 +28,7 @@
     padding: 30px;
     &_error {
         display: flex;
-        margin-bottom: 10px;
+        margin-bottom: 20px;
         &-message {
             color: red;
         }
@@ -46,7 +46,9 @@
     }
 }
 
-.register-form_password-input {
+.register-form_password-input,
+.register-form_name-input,
+.register-form_surname-input {
     &:extend(.register-form_email-input);
     &:focus {
         border-color: #8f8686;
@@ -58,7 +60,9 @@
     flex-direction: column;
 }
 
-.register-form_password {
+.register-form_password,
+.register-form_name,
+.register-form_surname {
     &:extend(.register-form_email);
 }
 
@@ -73,6 +77,9 @@
     color: #faf6f6;
     padding: 10px 20px;
     cursor: pointer;
+    &__disabled {
+        background: #8f8686;
+    }
 }
 
 .register-form_submit-button {

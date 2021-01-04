@@ -24,6 +24,8 @@ export class Searcher {
 
   private orderBy = null;
   private orderDirection: 'asc' | 'desc';
+  private searchString = '';
+  private searchField = 'name';
 
   private filters: Array<FilterQuery> = [];
 
@@ -54,6 +56,11 @@ export class Searcher {
                   (acc, item) => acc.where(item.field, '==', item.value),
                   query
                 );
+              }
+              if (this.searchString !== '') {
+                query = query
+                  .where(this.searchField, '>=', this.searchString)
+                  .where(this.searchField, '<=', this.searchString + '\uf8ff');
               }
               return query;
             })
@@ -117,6 +124,12 @@ export class Searcher {
         this.orderDirection = 'desc';
         break;
     }
+    this.lastItem = null;
+    this.load$.next();
+  }
+
+  public changeSearchString(value: string): void {
+    this.searchString = value.toLocaleLowerCase();
     this.lastItem = null;
     this.load$.next();
   }

@@ -12,6 +12,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 import { environment } from '../environments/environment';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+// import { CapitalizePipe } from './pipes/capitalize.pipe';
 
 @NgModule({
   declarations: [AppComponent],

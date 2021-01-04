@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '@core/services/auth.service';
+import { UserService } from '@services/user.service';
 
 @Component({
   selector: 'app-sign-up-page',
@@ -18,7 +19,8 @@ export class SignUpPageComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
-    private route: Router
+    private route: Router,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -27,16 +29,26 @@ export class SignUpPageComponent implements OnInit {
 
   public initRegisterForm() {
     this.registerForm = this.fb.group({
+      name: ['', [Validators.required, Validators.minLength(3)]],
+      surname: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(7)]]
     });
   }
 
   public registerUser(): void {
-    this.auth.createUser(
-      this.registerForm.value.email,
-      this.registerForm.value.password
-    );
+    this.auth
+      .createUser(
+        this.registerForm.value.email,
+        this.registerForm.value.password
+      )
+      .then((id) => {
+        this.userService.addNewUser(
+          this.registerForm.value.name,
+          this.registerForm.value.surname,
+          id
+        );
+      });
   }
 
   get login(): AbstractControl {
@@ -45,6 +57,14 @@ export class SignUpPageComponent implements OnInit {
 
   get password(): AbstractControl {
     return this.registerForm.get('password');
+  }
+
+  get name(): AbstractControl {
+    return this.registerForm.get('name');
+  }
+
+  get surname(): AbstractControl {
+    return this.registerForm.get('surname');
   }
 
   get errorMessage(): string {

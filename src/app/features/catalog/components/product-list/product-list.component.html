@@ -7,7 +7,13 @@
     [description]="createShortDescription(product)"
     [canAddToCompare]="canAddToCompare(product)"
     [price]="product.price"
-    (addedToCompare)="addToCompare(product)"></app-product-card>
-  <button (click)="loadMore()" *ngIf="hasMore$ | async" class="product-list_button" >Следующие товары</button>
+    (addedToCompare)="addToCompare(product)"
+  ></app-product-card>
+  <button
+    (click)="loadMore()"
+    *ngIf="hasMore$ | async"
+    class="product-list_button"
+  >
+    Следующие товары
+  </button>
 </div>
-
