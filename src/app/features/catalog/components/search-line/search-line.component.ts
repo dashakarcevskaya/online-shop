@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-// import { Searcher } from '@core/entities/searcher';
 
 @Component({
   selector: 'app-search-line',
@@ -7,14 +6,6 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./search-line.component.less']
 })
 export class SearchLineComponent {
-  // public currentString: string;
-  // public searcher: Searcher;
-
-  // ngOnInit(): void {}
-
-  // public updateSearchLine(): void {
-  //   this.searcher.changeSearchString(this.currentString);
-  // }
   @Output()
   changed = new EventEmitter<string>();
   public onChange(value) {

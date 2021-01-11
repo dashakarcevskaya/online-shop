@@ -11,12 +11,15 @@
             <span class="catalog-item__price">{{ price }} р.</span>
         </div>
         <div class="catalog-item__buttons">
-            <button class="catalog-item__button">
+            <button class="catalog-item__button" (click)="addToCart()">
                 В корзину
             </button>
-            <button class="catalog-item__button" (click)="addToCompare()" [disabled]="!canAddToCompare">
+            <button class="catalog-item__button" (click)="addToCompare()">
                 В сравнение
             </button>
+            <div class="catalog-item_notice" [ngClass]="{'catalog-item_notice__visible': hasProduct(product)}">
+                <span class="catalog-item_notice-title">Товар в сравнении</span>
+            </div>
         </div>
     </div>
 </div>

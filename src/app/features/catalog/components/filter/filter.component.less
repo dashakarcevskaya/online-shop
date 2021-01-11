@@ -17,6 +17,7 @@
 
 .list-name {
   font-weight: bold;
+  font-size: 16px;
 }
 
 .filter-list__item-name {
@@ -28,9 +29,23 @@
   display: none;
 }
 
+@media (max-width: 1280px) {
+  .filter-container {
+    max-width: 200px;
+  }
+}
+
 @media (max-width: 1024px) {
   .filter-container {
-    max-width: 230px;
+    max-width: 210px;
+  }
+
+  .filter-list__item-name {
+    font-size: 12px;
+  }
+
+  .list-name {
+    font-size: 14px;
   }
 }
 

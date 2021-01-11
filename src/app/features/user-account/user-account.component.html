@@ -4,7 +4,7 @@
         <div class="user-information__name">
             <div>
                 <span class="user-information_item-title">Имя:</span>
-                <span class="user-information_item-value">{{currentUser.name | capitalize}}</span>
+                <span class="user-information_item-value">{{ name | capitalize }}</span>
                 <button class="user-information__edit-button" (click)="showNameEditor()">
                     <div class="user-information__edit"></div>
                 </button>
@@ -17,7 +17,7 @@
         <div class="user-information__surname">
             <div>
                 <span class="user-information_item-title">Фамилия:</span>
-                <span class="user-information_item-value">{{currentUser.surname | capitalize}}</span>
+                <span class="user-information_item-value">{{ surname | capitalize }}</span>
                 <button class="user-information__edit-button" (click)="showSurnameEditor()">
                     <div class="user-information__edit"></div>
                 </button>    
@@ -27,10 +27,32 @@
                 <button class="user-information_change-button" (click)="changeUserSurname()">Изменить</button>
             </div>  
         </div>
-        <div class="user-information__surname">
+        <div class="user-information__email">
             <div>
                 <span class="user-information_item-title">Почта:</span>
-                <span class="user-information_item-value">{{getUserEmail()}}</span>
+                <span class="user-information_item-value">{{ email }}</span>
+            </div>
+        </div>
+        <div class="user-information__address">
+            <div>
+                <span class="user-information_item-title">Адрес:</span>
+                <span class="user-information_item-value">{{ currentUser | address }}</span>
+                <button class="user-information__edit-button" (click)="showAddressEditor()">
+                    <div class="user-information__edit"></div>
+                </button>    
+            <!-- </div>
+                <div class="user-information_change-items" [ngClass]="{'user-information_change-items__visible': isChangeSurname}">
+                <input type="text" title="Введите новое имя" class="user-information_change-input" [(ngModel)]="userSurname">
+                <button class="user-information_change-button" (click)="changeUserSurname()">Изменить</button>
+            </div>   -->
+            <div class="user-information_change-items" [ngClass]="{'user-information_change-items__visible': isChangeAddress}">
+                <form [formGroup]="addressForm" (ngSubmit)="changeUserAddress()" class="user-information_address-form">
+                    <input type="text" formControlName="sity" placeholder="Город" class="user-information_address-form_input">
+                    <input type="text" formControlName="street" placeholder="Улица" class="user-information_address-form_input">
+                    <input type="text" formControlName="house" placeholder="Дом" class="user-information_address-form_input">
+                    <input type="text" formControlName="apartment" placeholder="Квартира" class="user-information_address-form_input">
+                    <button type="submit" class="user-information_address-form_button">Изменить</button>
+                </form>
             </div>
         </div>
     </div>

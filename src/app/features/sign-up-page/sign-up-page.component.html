@@ -6,32 +6,42 @@
         <div class="register-form_name">
             <label>Имя<span class="required-field" title="Обязательно для заполнения">*</span></label>
             <input type="text" formControlName="name" class="register-form_name-input">
+            <div [ngClass]="{'register-form_error': name.errors?.pattern}">
+                <!-- <span class="register-form_error-message" *ngIf="name.errors?.required">Обязательное поле</span> -->
+                <span class="register-form_error-message" *ngIf="name.errors?.pattern">Поле должно содержать только буквы</span>
+            </div>
         </div>
         <div class="register-form_surname">
             <label>Фамилия<span class="required-field" title="Обязательно для заполнения">*</span></label>
             <input type="text" formControlName="surname" class="register-form_surname-input">
+            <div [ngClass]="{'register-form_error': surname.errors?.minlength || surname.errors?.pattern}">
+                <!-- <span class="register-form_error-message" *ngIf="surname.errors?.required">Обязательное поле</span> -->
+                <span class="register-form_error-message" *ngIf="surname.errors?.minlength">Поле должно содержать минимум 3 буквы</span>
+                <span class="register-form_error-message" *ngIf="surname.errors?.pattern">Поле должно содержать только буквы</span>
+            </div>
         </div>
+
         <div class="register-form_email">
             <label>E-mail<span class="required-field" title="Обязательно для заполнения">*</span></label>
             <input type="email" class="register-form_email-input" formControlName="email">
-            <!-- <div [ngClass]="{'register-form_error': login.invalid}">
-                <span class="register-form_error-message" *ngIf="login.errors?.required">Обязательное поле</span>
-                <span class="register-form_error-message" *ngIf="login.errors?.email">Неверный email</span>
-            </div> -->
+            <div [ngClass]="{'register-form_error': email.errors?.email}">
+                <!-- <span class="register-form_error-message" *ngIf="email.errors?.required">Обязательное поле</span> -->
+                <span class="register-form_error-message" *ngIf="email.errors?.email">Неверный email</span>
+            </div>
         </div>
         <div class="register-form_password">
             <label>Пароль<span class="required-field" title="Обязательно для заполнения">*</span></label>
             <input type="password" required class="register-form_password-input" formControlName="password">
-            <!-- <div [ngClass]="{'register-form_error': password.invalid}">
-                <span *ngIf="password.errors?.required" class="register-form_error-message">Обязательное поле</span>
+            <div [ngClass]="{'register-form_error': password.errors?.minlength}">
+                <!-- <span *ngIf="password.errors?.required" class="register-form_error-message">Обязательное поле</span> -->
                 <span *ngIf="password.errors?.minlength" class="register-form_error-message">Пароль должен содержать больше 6 символов</span>
-            </div> -->
+            </div>
         </div>
         <div *ngIf="errorMessage" class="sign-up_error-container">
             <span class="sign-up_error-message">Аккаунт с таким именем уже существует</span>
         </div>
         <div class="register-form_submit-button">
-            <button type="submit" class="register-form_button" [disabled]="!registerForm.valid">Зарегистрироваться</button>
+            <button type="submit" class="register-form_button" [disabled]="registerForm.invalid" [ngClass]="{'register-form_button__disabled': registerForm.invalid}">Зарегистрироваться</button>
             <a class="register-form__register" href="/sign-in-page">У меня уже есть аккаунт</a>
         </div>
     </form>

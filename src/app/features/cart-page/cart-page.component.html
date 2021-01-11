@@ -1,0 +1,47 @@
+<div class="cart-container">
+  <span class="cart-container_title">Корзина</span>
+  <div class="cart-container_order" [ngClass]="{'cart-container_order__hidden': isEmptyList()}">
+    <div class="cart-container_products">
+        <div class="cart-container_product"  *ngFor="let item of getCartItems()">
+          <div class="cart-container_image-container">
+            <img class="cart-container_product-image" [src]="item.product.images[0]" />
+          </div>
+          <div class="cart-container_product-name">
+            <span>
+              {{ item.product.brand }} {{ item.product.model }}
+            </span>
+          </div>
+          <div class="cart-container_product-quantity">
+            <button class="cart-container_quantity-button" (click)="reduceQuantity(item.product.id)">-</button>
+            <input value="{{ item.quantity }}" class="cart-container_quantity-input" readonly>
+            <button class="cart-container_quantity-button" (click)="increaseQuantity(item.product.id)">+</button>
+          </div>
+          <div class="cart-container_product-price">
+            <span >{{ item.product.price }} руб.</span>
+          </div>
+          <div class="cart-container_button">
+              <button class="cart-container_button__remove" (click)="removeItem(item.product)">
+                <div class="cart-container_icon-times"></div>
+              </button>
+            </div>
+        </div>
+    </div>
+    <div class="cart-container_details" >
+      <div class="cart-container_details-info">
+        <span class="cart-container_details-info_item">Сумма по товарам: <strong>{{ getCostOfItems() }} руб.</strong></span>
+        <span class="cart-container_details-info_item">Стоимость доставки: <strong>{{ getCostOfDelivery() }} руб.</strong></span>
+      </div>
+      <div class="cart-container_details-price">
+        <span class="cart-container_details-price-item">Итого: <strong>{{ getFinalyPrice() }} руб.</strong></span>
+      </div>
+      <a routerLink="/order-page" routerLinkActive="active">
+        <button class="cart-container_details-button">Оформить заказ</button>
+      </a>
+  </div>
+  </div>
+  <div class="cart-container__message_hidden" [ngClass]="{'cart-container__message_visible': isEmptyList()}">
+    <div>
+      <span>Нет товаров в корзине</span>
+    </div>
+  </div>
+</div>

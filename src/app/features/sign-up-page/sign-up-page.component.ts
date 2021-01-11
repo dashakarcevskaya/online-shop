@@ -27,10 +27,24 @@ export class SignUpPageComponent implements OnInit {
     this.initRegisterForm();
   }
 
-  public initRegisterForm() {
+  public initRegisterForm(): void {
     this.registerForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(3)]],
-      surname: ['', [Validators.required, Validators.minLength(3)]],
+      name: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(1),
+          Validators.pattern(/^[А-яA-z]*$/)
+        ]
+      ],
+      surname: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.pattern(/^[А-яA-z]*$/)
+        ]
+      ],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(7)]]
     });
@@ -51,8 +65,8 @@ export class SignUpPageComponent implements OnInit {
       });
   }
 
-  get login(): AbstractControl {
-    return this.registerForm.get('login');
+  get email(): AbstractControl {
+    return this.registerForm.get('email');
   }
 
   get password(): AbstractControl {

@@ -11,8 +11,7 @@
   <app-product-list
     [products$]="products$"
     [hasMore$]="hasMore$"
-    (loadedMore)="loadMore()"
-  ></app-product-list>
+    (loadedMore)="loadMore()"></app-product-list>
 </div>
 <div class="compare-notification" *ngIf="getCompareItemsAmount() > 0">
   <button routerLink="/compare-page" class="compare-notification__button">
@@ -21,4 +20,5 @@
   <button class="compare-notification__button" (click)="clearCompareList()">
     <div class="icon-trash"></div>
   </button>
+
 </div>

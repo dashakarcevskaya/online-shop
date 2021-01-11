@@ -5,11 +5,13 @@ import { Observable } from 'rxjs';
 
 import { CompareService } from '@core/services/compare.service';
 import { ProductService } from '@services/product.service';
+import { CartService } from '@services/cart.service';
 import { ProductShortDescriptionService } from '../../services/product-short-description.service';
 
 import { ProductType } from '@core/enums/product-type';
 import { Product } from '@core/types/product';
 import { Searcher } from '@core/entities/searcher';
+// import { CartItem } from '@core/types/cart-item';
 
 @Component({
   selector: 'app-product-list',
@@ -32,7 +34,8 @@ export class ProductListComponent {
     private productService: ProductService,
     private route: ActivatedRoute,
     private shordDescriptionService: ProductShortDescriptionService,
-    private compareService: CompareService
+    private compareService: CompareService,
+    private cartService: CartService
   ) {
     this.productType = (this.route.data as any).value.productType;
   }
@@ -63,5 +66,9 @@ export class ProductListComponent {
 
   public canAddToCompare(product: Product): boolean {
     return this.compareService.canAddProduct(product);
+  }
+
+  public addToCart(product: Product): void {
+    this.cartService.addProduct(product);
   }
 }
