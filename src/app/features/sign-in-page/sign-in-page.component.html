@@ -1,0 +1,32 @@
+<div class="sign-in_form">
+    <div class="sign-in_form-title">
+        <span>Вход в личный кабинет</span>
+    </div>
+    <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="login-form_email">
+            <label>E-mail<span class="required-field" title="Обязательно для заполнения">*</span></label>
+            <input type="email" class="login-form_email-input" formControlName="login">
+            <div [ngClass]="{'login-form_error': login.invalid}">
+                <span class="login-form_error-message" *ngIf="login.errors?.required">Обязательное поле</span>
+                <span class="login-form_error-message" *ngIf="login.errors?.email">Неверный email</span>
+            </div>
+        </div>
+        <div class="login-form_password">
+            <label>Пароль<span class="required-field" title="Обязательно для заполнения">*</span></label>
+            <input type="password" class="login-form_password-input" formControlName="password">
+            <div [ngClass]="{'login-form_error': password.invalid}">
+                <span *ngIf="password.errors?.required" class="login-form_error-message">Обязательное поле</span>
+                <span *ngIf="password.errors?.minlength" class="login-form_error-message">Пароль должен содержать больше 6 символов</span>
+            </div>
+        </div>
+        <div *ngIf="errorMessage">
+            <span class="sign-in_error-message">Неверный логин или пароль</span>
+        </div>
+        <div class="login-form_submit-button">
+            <button type="submit" class="login-form_button" [disabled]="loginForm.invalid">Войти</button>
+            <a class="login-form__password-restore" href="#">Восстановить пароль</a>
+            <a class="login-form__register" href="/sign-up-page">Зарегистрироваться</a>
+        </div>
+    </form>
+ </div>
+

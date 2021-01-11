@@ -1,0 +1,100 @@
+.sign-up {
+    &_error-message {
+        margin-bottom: 10px;
+        color: #e72929;
+    }
+    &_error-container {
+        margin-bottom: 10px;
+    }
+}
+.sign-up_form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 176px;
+    &-title {
+        font-size: 30px;
+        margin-bottom: 20px;
+    }
+}
+
+
+.register-form {
+    border: 1px solid #dddddd;
+    max-width: 600px;
+    padding: 30px;
+    width: 100%;
+    height: auto;
+    padding: 30px;
+    &_error {
+        display: flex;
+        margin-bottom: 20px;
+        &-message {
+            color: red;
+        }
+    }
+}
+
+.register-form_email-input {
+    height: 40px;
+    margin: 10px 0px 20px 0px;
+    border: 1px solid #eeeeee;
+    border-radius: 0px;
+    outline:none;
+    &:focus {
+        border-color: #8f8686;
+    }
+}
+
+.register-form_password-input,
+.register-form_name-input,
+.register-form_surname-input {
+    &:extend(.register-form_email-input);
+    &:focus {
+        border-color: #8f8686;
+    }
+}
+
+.register-form_email {
+    display: flex;
+    flex-direction: column;
+}
+
+.register-form_password,
+.register-form_name,
+.register-form_surname {
+    &:extend(.register-form_email);
+}
+
+.required-field {
+    color: #af1212;
+    margin-left: 3px;
+}
+
+.register-form_button {
+    background: #0f0f0f;
+    border: none;
+    color: #faf6f6;
+    padding: 10px 20px;
+    cursor: pointer;
+    &__disabled {
+        background: #8f8686;
+    }
+}
+
+.register-form_submit-button {
+    display: flex;
+    align-items: center;
+}
+
+.register-form__password-restore {
+    margin-left: 15px;
+    border-bottom: 1px dotted;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.register-form__register{
+    &:extend(.register-form__password-restore);
+}

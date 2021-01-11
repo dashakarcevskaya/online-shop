@@ -1,0 +1,59 @@
+.catalog {
+  display: flex;
+  justify-content: center;
+}
+
+.catalog_item__sort {
+  margin-bottom: 10px;
+  margin-left: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.catalog-item__header {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (max-width: 768px) {
+  .catalog {
+    flex-direction: column;
+  }
+}
+
+.catalog_item__sort {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 20px;
+}
+
+.compare-notification {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  right: 20px;
+  bottom: 30px;
+  background: #DEB887;
+  z-index: 1;
+  box-shadow: 0 0 5px 2px #dddddd;
+  &__button {
+    border: none;
+    padding: 10px;
+    background: #DEB887;
+    cursor: pointer;
+    border-right: 1px solid #8b8787;
+    outline: none;
+    &:hover {
+      background: #d6a86b;
+    }
+  }
+}
+
+.icon-trash {
+  background: url('../../catalog-icons/trash-icon.svg') no-repeat center;
+  width: 22px;
+  height: 22px;
+  opacity: 0.6;
+  cursor: pointer;
+  outline: none;
+}

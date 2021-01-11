@@ -1,0 +1,89 @@
+@import 'variables';
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.container__category {
+  width: 500px;
+  height: 340px;
+  margin: 15px;
+  cursor: pointer;
+  padding: 20px 0px;
+  &:hover {
+    opacity: 0.6;
+  }
+  // box-shadow: 0 0 10px 5px #dddddd;
+}
+
+.container__category__phones {
+  background: url(../../../assets/images/phone.jpg) no-repeat;
+  background-size: contain;
+}
+
+.container__category__laptops {
+  background: url(../../../assets/images/laptop.jpg) no-repeat;
+  background-size: contain;
+}
+
+.container__category__watch {
+  background: url(../../../assets/images/watch.jpg) no-repeat;
+  background-size: contain;
+}
+
+.container__category__headset {
+  background: url(../../../assets/images/headset.jpg) no-repeat;
+  background-size: contain;
+}
+
+.category-title {
+  color: @text-color;
+  font-size: 30px;
+  margin: 20px;
+}
+
+a {
+  text-decoration: none;
+}
+.container__sale {
+  background: url(../../../assets/images/sale.jpg) no-repeat;
+  background-size: contain;
+  width: 600px;
+  height: 400px;
+  box-shadow: 0 0 10px 5px @box-shadow-color;
+  display: flex;
+  justify-content: center;
+}
+
+.container__sale__title {
+  margin-top: 250px;
+  &:extend(.category-title);
+}
+
+@media (max-width: 560px) {
+  .container__category {
+    width: 420px;
+    height: 278px;
+  }
+}
+
+@media (max-width: 420px) {
+  .container__category {
+    width: 300px;
+    height: 200px;
+    margin: 10px 0px;
+  }
+  .category-title {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 320px) {
+  .container__category {
+    width: 280px;
+    height: 190px;
+  }
+}

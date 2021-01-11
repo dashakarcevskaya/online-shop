@@ -1,0 +1,19 @@
+<div class="product-list">
+  <app-product-card
+    *ngFor="let product of products$ | async; trackBy: trackByFn"
+    [href]="createUrl(product)"
+    [title]="createTitle(product)"
+    [image]="product.images[0]"
+    [description]="createShortDescription(product)"
+    [canAddToCompare]="canAddToCompare(product)"
+    [price]="product.price"
+    (addedToCompare)="addToCompare(product)"
+  ></app-product-card>
+  <button
+    (click)="loadMore()"
+    *ngIf="hasMore$ | async"
+    class="product-list_button"
+  >
+    Следующие товары
+  </button>
+</div>

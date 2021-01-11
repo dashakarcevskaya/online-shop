@@ -1,0 +1,8 @@
+<div class="sorting-container">
+    <span class="sorting-container_span">Сортировка:</span>
+    <select name="select" class="sorting-container_select" (change)="onChange($event.target.value)">
+      <option *ngFor="let sortType of sortTypes" value="{{sortType.value}}"> 
+        <span>{{ sortType.text }}</span>
+      </option>
+    </select>
+  </div>
