@@ -7,6 +7,9 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  &_link {
+    display: flex;
+  }
 }
 
 .logo {
@@ -17,6 +20,22 @@ header {
 .header-actions {
   display: flex;
   justify-content: space-between;
+  &__quantity {
+    color: white;
+    &-item {
+      width: 15px;
+      height: 15px;
+      background: #ff4a04;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 8px;
+      font-size: 10px;
+      margin-left: 16px;
+      position: absolute;
+      border: 1px solid #ffffff;
+    }
+  }
 }
 
 .header-actions__icon {

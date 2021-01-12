@@ -1,13 +1,9 @@
-import { DebugEventListener, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { User } from '@core/types/user';
 import { AuthService } from '@core/services/auth.service';
-import {
-  AngularFirestore // AngularFirestoreCollection
-} from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-// import { map } from 'rxjs/operators';
-// import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -39,9 +35,15 @@ export class UserService {
   }
 
   public addNewUser(name: string, surname: string, id: string): void {
-    this.db
-      .collection<User>('/users')
-      .add({ uid: id, name: name, surname: surname });
+    this.db.collection<User>('/users').add({
+      uid: id,
+      name: name,
+      surname: surname,
+      sity: '',
+      street: '',
+      house: null,
+      apartment: null
+    });
   }
 
   public changeName(name: string): void {
@@ -50,5 +52,16 @@ export class UserService {
 
   public changeSurname(surname: string): void {
     this.db.doc<User>(`users/${this.id}`).update({ surname: surname });
+  }
+
+  public changeAddress(
+    sity: string,
+    street: string,
+    house: number,
+    apartment: number
+  ): void {
+    this.db
+      .doc<User>(`users/${this.id}`)
+      .update({ sity, street, house, apartment });
   }
 }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Product } from '@core/types/product';
+import { ModalService } from '@services/modal.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,9 @@ export class CompareService {
     localStorage.getItem(this.lsKey) || '[]'
   );
   private maxProductAmount = 3;
+  private message: string;
 
-  constructor() {
+  constructor(private modalService: ModalService) {
     this.init();
   }
 
@@ -25,8 +27,10 @@ export class CompareService {
 
   public addProduct(product: Product): void {
     if (!this.canAddProduct(product)) {
+      this.modalService.showModalWindow(this.message);
       return;
     }
+
     this.products = [...this.products, product];
     this.sync();
   }
@@ -36,9 +40,18 @@ export class CompareService {
       return false;
     }
     if (this.products.length === this.maxProductAmount) {
+      this.message = 'Вы можете добавить не более 3 товаров в сравнение';
+      return false;
+    }
+    if (this.products.includes(product)) {
+      this.message = 'Товар уже в сравнении!';
       return false;
     }
     return true;
+  }
+
+  public inProductsList(product: Product): boolean {
+    return this.products.includes(product);
   }
 
   public removeAllProducts(): void {

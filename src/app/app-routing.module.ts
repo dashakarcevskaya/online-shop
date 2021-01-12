@@ -37,10 +37,24 @@ const routes: Routes = [
       )
   },
   {
+    path: 'cart-page',
+    loadChildren: () =>
+      import('./features/cart-page/cart-page.module').then(
+        (m) => m.CartPageModule
+      )
+  },
+  {
     path: 'user-account',
     loadChildren: () =>
       import('./features/user-account/user-account.module').then(
         (m) => m.UserAccountModule
+      )
+  },
+  {
+    path: 'order-page',
+    loadChildren: () =>
+      import('./features/order-page/order-page.module').then(
+        (m) => m.OrderPageModule
       )
   }
 ];

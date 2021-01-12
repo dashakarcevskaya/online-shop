@@ -8,12 +8,9 @@
       <li class="header-navigation__list-items">
         <a href="/catalog" class="header-navigation__item">Каталог</a>
         <ul class="header-navigation__catalog">
-          <li
-            *ngFor="let item of catalog"
+          <li *ngFor="let item of catalog"
             class="header-navigation__catalog-item">
-            <a routerLink="/{{ item.href }}" routerLinkActive="active">{{
-              item.name
-            }}</a>
+            <a routerLink="/{{ item.href }}" routerLinkActive="active">{{ item.name }}</a>
           </li>
         </ul>
       </li>
@@ -25,29 +22,39 @@
       </li>
       <li>
         <a href="#" class="header-navigation__item header-contacts__contacts">О нас</a>
-      </li>      
+      </li>
     </ul>
   </div>
-  <div *ngIf="display" class="navigation-menu__mobile-overlay" (click)="toggle()"></div>
-  <div [ngClass]="{'navigation-menu__mobile--visible': display}" class="navigation-menu__mobile">
+  <div *ngIf="display"
+    class="navigation-menu__mobile-overlay"
+    (click)="toggle()"></div>
+  <div [ngClass]="{ 'navigation-menu__mobile--visible': display }"
+    class="navigation-menu__mobile">
     <ul class="navigation-menu__items-mobile">
       <li *ngFor="let item of catalog" class="navigation-menu__item-mobile">
-        <a href="{{item.href}}">{{ item.name }}</a>
+        <a href="{{ item.href }}">{{ item.name }}</a>
       </li>
     </ul>
   </div>
   <div class="header-actions">
-    <!-- <a href="#">
-      <div class="header-actions__icon header-actions__icon-search"></div>
-    </a> -->
-    <a routerLink="/compare-page" routerLinkActive="active">
-      <!-- <div class="header-actions__compare-quantity"></div> -->
-      <div class="header-actions__icon header-actions__icon-compare"></div>
+    <a routerLink="/compare-page" routerLinkActive="active" class="header-actions_link" title="Сравнение">
+      <div class="header-actions__icon header-actions__icon-compare">
+        <div class="header-actions__quantity-item">
+          <span class="header-actions__quantity">{{ getCompareItemsAmount() }}</span>
+        </div>
+      </div>
     </a>
-    <a routerLink="/user-account" routerLinkActive="active">
+    <a routerLink="/user-account" routerLinkActive="active" title="Личный кабинет">
       <div class="header-actions__icon header-actions__icon-user"></div>
     </a>
-    <div class="header-actions__icon header-actions__icon-cart"></div>
-    <div class="header-actions__icon header-actions__mobile-menu" (click)="toggle()"></div>
+    <a routerLink="/cart-page" routerLinkActive="active" class="header-actions_link" title="Корзина">
+      <div class="header-actions__icon header-actions__icon-cart">
+        <div class="header-actions__quantity-item">
+          <span class="header-actions__quantity">{{ getCartItemsAmount() }}</span>
+        </div>
+      </div>
+    </a>
+    <div class="header-actions__icon header-actions__mobile-menu"
+      (click)="toggle()"></div>
   </div>
 </header>
