@@ -1,17 +1,29 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { User } from '@core/types/user';
+import { UserAddress } from '@core/types/userAddress';
+
 @Pipe({
   name: 'address'
 })
 export class AddressPipe implements PipeTransform {
-  transform(value: User): any {
-    if (value?.sity === '') {
+  transform(value: UserAddress): any {
+    const capitalize = (str: string) => {
+      if (str) {
+        return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+      }
+      return str;
+    };
+
+    if (value?.city === '') {
       return '--';
     } else {
       if (value?.apartment === null) {
-        return `г.${value?.sity}, ул.${value?.street}, д.${value?.house}`;
+        return `г.${capitalize(value?.city)}, ул.${capitalize(
+          value?.street
+        )}, д.${value?.house}`;
       } else {
-        return `г.${value?.sity}, ул.${value?.street}, д.${value?.house}, кв.${value?.apartment}`;
+        return `г.${capitalize(value?.city)}, ул.${capitalize(
+          value?.street
+        )}, д.${value?.house}, кв.${value?.apartment}`;
       }
     }
   }

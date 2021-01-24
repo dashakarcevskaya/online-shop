@@ -1,16 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Product } from '@core/types/product';
 import { CartItem } from '@core/types/cart-item';
+import { ModalService } from '@services/modal.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
   private lsKey = 'cartItems';
+  private message: string;
+  private maxProductAmount = 10;
   public cartItems: Array<CartItem> = JSON.parse(
     localStorage.getItem(this.lsKey) || '[]'
   );
-  constructor() {
+  constructor(private modalService: ModalService) {
     this.init();
   }
 
@@ -27,11 +30,24 @@ export class CartService {
   public addProduct(product: Product): void {
     const item = this.cartItems.find((el) => el.product.id === product.id);
     if (item) {
-      item.quantity += 1;
+      if (!this.canAddProduct(item)) {
+        this.modalService.showModalWindow(this.message);
+        return;
+      } else {
+        item.quantity++;
+      }
     } else {
       this.cartItems = [...this.cartItems, { product, quantity: 1 }];
     }
     this.sync();
+  }
+
+  public canAddProduct(product: CartItem): boolean {
+    if (product.quantity === this.maxProductAmount) {
+      this.message = 'Вы можете добавить не более 10 единиц одного товара';
+      return false;
+    }
+    return true;
   }
 
   public removeAllProducts(): void {
@@ -44,10 +60,6 @@ export class CartService {
       (item) => item.product.id !== product.id
     );
     this.sync();
-  }
-
-  private sync(): void {
-    localStorage.setItem(this.lsKey, JSON.stringify(this.cartItems));
   }
 
   public reduceItemQuantity(itemId: string): void {
@@ -74,7 +86,7 @@ export class CartService {
       0
     );
     return this.cartItemsAmount;
-    this.sync();
+    // this.sync();
   }
 
   public getCostOfCartItems(): number {
@@ -82,13 +94,17 @@ export class CartService {
       (acc, value) => acc + value.product.price * value.quantity,
       0
     );
-    this.sync();
+    // this.sync();
   }
 
   public getCostOfDelivery(): number {
     if (this.getCostOfCartItems() <= 500) {
       return 50;
     } else return 0;
-    this.sync();
+    // this.sync();
+  }
+
+  private sync(): void {
+    localStorage.setItem(this.lsKey, JSON.stringify(this.cartItems));
   }
 }

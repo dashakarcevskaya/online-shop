@@ -8,5 +8,6 @@ export type Product = {
   description: string;
   price: number;
   year: number;
+  name: string;
   images: string[];
 };

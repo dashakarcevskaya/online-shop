@@ -21,7 +21,7 @@ export class SignInPageComponent implements OnInit {
     this.initForm();
   }
 
-  public initForm() {
+  public initForm(): void {
     this.loginForm = this.fb.group({
       login: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(7)]]
@@ -50,8 +50,4 @@ export class SignInPageComponent implements OnInit {
   get errorMessage(): string {
     return this.authService.errorMessage;
   }
-
-  // logOut(): void {
-  //   this.authService.logOut();
-  // }
 }

@@ -1,0 +1,609 @@
+@import 'variables';
+
+.order-container {
+  display: flex;
+  margin-top: 20px;
+
+  &_information {
+    width: 60%;
+
+    &-title {
+      font-size: 30px;
+      margin-left: 30px;
+      font-weight: bold;
+    }
+  }
+
+  &_products {
+    padding: 15px 25px;
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    border: 1px solid #d8d5d5;
+    &-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+  }
+
+  &_image-container {
+    width: 30%;
+  }
+
+  &_product {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+
+    &-image {
+      height: 60px;
+      width: auto;
+    }
+
+    &-name {
+      width: 40%;
+    }
+
+    &-quantity {
+      width: 40%;
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+
+  &_details {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid #d8d5d5;
+
+    &-info_item {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &-price {
+      border-top: 1px solid #d8d5d5;
+      margin-top: 20px;
+      padding-top: 20px;
+
+      &-item {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+
+  &_address-form {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid @border-color;
+    padding: 5px 20px;
+    margin: 10px;
+
+    &__invalid {
+      background: #ffe9e9;
+    }
+
+    &_input {
+      border: 1px solid @border-color;
+      max-width: 250px;
+      width: 100%;
+      outline: none;
+      margin-top: 10px;
+      font-size: 16px;
+      height: 26px;
+    }
+
+    &_button {
+      background: #0f0f0f;
+      max-width: 250px;
+      width: 100%;
+      color: #ffff;
+      border: none;
+      cursor: pointer;
+      padding: 7px;
+      outline: none;
+      margin-top: 10px;
+      font-size: 14px;
+
+      &__disabled {
+        background: #4a4a4a;
+      }
+    }
+  }
+}
+
+.button__disabled {
+  background: #c2c2c2;
+}
+
+.order-form {
+  // padding: 20px;
+  margin-top: 20px;
+
+  &_title {
+    margin-right: 15px;
+
+    &__add {
+      font-size: 12px;
+    }
+  }
+
+  &_button-container {
+    border: none;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    margin: 10px;
+  }
+
+  &_button {
+    height: 50px;
+    color: #ffffff;
+    background: #080808;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    width: 200px;
+    max-width: 370px;
+    width: 100%;
+    font-size: 16px;
+    &:hover {
+      background: #2e2d2d;
+    }
+  }
+
+  &_phone-number__invalid {
+    background: #ffe9e9;
+  }
+
+  &_phone-number_input {
+    border: none;
+    outline: none;
+  }
+
+  &_comment {
+    max-width: 370px;
+    width: 100%;
+    min-height: 100px;
+    margin-top: 10px;
+    padding: 5px;
+    outline: none;
+    border: 1px solid @border-color;
+    font-size: 14px;
+    align-items: flex-start;
+  }
+
+  &_comment-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &_user-address {
+    display: flex;
+
+    &__edit-button {
+      margin-left: 10px;
+      border: none;
+      background: none;
+      outline: none;
+    }
+
+    &__edit {
+      background: url('./icons/pencil.svg') no-repeat center;
+      width: 16px;
+      height: 16px;
+      opacity: 0.6;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+
+  &_user-address_button {
+    font-size: 14px;
+    height: 26px;
+    outline: none;
+    cursor: pointer;
+    border: 1px solid @border-color;
+    margin-left: 30px;
+
+    &:hover {
+      background: @border-color;
+    }
+  }
+
+  &_payment-method {
+    display: flex;
+    flex-direction: column;
+
+    &_title {
+      margin-bottom: 10px;
+    }
+
+    &_input {
+      margin-bottom: 10px;
+    }
+
+    label {
+      margin-left: 10px;
+    }
+  }
+
+  &_item {
+    // margin-bottom: 20px;
+    padding: 20px 30px;
+    border-bottom: 1px solid #d8d5d5;
+    font-size: 20px;
+    // margin: 10px;
+    // display: flex;
+  }
+
+  &_card-container {
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    max-width: 320px;
+    min-height: 170px;
+    width: 100%;
+    border: 1px solid @border-color;
+    border-radius: 10px;
+    padding: 10px 20px;
+    z-index: 2;
+
+    &_icons {
+      display: flex;
+    }
+
+    &_icon {
+      width: 35px;
+      height: 35px;
+      margin-right: 30px;
+    }
+
+    &_visa-icon {
+      background: url('./icons/visa.svg') no-repeat center;
+    }
+
+    &_mastercard-icon {
+      background: url('./icons/mastercard.svg') no-repeat center;
+    }
+
+    &_maestro-icon {
+      background: url('./icons/maestro.svg') no-repeat center;
+    }
+
+    &_title {
+      font-size: 12px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    &_card-number {
+      border: 1px solid @border-color;
+      height: 30px;
+      outline: none;
+      margin-top: 10px;
+      font-size: 14px;
+      padding: 0px 10px;
+    }
+
+    &_card-date {
+      display: flex;
+    }
+
+    &_card-data {
+      display: flex;
+      margin-top: 10px;
+      justify-content: space-between;
+    }
+
+    &_input {
+      width: 40px;
+      border: 1px solid @border-color;
+      outline: none;
+      font-size: 14px;
+      padding: 5px;
+    }
+
+    &_separator {
+      margin: 0px 5px;
+    }
+
+    &_cvv {
+      display: flex;
+      align-items: center;
+
+      &-title {
+        font-size: 16px;
+        font-weight: bold;
+      }
+    }
+
+    &_cvv-number {
+      width: 40px;
+      border: 1px solid @border-color;
+      outline: none;
+      font-size: 14px;
+      padding: 5px;
+      margin-left: 10px;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .order-container {
+    &_address-form {
+      padding: 0px 10px 5px 10px;
+
+      &_input {
+        font-size: 14px;
+      }
+    }
+
+    &_information {
+      width: 55%;
+
+      &-title {
+        font-size: 26px;
+        margin-left: 20px;
+      }
+    }
+
+    &_product {
+      font-size: 14px;
+    }
+
+    &_products {
+      width: 45%;
+      margin-right: 10px;
+    }
+
+    &_details {
+      font-size: 14px;
+    }
+  }
+
+  .order-form {
+    &_item {
+      font-size: 16px;
+      padding: 10px;
+    }
+
+    &_title {
+      margin-right: 10px;
+    }
+
+    &_button {
+      font-size: 14px;
+    }
+
+    &_user-address__edit {
+      width: 14px;
+      height: 14px;
+      &-button {
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .order-container {
+    flex-direction: column-reverse;
+    align-items: center;
+
+    &_products {
+      width: 85%;
+    }
+
+    &_information {
+      width: 85%;
+      margin-top: 20px;
+    }
+  }
+}
+
+@media (max-width: 560px) {
+  .order-container {
+    &_products {
+      padding: 15px;
+    }
+
+    &_products-title {
+      font-size: 20px;
+    }
+
+    &_information-title {
+      font-size: 20px;
+      margin-left: 15px;
+    }
+
+    &_address-form_input {
+      font-size: 14px;
+      height: 24px;
+    }
+  }
+
+  .order-form {
+    &_item {
+      margin: 5px;
+      font-size: 14px;
+      padding: 10px 10px;
+      // display: flex;
+      // flex-direction: column;
+    }
+
+    &_title {
+      margin-bottom: 10px;
+    }
+
+    &_button {
+      height: 45px;
+      max-width: 330px;
+    }
+
+    &_comment {
+      max-width: 330px;
+    }
+
+    &_button-container {
+      margin: 5px;
+      padding: 10px;
+    }
+
+    &_card-container {
+      max-width: 300px;
+      min-height: 160px;
+
+      &_icon {
+        width: 30px;
+        height: 30px;
+        margin-right: 25px;
+      }
+
+      &_card-number,
+      &_input,
+      &_cvv-number {
+        height: 27px;
+      }
+    }
+  }
+}
+
+@media (max-width: 440px) {
+  .order-form {
+    &_item {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+
+@media (max-width: 420px) {
+  .order-container {
+    &_image-container {
+      width: 25%;
+    }
+
+    &_product-name {
+      width: 45%;
+    }
+
+    &_product-quantity {
+      width: 35%;
+    }
+
+    &_product {
+      font-size: 13px;
+    }
+
+    &_details-info_item {
+      font-size: 13px;
+    }
+
+    &_details-price {
+      font-size: 13px;
+    }
+
+    &_product-image {
+      height: 50px;
+    }
+
+    &_products-title,
+    &_information-title {
+      font-size: 16px;
+    }
+
+    &_address-form {
+      padding: 0px 10px 5px 5px;
+
+      &_button {
+        font-size: 12px;
+      }
+
+      &_input {
+        font-size: 13px;
+      }
+    }
+
+    // &_address-form_button {
+    //   font-size: 12px;
+    // }
+  }
+
+  .order-form {
+    margin-top: 10px;
+
+    &_button {
+      font-size: 12px;
+      height: 36px;
+    }
+
+    &_item {
+      font-size: 13px;
+    }
+
+    &_comment {
+      font-size: 12px;
+      min-height: 90px;
+    }
+
+    &_card-container {
+      max-width: 260px;
+      min-height: 142px;
+      padding: 10px 17px;
+
+      &_icon {
+        width: 27px;
+        height: 27px;
+        margin-right: 20px;
+      }
+
+      &_card-number,
+      &_input,
+      &_cvv-number {
+        height: 20px;
+        font-size: 12px;
+      }
+
+      &_cvv-title {
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+@media (max-width: 320px) {
+  .order-form {
+    &_card-container {
+      max-width: 260px;
+      min-height: 130px;
+      padding: 10px 13px;
+
+      &_title {
+        margin-top: 5px;
+      }
+
+      &_card-number,
+      &_input,
+      &_cvv-number {
+        height: 18px;
+      }
+
+      &_cvv-title {
+        font-size: 13px;
+      }
+
+      &_icon {
+        width: 25px;
+        height: 25px;
+        margin-right: 17px;
+      }
+    }
+  }
+}

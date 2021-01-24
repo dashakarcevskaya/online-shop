@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { User } from '@core/types/user';
 import { AuthService } from '@core/services/auth.service';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { map } from 'rxjs/operators';
+import { map, mergeMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -13,25 +13,25 @@ export class UserService {
   constructor(private db: AngularFirestore, private auth: AuthService) {}
 
   public getUser(): Observable<User[]> {
-    return this.db
-      .collection<User>('/users', (ref) => {
-        return ref.where('uid', '==', this.auth.getUserId());
-      })
-      .snapshotChanges()
-      .pipe(
-        map((items) =>
-          items.map((item) => {
-            const data = item.payload.doc.data();
-            const id = item.payload.doc.id;
-            this.id = id;
-            return { id, ...data } as User;
+    return this.auth.getUserId().pipe(
+      mergeMap((id) => {
+        return this.db
+          .collection<User>('/users', (ref) => {
+            return ref.where('uid', '==', id);
           })
-        )
-      );
-  }
-
-  public getId(): string {
-    return this.auth.getUserId();
+          .snapshotChanges()
+          .pipe(
+            map((items) =>
+              items.map((item) => {
+                const data = item.payload.doc.data();
+                const id = item.payload.doc.id;
+                this.id = id;
+                return { id, ...data } as User;
+              })
+            )
+          );
+      })
+    );
   }
 
   public addNewUser(name: string, surname: string, id: string): void {
@@ -39,7 +39,7 @@ export class UserService {
       uid: id,
       name: name,
       surname: surname,
-      sity: '',
+      city: '',
       street: '',
       house: null,
       apartment: null
@@ -55,13 +55,13 @@ export class UserService {
   }
 
   public changeAddress(
-    sity: string,
+    city: string,
     street: string,
     house: number,
     apartment: number
   ): void {
     this.db
       .doc<User>(`users/${this.id}`)
-      .update({ sity, street, house, apartment });
+      .update({ city, street, house, apartment });
   }
 }

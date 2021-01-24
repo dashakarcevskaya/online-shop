@@ -7,7 +7,6 @@
             <label>E-mail<span class="required-field" title="Обязательно для заполнения">*</span></label>
             <input type="email" class="login-form_email-input" formControlName="login" autocomplete="on">
             <div [ngClass]="{'login-form_error': login.errors?.email}">
-                <!-- <span class="login-form_error-message" *ngIf="login.errors?.required">Обязательное поле</span> -->
                 <span class="login-form_error-message" *ngIf="login.errors?.email">Неверный email</span>
             </div>
         </div>
@@ -15,7 +14,6 @@
             <label>Пароль<span class="required-field" title="Обязательно для заполнения">*</span></label>
             <input type="password" class="login-form_password-input" formControlName="password">
             <div [ngClass]="{'login-form_error': password.errors?.minlength}">
-                <!-- <span *ngIf="password.errors?.required" class="login-form_error-message">Обязательное поле</span> -->
                 <span *ngIf="password.errors?.minlength" class="login-form_error-message">Пароль должен содержать больше 6 символов</span>
             </div>
         </div>
@@ -24,7 +22,7 @@
         </div>
         <div class="login-form_submit-button">
             <button type="submit" class="login-form_button" [disabled]="loginForm.invalid" [ngClass]="{'login-form_button__disabled': loginForm.invalid}">Войти</button>
-            <a class="login-form__password-restore" href="#">Восстановить пароль</a>
+            <a class="login-form__password-restore" href="/forgot-password-page">Восстановить пароль</a>
             <a class="login-form__register" href="/sign-up-page">Зарегистрироваться</a>
         </div>
     </form>

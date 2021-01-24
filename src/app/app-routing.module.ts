@@ -56,6 +56,27 @@ const routes: Routes = [
       import('./features/order-page/order-page.module').then(
         (m) => m.OrderPageModule
       )
+  },
+  {
+    path: 'forgot-password-page',
+    loadChildren: () =>
+      import(
+        './features/forgot-password-page/forgot-password-page.module'
+      ).then((m) => m.ForgotPasswordPageModule)
+  },
+  {
+    path: 'check-page',
+    loadChildren: () =>
+      import('./features/check-page/check-page.module').then(
+        (m) => m.CheckPageModule
+      )
+  },
+  {
+    path: 'order-history',
+    loadChildren: () =>
+      import('./features/order-history/order-history.module').then(
+        (m) => m.OrderHistoryModule
+      )
   }
 ];
 

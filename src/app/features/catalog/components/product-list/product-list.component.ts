@@ -11,7 +11,6 @@ import { ProductShortDescriptionService } from '../../services/product-short-des
 import { ProductType } from '@core/enums/product-type';
 import { Product } from '@core/types/product';
 import { Searcher } from '@core/entities/searcher';
-// import { CartItem } from '@core/types/cart-item';
 
 @Component({
   selector: 'app-product-list',

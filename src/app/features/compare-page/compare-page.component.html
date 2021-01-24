@@ -21,8 +21,11 @@
       </div>
     </div>
     <button
-      class="compare-container__button_clear"
+      class="compare-container__button"
       (click)="removeProduct(product)">Удалить из сравнения</button>
+      <button class="compare-container__button" (click)="addToCart(product)">
+        Добавить в корзину
+      </button>
   </div>
   <div
     [ngClass]="{
@@ -32,3 +35,5 @@
     <span>Нет товаров в сравнении</span>
   </div>
 </div>
+
+

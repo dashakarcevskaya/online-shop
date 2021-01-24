@@ -27,6 +27,6 @@ export class HeaderComponent {
 
   public toggle(): void {
     this.display = !this.display;
-    document.body.style.overflow = this.display ? 'hidden' : 'auto';
+    // document.body.style.overflow = this.display ? 'hidden' : 'auto';
   }
 }

@@ -1,4 +1,4 @@
-<div class="product-list">
+<div class="product-list" *ngIf="products$ | async">
   <app-product-card
     *ngFor="let product of products$ | async; trackBy: trackByFn"
     [product]="product"
@@ -9,9 +9,16 @@
     [canAddToCompare]="canAddToCompare(product)"
     [price]="product.price"
     (addedToCompare)="addToCompare(product)"
-    (addedToCart)="addToCart(product)"></app-product-card>
+    (addedToCart)="addToCart(product)"
+  ></app-product-card>
   <button
     (click)="loadMore()"
     *ngIf="hasMore$ | async"
-    class="product-list_button">Следующие товары</button>
+    class="product-list_button"
+  >
+    Следующие товары
+  </button>
+</div>
+<div *ngIf="(products$ | async).length === 0" class="product-list__error">
+  <span>По вашему запросу ничего не найдено</span>
 </div>

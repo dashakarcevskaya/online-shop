@@ -6,7 +6,7 @@
     <div class="product-info">
       <span class="product__brand">{{ product.brand }} {{ product.model }}</span>
       <span class="product__price">{{ product.price }} руб.</span>
-      <div class="product__quantity">
+      <!-- <div class="product__quantity">
         <button
           type="button"
           class="quantity-button"
@@ -22,8 +22,8 @@
           type="button"
           class="quantity-button"
           (click)="increaseQuantity()">+</button>
-      </div>
-      <button class="product-info__button">Добавить в корзину</button>
+      </div> -->
+      <button class="product-info__button" (click)="addToCard()">Добавить в корзину</button>
       <button class="product-info__button" (click)="addToCompare()" [disabled]="!canAddToCompare()">Добавить в сранение</button>
     </div>
   </div>

@@ -1,1 +1,211 @@
-<p>order-page works!</p>
+<div class="order-container">
+  <div class="order-container_information">
+    <span class="order-container_information-title">Оформление заказа</span>
+    <form class="order-form" [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+      <div class="order-form_user-name order-form_item">
+        <span class="order-form_title">Покупатель:</span>
+        <span>{{ userSurname | capitalize }} {{ userName | capitalize }}</span>
+      </div>
+      <div
+        class="order-form_phone-number order-form_item"
+        [ngClass]="{ 'order-form_phone-number__invalid': phoneNumber.invalid }"
+      >
+        <span class="order-form_title">Мобильный телефон:</span>
+        <input
+          class="order-form_phone-number_input"
+          type="text"
+          prefix="+375 "
+          mask="(00) 000 00 00"
+          formControlName="phoneNumber"
+          [ngClass]="{
+            'order-form_phone-number__invalid': phoneNumber.invalid
+          }"
+        />
+      </div>
+      <div
+        class="order-form_user-address order-form_item"
+        [ngClass]="{
+          'order-container_address-form__invalid': isHasAddress()
+        }"
+      >
+        <span class="order-form_title"> Адрес доставки:</span>
+        <div>
+          <span>{{ currentUserAddress | address }}</span>
+          <button
+            type="button"
+            class="order-form_user-address__edit-button"
+            (click)="showAddressEditor()"
+          >
+            <div class="order-form_user-address__edit"></div>
+          </button>
+        </div>
+      </div>
+      <form
+        [formGroup]="addressForm"
+        (ngSubmit)="changeUserAddress()"
+        class="order-container_address-form"
+        *ngIf="isChangeAddress"
+      >
+        <input
+          type="text"
+          formControlName="city"
+          placeholder="Город"
+          class="order-container_address-form_input"
+        />
+        <input
+          type="text"
+          formControlName="street"
+          placeholder="Улица"
+          class="order-container_address-form_input"
+        />
+        <input
+          type="text"
+          formControlName="house"
+          placeholder="Дом"
+          class="order-container_address-form_input"
+        />
+        <input
+          type="text"
+          formControlName="apartment"
+          placeholder="Квартира"
+          class="order-container_address-form_input"
+        />
+        <button
+          type="submit"
+          class="order-container_address-form_button"
+          [disabled]="addressForm.invalid"
+          [ngClass]="{'button__disabled': addressForm.invalid}"
+        >
+          Изменить
+        </button>
+      </form>
+      <div class="order-form_payment-method order-form_item">
+        <span class="order-form_payment-method_title order-form_title"
+          >Способ оплаты:</span
+        >
+        <div>
+          <input
+            id="cash"
+            type="radio"
+            formControlName="paymentMethod"
+            value="cash"
+            name="paymentMethod"
+            class="order-form_payment-method_input"
+          />
+          <label for="cash">Наличные</label>
+        </div>
+        <div>
+          <input
+            id="card"
+            type="radio"
+            formControlName="paymentMethod"
+            value="card"
+            name="paymentMethod"
+            class="order-form_payment-method_input"
+          />
+          <label for="card">Карта</label>
+        </div>
+        <div
+          class="order-form_card-container"
+          *ngIf="paymentMethod() === 'card'"
+        >
+          <div class="order-form_card-container_icons">
+            <div
+              class="order-form_card-container_visa-icon order-form_card-container_icon"
+            ></div>
+            <div
+              class="order-form_card-container_mastercard-icon order-form_card-container_icon"
+            ></div>
+            <div
+              class="order-form_card-container_maestro-icon order-form_card-container_icon"
+            ></div>
+          </div>
+          <span class="order-form_card-container_title">Номер карты</span>
+          <input
+            class="order-form_card-container_card-number"
+            type="text"
+            mask="0000 0000 0000 0000"
+            placeholder="0000 0000 0000 0000"
+          />
+          <div class="order-form_card-container_card-data">
+            <div class="order-form_card-container_card-date">
+              <input
+                class="order-form_card-container_input"
+                type="text"
+                mask="00"
+                placeholder="ММ"
+              />
+              <span class="order-form_card-container_separator">/</span>
+              <input
+                class="order-form_card-container_input"
+                type="text"
+                mask="00"
+                placeholder="ГГ"
+              />
+            </div>
+            <div class="order-form_card-container_cvv">
+              <span class="order-form_card-container_cvv-title">cvv</span>
+              <input
+                class="order-form_card-container_cvv-number"
+                type="text"
+                mask="000"
+                placeholder="000"
+              />
+            </div>
+          </div>
+        </div>
+        <!-- <div class="order-form_card-container__privacy" *ngIf="paymentMethod()==='card'">
+
+          </div>           -->
+      </div>
+      <div class="order-form_comment-container order-form_item">
+        <span class="order-form_title"
+          >Комментарий к заказу
+          <span class="order-form_title__add">(необязательно)</span></span
+        >
+        <textarea
+          class="order-form_comment"
+          type="text"
+          formControlName="comment"
+          placeholder="Укажите дополнительные детали"
+        ></textarea>
+      </div>
+      <div class="order-form_button-container">
+        <button type="submit" class="order-form_button">
+          Подтвердить заказ
+        </button>
+      </div>
+    </form>
+  </div>
+  <div class="order-container_products">
+    <span class="order-container_products-title">Ваш заказ</span>
+    <div class="order-container_product" *ngFor="let item of getCartItems()">
+      <div class="order-container_image-container">
+        <img
+          class="order-container_product-image"
+          [src]="item.product.images[0]"
+        />
+      </div>
+      <div class="order-container_product-name">
+        <span> {{ item.product.brand }} {{ item.product.model }} </span>
+      </div>
+      <div class="order-container_product-quantity">
+        <span>{{ item.quantity }} x {{ item.product.price }} руб.</span>
+      </div>
+    </div>
+    <div class="order-container_details">
+      <span class="order-container_details-info_item"
+        >Сумма по товарам: <strong>{{ getCostOfItems() }} руб.</strong></span
+      >
+      <span class="order-container_details-info_item"
+        >Стоимость доставки:
+        <strong>{{ getCostOfDelivery() }} руб.</strong></span
+      >
+      <div class="order-container_details-price">
+        <span class="order-container_details-price-item"
+          >Итого: <strong>{{ getFinalyPrice() }} руб.</strong></span
+        >
+      </div>
+    </div>
+  </div>
+</div>

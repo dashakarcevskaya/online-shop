@@ -4,5 +4,5 @@ export type Filter = {
   name: string;
   productType: ProductType;
   field: string;
-  options: Array<{ name: string; value: any }>;
+  options: Array<{ name: string | number; value: string | number }>;
 };

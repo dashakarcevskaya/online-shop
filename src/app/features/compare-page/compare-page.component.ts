@@ -1,19 +1,26 @@
-import { Component } from '@angular/core';
-import { CompareService } from '@core/services/compare.service';
+import { Component, OnInit } from '@angular/core';
 import { Product } from '@core/types/product';
-import { ProductDescriptionService } from '@core/services/product-description.service';
 import { ProductDescription } from '@core/types/product-description';
+
+import { CompareService } from '@services/compare.service';
+import { CartService } from '@services/cart.service';
+import { ProductDescriptionService } from '@core/services/product-description.service';
+import Swiper from 'swiper';
 
 @Component({
   selector: 'app-compare-page',
   templateUrl: './compare-page.component.html',
   styleUrls: ['./compare-page.component.less']
 })
-export class ComparePageComponent {
+export class ComparePageComponent implements OnInit {
+  public swiper: Swiper;
   constructor(
     private compareService: CompareService,
+    private cartService: CartService,
     private productDescriptionService: ProductDescriptionService
   ) {}
+
+  ngOnInit(): void {}
 
   public getProducts(): Product[] {
     return this.compareService.products;
@@ -49,5 +56,9 @@ export class ComparePageComponent {
 
   public removeProduct(product: Product): void {
     this.compareService.removeProduct(product);
+  }
+
+  public addToCart(product: Product): void {
+    this.cartService.addProduct(product);
   }
 }

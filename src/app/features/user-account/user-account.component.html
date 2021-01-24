@@ -40,22 +40,20 @@
                 <button class="user-information__edit-button" (click)="showAddressEditor()">
                     <div class="user-information__edit"></div>
                 </button>    
-            <!-- </div>
-                <div class="user-information_change-items" [ngClass]="{'user-information_change-items__visible': isChangeSurname}">
-                <input type="text" title="Введите новое имя" class="user-information_change-input" [(ngModel)]="userSurname">
-                <button class="user-information_change-button" (click)="changeUserSurname()">Изменить</button>
-            </div>   -->
-            <div class="user-information_change-items" [ngClass]="{'user-information_change-items__visible': isChangeAddress}">
+                <div class="user-information_change-items" [ngClass]="{'user-information_change-items__visible': isChangeAddress}" *ngIf="isChangeAddress">
                 <form [formGroup]="addressForm" (ngSubmit)="changeUserAddress()" class="user-information_address-form">
-                    <input type="text" formControlName="sity" placeholder="Город" class="user-information_address-form_input">
+                    <input type="text" formControlName="city" placeholder="Город" class="user-information_address-form_input">
                     <input type="text" formControlName="street" placeholder="Улица" class="user-information_address-form_input">
                     <input type="text" formControlName="house" placeholder="Дом" class="user-information_address-form_input">
                     <input type="text" formControlName="apartment" placeholder="Квартира" class="user-information_address-form_input">
-                    <button type="submit" class="user-information_address-form_button">Изменить</button>
+                    <button type="submit" class="user-information_address-form_button" [disabled]="addressForm.invalid" [ngClass]="{'user-information_address-form_button__disabled': addressForm.invalid}">Изменить</button>
                 </form>
+                </div>
             </div>
         </div>
-    </div>
+        <div class="user-information_purchase-history">
+            <a routerLink="/order-history" routerLinkActive="active" class="user-information_item-title purchase-history_link">История покупок</a>
+        </div>
 
     <button (click)="logOut()" class="user-information_button">Выйти</button>
 </div>

@@ -1,93 +1,24 @@
-<div class="filter-container">
-    <div class="filter-list">
-        <span class="list-name">Производитель</span>
-        <ul class="filter-list">
-            <li *ngFor="let brand of brands" class="filter-list__item">
-                <label>
-                    <input type="checkbox"> 
-                    <span class="filter-list__item-name">{{ brand }}</span>
-                </label>
-            </li>
-        </ul>
-    </div>
-    <div class="filter-list">
-        <span class="list-name">Дата выхода на рынок</span>
-        <ul class="filter-list">
-            <li *ngFor="let year of years" class="filter-list__item">
-                <label>
-                    <input type="checkbox"> 
-                    <span class="filter-list__item-name">{{ year }}</span>
-                </label>
-            </li>
-        </ul>
-    </div>
-    <div class="filter-list">
-        <span class="list-name">Операционная система</span>
-        <ul class="filter-list">
-            <li *ngFor="let system of operatingSystem" class="filter-list__item">
-                <label>
-                    <input type="checkbox"> 
-                    <span class="filter-list__item-name">{{ system }}</span>
-                </label>
-            </li>
-        </ul>
-    </div>
-    <div class="filter-list">
-        <span class="list-name">Размер экрана</span>
-        <ul class="filter-list">
-            <li *ngFor="let size of screenSize" class="filter-list__item">
-                <label>
-                    <input type="checkbox"> 
-                    <span class="filter-list__item-name">{{ size }}</span>
-                </label>
-            </li>
-        </ul>
-    </div>
-    <div class="filter-list">
-        <span class="list-name">Разрешение экрана</span>
-        <ul class="filter-list">
-            <li *ngFor="let resolution of screenResolution" class="filter-list__item">
-                <label>
-                    <input type="checkbox"> 
-                    <span class="filter-list__item-name">{{ resolution }}</span>
-                </label>
-            </li>
-        </ul>
-    </div>
-    <div class="filter-list">
-        <span class="list-name">Технология экрана</span>
-        <ul class="filter-list">
-            <li *ngFor="let technology of screenTechnology" class="filter-list__item">
-                <label>
-                    <input type="checkbox"> 
-                    <span class="filter-list__item-name">{{ technology }}</span>
-                </label>
-            </li>
-        </ul>
-    </div>
-    <div class="filter-list">
-        <span class="list-name">Частота обновления экрана</span>
-        <ul class="filter-list">
-            <li *ngFor="let frequency of screenFrequency" class="filter-list__item">
-                <label>
-                    <input type="checkbox"> 
-                    <span class="filter-list__item-name">{{ frequency }} Гц</span>
-                </label>
-            </li>
-        </ul>
-    </div>
-    <div class="filter-list">
-        <span class="list-name">Оперативная память</span>
-        <ul class="filter-list">
-            <li *ngFor="let value of memory" class="filter-list__item">
-                <label>
-                    <input type="checkbox"> 
-                    <span class="filter-list__item-name">{{ value }} ГБ</span>
-                </label>
-            </li>
-        </ul>
-    </div>
+<div class="filter-container" *ngIf="filters.length !== 0">
+  <div class="filter-list" *ngFor="let filter of filters">
+    <span>{{ filter.name }}</span>
+    <ul class="filter-list">
+      <li *ngFor="let option of filter.options" class="filter-list__item">
+        <label>
+          <input
+            type="radio"
+            name="{{ filter.field }}"
+            class="filter-list__item-name"
+            value="{{ option.value }}"
+            (change)="onChangeFilers($event.target.value, filter.field)"
+          />
+          {{ option.value }}
+        </label>
+      </li>
+    </ul>
+  </div>
 </div>
-<div class="filter-container__button">
+<div class="filter-container__default" *ngIf="filters.length === 0"></div>
+
+<!-- <div class="filter-container__button">
     <button>Фильтры</button>
-</div>
+</div> -->

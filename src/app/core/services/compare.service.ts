@@ -36,14 +36,15 @@ export class CompareService {
   }
 
   public canAddProduct(product: Product): boolean {
-    if (!this.products.every((item) => item.type === product.type)) {
+    const item = this.products.find((el) => el.id === product.id);
+    if (!this.products.every((item: Product) => item.type === product.type)) {
       return false;
     }
     if (this.products.length === this.maxProductAmount) {
       this.message = 'Вы можете добавить не более 3 товаров в сравнение';
       return false;
     }
-    if (this.products.includes(product)) {
+    if (item) {
       this.message = 'Товар уже в сравнении!';
       return false;
     }
@@ -51,7 +52,10 @@ export class CompareService {
   }
 
   public inProductsList(product: Product): boolean {
-    return this.products.includes(product);
+    const item = this.products.find((el) => el.id === product.id);
+    if (item) {
+      return true;
+    } else return false;
   }
 
   public removeAllProducts(): void {

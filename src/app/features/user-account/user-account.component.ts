@@ -11,11 +11,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./user-account.component.less']
 })
 export class UserAccountComponent implements OnInit {
-  constructor(
-    private userService: UserService,
-    private auth: AuthService,
-    private fb: FormBuilder
-  ) {}
   public currentUser: User;
   public userName: string;
   public userSurname: string;
@@ -23,6 +18,12 @@ export class UserAccountComponent implements OnInit {
   public isChangeSurname = false;
   public isChangeAddress = false;
   public addressForm: FormGroup;
+
+  constructor(
+    private userService: UserService,
+    private auth: AuthService,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.userService.getUser().subscribe((user) => {
@@ -33,15 +34,21 @@ export class UserAccountComponent implements OnInit {
 
   public initAddressForm(): void {
     this.addressForm = this.fb.group({
-      sity: [
+      city: [
         '',
-        [Validators.required, Validators.minLength(3)],
-        Validators.pattern(/^[А-яA-z]*$/)
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.pattern(/^[А-яA-z]*$/)
+        ]
       ],
       street: [
         '',
-        [Validators.required, Validators.minLength(4)],
-        Validators.pattern(/^[А-яA-z]*$/)
+        [
+          Validators.required,
+          Validators.minLength(4),
+          Validators.pattern(/^[А-яA-z]*$/)
+        ]
       ],
       house: [
         '',
@@ -94,9 +101,10 @@ export class UserAccountComponent implements OnInit {
     this.userService.changeSurname(this.userSurname.toLowerCase());
     this.userSurname = '';
   }
+
   public changeUserAddress(): void {
     this.userService.changeAddress(
-      this.addressForm.value.sity,
+      this.addressForm.value.city,
       this.addressForm.value.street,
       Number(this.addressForm.value.house),
       this.addressForm.value.apartment

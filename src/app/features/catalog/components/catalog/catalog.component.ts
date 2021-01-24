@@ -7,6 +7,7 @@ import { ProductService } from '@services/product.service';
 import { ProductType } from '@core/enums/product-type';
 import { SortType } from '@core/enums/sort-type';
 import { CompareService } from '@core/services/compare.service';
+import { FilterQuery } from '@core/types/filterQuery';
 
 @Component({
   selector: 'app-catalog',
@@ -18,6 +19,7 @@ export class CatalogComponent implements OnInit {
   public hasMore$: Observable<boolean>;
   public searcher: Searcher;
   public productType: ProductType;
+  public sortType = SortType.Default;
 
   constructor(
     private productService: ProductService,
@@ -32,12 +34,6 @@ export class CatalogComponent implements OnInit {
     this.products$ = this.searcher.getLoadedItems();
     this.hasMore$ = this.searcher.hasMore();
     this.loadMore();
-    // this.searcher.setFilters([
-    //   { field: 'brand', value: 'Samsung' },
-    //   { field: 'memory', value: 12 },
-    //   { field: 'year', value: 2020 },
-    //   { field: 'accumulator', value: 5000 }
-    // ]);
   }
 
   public loadMore(): void {
@@ -46,6 +42,15 @@ export class CatalogComponent implements OnInit {
 
   public onChange(value: SortType): void {
     this.searcher.changeSortType(value);
+    this.sortType = value;
+  }
+
+  public onChangeFilters(value: FilterQuery): void {
+    this.searcher.setFilters(value);
+  }
+
+  public isSortingDisabled(): boolean {
+    return this.searcher.isSortingDisabled;
   }
 
   public getCompareItemsAmount(): number {
@@ -54,7 +59,6 @@ export class CatalogComponent implements OnInit {
 
   public clearCompareList(): void {
     this.compareService.removeAllProducts();
-    console.log(this.compareService.products);
   }
 
   public updateSearchValue(value: string): void {

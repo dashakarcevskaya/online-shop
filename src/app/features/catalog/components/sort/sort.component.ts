@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SortType } from '@core/enums/sort-type';
 import { sort } from './sortTypes';
 
@@ -8,6 +8,10 @@ import { sort } from './sortTypes';
   styleUrls: ['./sort.component.less']
 })
 export class SortComponent {
+  @Input()
+  value: SortType;
+  @Input()
+  disabled: boolean;
   @Output()
   changed = new EventEmitter<SortType>();
   public sortTypes = sort;

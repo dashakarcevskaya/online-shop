@@ -1,0 +1,40 @@
+<div class="orders-container">
+  <span class="orders-container_title">История покупок</span>
+  <div class="orders-container_order" *ngFor="let order of orders">
+    <span class="order-number">Заказ № {{ order.number }}</span>
+    <div class="order-description">
+      <span class="order-description_title">Дата заказа:</span>
+      <span class="order-date">{{ order.date }}</span>
+    </div>
+    <div class="order-description">
+      <span class="order-description_title">Время заказа:</span>
+      <span class="order-time">{{ order.time }}</span>
+    </div>
+    <div class="order-description">
+      <span class="order-description_title">Способ оплаты:</span>
+      <span class="order-time">{{ getPaymentMethod(order) }}</span>
+    </div>
+    <div *ngIf="order.comment" class="order-description">
+      <span class="order-description_title">Комментарии к заказу:</span>
+      <span class="order-time">{{ order.comment }}</span>
+    </div>
+    <div class="order-products">
+      <div *ngFor="let product of order.products" class="order-product">
+        <img [src]="product.images" routerLink="{{ createUrl(product) }}" class="order-product_image" />
+        <div class="order-product_name">
+            <span routerLink="{{ createUrl(product) }}">{{ product.name }}</span>
+        </div>
+        <div class="order-product_quantity">
+            <span>{{ product.quantity }} x {{ product.price }} руб.</span>
+        </div>
+        <div class="order-product_price">
+            <span>{{ product.quantity * product.price }} руб.</span>
+        </div>
+      </div>
+      <div class="order-products_price">
+        <span>Cумма заказа</span>
+        <span>{{ order.orderPrice }} руб.</span>
+      </div>
+    </div>
+  </div>
+</div>

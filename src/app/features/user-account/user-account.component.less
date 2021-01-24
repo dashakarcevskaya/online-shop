@@ -3,82 +3,103 @@
   border: 1px solid #dddddd;
   padding: 30px;
   margin-bottom: 30px;
+
   &_container {
-    margin-bottom: 180px;
     margin-top: 30px;
   }
+
   &_item-title {
     font-size: 20px;
     margin-right: 30px;
   }
+
   &_change-items {
     display: none;
+
     &__visible {
       margin-top: 20px;
       display: flex;
     }
   }
+
   &_address-form {
     display: flex;
     flex-direction: column;
+
     &_button {
-      background: #4a4a4a;
+      background: #0f0f0f;
       color: #ffff;
       border: none;
       cursor: pointer;
       padding: 7px;
       outline: none;
+
+      &__disabled {
+        background: #4a4a4a;
+      }
     }
+
     input {
       margin-bottom: 10px;
     }
   }
+
   &_address-form_input {
     border: 1px solid #dddddd;
     outline: none;
   }
+
   &_item-value {
     font-size: 18px;
     margin-right: 12px;
   }
+  
   &__edit-button {
     border: none;
     background: none;
     outline: none;
   }
+
   &__edit {
     background: url('./icons/pencil.svg') no-repeat center;
     width: 16px;
     height: 16px;
     opacity: 0.6;
     cursor: pointer;
+
     &:hover {
       opacity: 0.8;
     }
   }
+
   &_container {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
+
   &_title {
     font-size: 30px;
     margin-bottom: 30px;
   }
+
   &__name,
   &__surname,
   &__email,
-  &__address {
+  &__address,
+  &_purchase-history {
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
   }
+
   &_change-input {
     height: 30px;
     outline: none;
     border: 1px solid #dddddd;
     outline: none;
   }
+
   &_change-button {
     height: 30px;
     outline: none;
@@ -88,6 +109,7 @@
       background: #dddddd;
     }
   }
+
   &_button {
     background: #0f0f0f;
     border: none;
@@ -98,42 +120,61 @@
   }
 }
 
+.purchase-history_link {
+  text-decoration: none;
+  font-weight: bold;
+  color: #b40d43;
+  font-size: 18px;
+}
+
 @media (max-width: 560px) {
+
   .user-information {
     min-width: 410px;
     padding: 20px;
     padding-right: 0px;
+
     &_item-title {
       font-size: 16px;
     }
+
     &_change-button {
       height: 24px;
       font-size: 14px;
     }
+
     &_change-input {
       height: 24px;
     }
+
     &_item-value {
       font-size: 16px;
     }
+
     &_title {
       font-size: 22px;
     }
+
     &__edit {
       width: 14px;
       height: 14px;
     }
+
     &_button {
       font-size: 12px;
     }
+
     &_item-title {
       margin-right: 15px;
     }
+
     &_address-form {
+
       &_input {
         height: 24px;
         font-size: 14px;
       }
+
       &_button {
         font-size: 14px;
       }
@@ -142,9 +183,11 @@
   }
 }
 @media (max-width: 420px) {
+
   .user-information {
     min-width: 330px;
     padding: 20px 10px;
+
     &_item-title {
       font-size: 13px;
       margin-right: 10px;
@@ -154,29 +197,37 @@
       font-size: 13px;
       margin-right: 5px;
     }
+
     &_title {
       font-size: 20px;
     }
+
     &__edit {
       width: 12px;
       height: 12px;
     }
+
     &_button {
       padding: 7px 12px;
     }
+
     &_change-input {
       height: 20px;
       width: 120px;
     }
+
     &_change-button {
       height: 20px;
       font-size: 12px;
     }
+
     &_address-form {
+
       &_input {
         height: 20px;
         font-size: 12px;
       }
+
       &_button {
         font-size: 12px;
       }
@@ -185,12 +236,15 @@
 }
 
 @media (max-width: 330px) {  
+
   .user-information {
     min-width: 310px;
     padding: 15px 8px;
+
     &_item-title {
       font-size: 12px;
     }
+    
     &_item-value {
       font-size: 12px;
     }

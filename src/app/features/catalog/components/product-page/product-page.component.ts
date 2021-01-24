@@ -1,14 +1,16 @@
 import { Component } from '@angular/core';
-import { ProductService } from '@services/product.service';
-import { CompareService } from '@services/compare.service';
-import { ProductDescriptionService } from '@core/services/product-description.service';
-import { ProductDescription } from '@core/types/product-description';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+
+import { ProductService } from '@services/product.service';
+import { CompareService } from '@services/compare.service';
+import { ProductDescriptionService } from '@services/product-description.service';
+import { CartService } from '@services/cart.service';
 
 import { ProductType } from '@core/enums/product-type';
 import { Product } from '@core/types/product';
-import { Observable } from 'rxjs';
+import { ProductDescription } from '@core/types/product-description';
 
 @Component({
   selector: 'app-product-page',
@@ -30,7 +32,8 @@ export class ProductPageComponent {
     private productService: ProductService,
     private productDescriptionService: ProductDescriptionService,
     private route: ActivatedRoute,
-    private compareService: CompareService
+    private compareService: CompareService,
+    private cartService: CartService
   ) {
     this.productType = (this.route.data as any).value.productType;
     this.productId$ = this.route.params.pipe(map((params) => params.id));
@@ -78,5 +81,9 @@ export class ProductPageComponent {
 
   public canAddToCompare(): boolean {
     return this.compareService.canAddProduct(this.product);
+  }
+
+  public addToCard(): void {
+    this.cartService.addProduct(this.product);
   }
 }

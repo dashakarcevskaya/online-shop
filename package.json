@@ -27,8 +27,13 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "firebase": "^8.1.1",
     "ng-click-outside": "^7.0.1",
+    "ng-payment-card": "0.0.8",
+    "ngx-interactive-paycard": "^2.0.0",
+    "ngx-mask": "^11.1.4",
+    "ngx-useful-swiper": "^10.0.1",
     "normalize.css": "^8.0.1",
     "rxjs": "~6.6.0",
+    "swiper": "^6.4.8",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
   },
