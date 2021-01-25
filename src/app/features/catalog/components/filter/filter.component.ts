@@ -17,7 +17,8 @@ export class FilterComponent implements OnInit {
   @Output()
   changedFilter = new EventEmitter<FilterQuery>();
 
-  public filters: Filter[];
+  public filters: Filter[] = [];
+  public display = false;
 
   ngOnInit(): void {
     this.filterService.getFilters(this.productType).subscribe((filters) => {
@@ -30,5 +31,10 @@ export class FilterComponent implements OnInit {
 
   public onChangeFilers(value: string | number, field: string): void {
     this.changedFilter.emit({ field, value: isNaN(+value) ? value : +value });
+  }
+
+  public toggle(): void {
+    console.log(this.display);
+    this.display = !this.display;
   }
 }

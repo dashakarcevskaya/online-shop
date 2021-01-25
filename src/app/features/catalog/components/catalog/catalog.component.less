@@ -1,6 +1,7 @@
 .catalog {
   display: flex;
   justify-content: center;
+  padding: 20px;
 }
 
 .message {
@@ -18,9 +19,12 @@
   justify-content: flex-end;
   margin-right: 20px;
 }
-
+app-filter {
+  max-width: 250px;
+  width: 100%;
+  margin-right: 10px;
+}
 app-product-list {
-  // max-width: 1150px;
   width: 100%;
   max-width: 1150px;
 }
@@ -76,6 +80,12 @@ app-product-list {
   .icon-trash {
     width: 18px;
     height: 18px;
+  }
+}
+
+@media (max-width: 978px) {
+  app-filter {
+    max-width: 230px;
   }
 }
 

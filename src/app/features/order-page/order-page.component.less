@@ -120,7 +120,6 @@
 }
 
 .order-form {
-  // padding: 20px;
   margin-top: 20px;
 
   &_title {
@@ -255,6 +254,10 @@
     padding: 10px 20px;
     z-index: 2;
 
+    &__invalid {
+      border: 1px solid #ff0000;
+    }
+
     &_icons {
       display: flex;
     }
@@ -332,6 +335,17 @@
       padding: 5px;
       margin-left: 10px;
     }
+  }
+}
+
+.order-form_card-container__invalid {
+  border: 1px solid #ff0000;  
+}
+
+.button__invalid {
+  background: #808080;
+  &:hover {
+    background: #808080;
   }
 }
 

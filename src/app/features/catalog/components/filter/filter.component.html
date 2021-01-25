@@ -17,8 +17,35 @@
     </ul>
   </div>
 </div>
+<div
+  *ngIf="display"
+  class="navigation-menu__mobile-overlay"
+  (click)="toggle()"
+></div>
+<div
+  [ngClass]="{ 'navigation-menu__mobile--visible': display }"
+  class="navigation-menu__mobile"
+>
+  <div class="filter-list" *ngFor="let filter of filters">
+    <span>{{ filter.name }}</span>
+    <ul class="filter-list">
+      <li *ngFor="let option of filter.options" class="filter-list__item">
+        <label>
+          <input
+            type="radio"
+            name="{{ filter.field }}"
+            class="filter-list__item-name"
+            value="{{ option.value }}"
+            (change)="onChangeFilers($event.target.value, filter.field)"
+          />
+          {{ option.value }}
+        </label>
+      </li>
+    </ul>
+  </div>
+</div>
 <div class="filter-container__default" *ngIf="filters.length === 0"></div>
 
-<!-- <div class="filter-container__button">
-    <button>Фильтры</button>
-</div> -->
+<div class="filter-container__button">
+  <button (click)="toggle()">Фильтры</button>
+</div>

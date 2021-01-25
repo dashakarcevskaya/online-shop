@@ -22,7 +22,7 @@ export class OrderHistoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.orderHistoryService.getOrders().subscribe((orders) => {
-      this.orders = orders.sort((a, b) => (a.date > b.date ? 1 : -1));
+      this.orders = orders.sort((a, b) => (a.date > b.date ? -1 : 1));
     });
   }
 

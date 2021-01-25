@@ -37,17 +37,6 @@ export class ProductPageComponent {
   ) {
     this.productType = (this.route.data as any).value.productType;
     this.productId$ = this.route.params.pipe(map((params) => params.id));
-    // this.product$ = this.productId$.pipe(
-    //   map((id) => {
-    //     return this.productService.getById(this.productType, id);
-    //   }),
-    //   concatAll()
-    // );
-    // this.description$ = this.product$.pipe(
-    //   map((product) =>
-    //     productDescriptionService.mapProductToDescription(product)
-    //   )
-    // );
 
     this.route.params.subscribe((params) => {
       this.productService

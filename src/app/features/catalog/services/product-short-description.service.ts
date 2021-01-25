@@ -3,6 +3,7 @@ import { ProductType } from '@core/enums/product-type';
 import { HeadphonesPurpose } from '@core/enums/headphones-purpose';
 import { Product } from '@core/types/product';
 import { Phone } from '@core/types/phone';
+import { SmartWatches } from '@core/types/smartwatches';
 import { Headphones } from '@core/types/headphones';
 
 @Injectable()
@@ -11,10 +12,8 @@ export class ProductShortDescriptionService {
     switch (product.type) {
       case ProductType.Phone:
         return this.mapPhoneToShortDescription(product as Phone);
-      case ProductType.Tv:
-        return;
       case ProductType.SmartWatch:
-        return;
+        return this.mapSmartWatchesToShortDescription(product as SmartWatches);
       case ProductType.Headphones:
         return this.mapHeadphonesToShortDescription(product as Headphones);
     }
@@ -24,6 +23,10 @@ export class ProductShortDescriptionService {
     return `${product.brand}, экран ${product.screen.size}" ${product.screen.technology}
       (${product.screen.resolution_w}x${product.screen.resolution_h}), ${product.processor}, ОЗУ ${product.memory} ГБ,
       флеш-память ${product.storage}, камера ${product.main_camera_mp} Мп, аккумулятор ${product.accumulator} мАч`;
+  }
+
+  private mapSmartWatchesToShortDescription(product: SmartWatches): string {
+    return `${product.name}`;
   }
 
   private mapHeadphonesToShortDescription(product: Headphones): string {

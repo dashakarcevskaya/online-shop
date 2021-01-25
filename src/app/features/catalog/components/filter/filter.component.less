@@ -1,6 +1,5 @@
+@import 'variables';
 .filter-container {
-  max-width: 250px;
-  width: 100%;
   box-shadow: 0 0 10px 5px #dddddd;
   margin-right: 10px;
   padding: 20px;
@@ -32,31 +31,47 @@
 
 .filter-list__item-name {
   font-size: 15px;
-  // margin-left: 10px;
 }
 
 .filter-container__button {
   display: none;
 }
 
-@media (max-width: 1280px) {
-  .filter-container {
-    max-width: 200px;
-  }
+.navigation-menu__mobile {
+  width: 300px;
+  background-color: @menu-color;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  display: none;
+  padding: 20px;
 }
 
+.navigation-menu__mobile-overlay {
+  background: grey;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  opacity: 0.8;
+  z-index: 2;
+}
+
+  .navigation-menu__mobile--visible {
+    display: block;
+  }
+
+
+
 @media (max-width: 1024px) {
-  .filter-container {
-    max-width: 210px;
-  }
 
-  .filter-list__item-name {
-    font-size: 12px;
-  }
-
-  .list-name {
+  .filter-list {
     font-size: 14px;
   }
+
 }
 
 @media (max-width: 768px) {

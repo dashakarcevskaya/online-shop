@@ -1,7 +1,7 @@
 <div class="order-container">
   <div class="order-container_information">
     <span class="order-container_information-title">Оформление заказа</span>
-    <form class="order-form" [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+    <form class="order-form" [formGroup]="orderForm" (submit)="onSubmit">
       <div class="order-form_user-name order-form_item">
         <span class="order-form_title">Покупатель:</span>
         <span>{{ userSurname | capitalize }} {{ userName | capitalize }}</span>
@@ -74,7 +74,7 @@
           type="submit"
           class="order-container_address-form_button"
           [disabled]="addressForm.invalid"
-          [ngClass]="{'button__disabled': addressForm.invalid}"
+          [ngClass]="{ button__disabled: addressForm.invalid }"
         >
           Изменить
         </button>
@@ -106,7 +106,9 @@
           <label for="card">Карта</label>
         </div>
         <div
+          [formGroup]="cardForm"
           class="order-form_card-container"
+          [ngClass]="{ 'order-form_card-container__invalid': !isValidCard() }"
           *ngIf="paymentMethod() === 'card'"
         >
           <div class="order-form_card-container_icons">
@@ -124,6 +126,7 @@
           <input
             class="order-form_card-container_card-number"
             type="text"
+            formControlName="cardNumber"
             mask="0000 0000 0000 0000"
             placeholder="0000 0000 0000 0000"
           />
@@ -132,6 +135,7 @@
               <input
                 class="order-form_card-container_input"
                 type="text"
+                formControlName="cardMonth"
                 mask="00"
                 placeholder="ММ"
               />
@@ -139,6 +143,7 @@
               <input
                 class="order-form_card-container_input"
                 type="text"
+                formControlName="cardYear"
                 mask="00"
                 placeholder="ГГ"
               />
@@ -148,6 +153,7 @@
               <input
                 class="order-form_card-container_cvv-number"
                 type="text"
+                formControlName="cvvNumber"
                 mask="000"
                 placeholder="000"
               />
@@ -171,7 +177,7 @@
         ></textarea>
       </div>
       <div class="order-form_button-container">
-        <button type="submit" class="order-form_button">
+        <button type="submit" class="order-form_button" [disabled]="isValidOrder()" [ngClass]="{'button__invalid': !isValidOrder()}">
           Подтвердить заказ
         </button>
       </div>

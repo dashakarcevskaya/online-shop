@@ -1,4 +1,4 @@
-<div class="compare-container">  
+<div class="compare-container">
   <div *ngFor="let product of getProducts()" class="compare-container__product">
     <div class="compare-container__image">
       <img class="compare-container__product-image" [src]="product.images[0]" />
@@ -14,26 +14,31 @@
             'compare-container__table-item--different': getDifferentProductProperties().includes(
               property.name
             )
-          }">
-          <span class="compare-container__table-item__name">{{ property.name }}</span>
-          <span class="compare-container__table-item__value">{{ property.value }}</span>
+          }"
+        >
+          <span class="compare-container__table-item__name">{{
+            property.name
+          }}</span>
+          <span class="compare-container__table-item__value">{{
+            property.value
+          }}</span>
         </div>
       </div>
     </div>
-    <button
-      class="compare-container__button"
-      (click)="removeProduct(product)">Удалить из сравнения</button>
-      <button class="compare-container__button" (click)="addToCart(product)">
-        Добавить в корзину
-      </button>
+    <button class="compare-container__button" (click)="removeProduct(product)">
+      Удалить из сравнения
+    </button>
+    <button class="compare-container__button" (click)="addToCart(product)">
+      Добавить в корзину
+    </button>
   </div>
   <div
     [ngClass]="{
       'compare-container__message_visible': getProducts().length === 0,
       'compare-container__message_hidden': getProducts().length !== 0
-    }">
+    }"
+  >
     <span>Нет товаров в сравнении</span>
   </div>
 </div>
-
 

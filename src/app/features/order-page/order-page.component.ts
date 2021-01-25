@@ -80,12 +80,15 @@ export class OrderPageComponent implements OnInit {
   }
 
   public initCardform(): void {
-    this.cardForm = this.fb.group({
-      cardNumber: ['', [Validators.required]],
-      cardMonth: ['', [Validators.required]],
-      cardYear: ['', [Validators.required]],
-      cvvNumber: ['', [Validators.required]]
-    })
+    this.cardForm = this.fb.group(
+      {
+        cardNumber: ['', [Validators.required]],
+        cardMonth: ['', [Validators.required]],
+        cardYear: ['', [Validators.required]],
+        cvvNumber: ['', [Validators.required]]
+      },
+      { updateOn: 'blur' }
+    );
   }
 
   public initAddressForm(): void {
@@ -124,6 +127,36 @@ export class OrderPageComponent implements OnInit {
         ]
       ]
     });
+  }
+
+  public isValidCard(): boolean {
+    return this.cardForm.valid;
+  }
+
+  public isValidOrder(): boolean {
+    if (this.orderForm.value.paymentMethod === 'cash') {
+      if (this.orderForm.get('phoneNumber').valid && this.isValidAddress()) {
+        return true;
+      } else return false;
+    }
+
+    if (this.orderForm.value.paymentMethod === 'card') {
+      if (
+        this.orderForm.get('phoneNumber').valid &&
+        this.isValidAddress() &&
+        this.cardForm.valid
+      ) {
+        return true;
+      } else return false;
+    }
+  }
+
+  public isValidAddress(): boolean {
+    return this.currentUserAddress.city !== '' &&
+      this.currentUserAddress.street !== '' &&
+      this.currentUserAddress.house
+      ? true
+      : false;
   }
 
   public isHasAddress(): boolean {

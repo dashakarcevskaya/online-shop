@@ -21,6 +21,16 @@ const routes: Routes = [
     data: { productType: ProductType.Headphones }
   },
   {
+    path: 'smartwatches',
+    component: CatalogComponent,
+    data: { productType: ProductType.SmartWatch }
+  },
+  {
+    path: 'smartWatch/:id',
+    component: ProductPageComponent,
+    data: { productType: ProductType.SmartWatch }
+  },
+  {
     path: 'phone/:id',
     component: ProductPageComponent,
     data: {
