@@ -20,9 +20,9 @@ export class ProductShortDescriptionService {
   }
 
   private mapPhoneToShortDescription(product: Phone): string {
-    return `${product.brand}, экран ${product.screen.size}" ${product.screen.technology}
-      (${product.screen.resolution_w}x${product.screen.resolution_h}), ${product.processor}, ОЗУ ${product.memory} ГБ,
-      флеш-память ${product.storage}, камера ${product.main_camera_mp} Мп, аккумулятор ${product.accumulator} мАч`;
+    return `${product.brand}, screen ${product.screen.size}" ${product.screen.technology}
+      (${product.screen.resolution_w}x${product.screen.resolution_h}), ${product.processor}, memory ${product.memory} GB,
+      storage ${product.storage}, camera ${product.main_camera_mp} Mp, accumulator ${product.accumulator} mAh`;
   }
 
   private mapSmartWatchesToShortDescription(product: SmartWatches): string {
@@ -32,25 +32,23 @@ export class ProductShortDescriptionService {
   private mapHeadphonesToShortDescription(product: Headphones): string {
     return `${
       product.kind === 'headphones_with_mic'
-        ? 'наушники с микрофоном'
-        : 'наушники'
+        ? 'headphones with microphone'
+        : 'headphones'
     }, ${this.getHeadphonesPurpose(product.purpose)}
     ${
       product.wireless_interface ? `, ${product.wireless_interface_type} ,` : ''
     } 
-    ${
-      product.hours_capacity ? `время работы ${product.hours_capacity} ч.` : ''
-    }`;
+    ${product.hours_capacity ? `run time ${product.hours_capacity} h.` : ''}`;
   }
 
   private getHeadphonesPurpose(purpose: string): string {
     switch (purpose) {
       case HeadphonesPurpose.Portable:
-        return 'портативные';
+        return 'portable';
       case HeadphonesPurpose.Gaming:
-        return 'геймерские';
+        return 'gaming';
       case HeadphonesPurpose.Sport:
-        return 'спортивные';
+        return 'sport';
     }
   }
 }

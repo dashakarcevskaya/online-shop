@@ -5,8 +5,6 @@ import { Order } from '@core/types/order';
 import { AuthService } from '@services/auth.service';
 import { CartService } from '@services/cart.service';
 
-// import { CartItem } from '@core/types/cart-item';
-
 @Injectable({
   providedIn: 'root'
 })

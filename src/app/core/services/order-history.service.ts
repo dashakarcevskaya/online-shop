@@ -12,6 +12,8 @@ import { map, mergeMap } from 'rxjs/operators';
 })
 export class OrderHistoryService {
   public id;
+  private limit = 5;
+
   constructor(private db: AngularFirestore, private auth: AuthService) {
     this.id = this.auth.getUserId().subscribe((id) => id);
   }

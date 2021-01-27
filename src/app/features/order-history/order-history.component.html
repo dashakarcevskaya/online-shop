@@ -1,21 +1,21 @@
 <div class="orders-container">
-  <span class="orders-container_title">История покупок</span>
+  <span class="orders-container_title">Purchase history</span>
   <div class="orders-container_order" *ngFor="let order of orders">
-    <span class="order-number">Заказ № {{ order.number }}</span>
+    <span class="order-number">Order № {{ order.number }}</span>
     <div class="order-description">
-      <span class="order-description_title">Дата заказа:</span>
+      <span class="order-description_title">Order date:</span>
       <span class="order-date">{{ order.date }}</span>
     </div>
     <div class="order-description">
-      <span class="order-description_title">Время заказа:</span>
+      <span class="order-description_title">Order time:</span>
       <span class="order-time">{{ order.time }}</span>
     </div>
     <div class="order-description">
-      <span class="order-description_title">Способ оплаты:</span>
+      <span class="order-description_title">Payment method:</span>
       <span class="order-time">{{ getPaymentMethod(order) }}</span>
     </div>
     <div *ngIf="order.comment" class="order-description">
-      <span class="order-description_title">Комментарии к заказу:</span>
+      <span class="order-description_title">Comments on the order:</span>
       <span class="order-time">{{ order.comment }}</span>
     </div>
     <div class="order-products">
@@ -25,15 +25,15 @@
             <span routerLink="{{ createUrl(product) }}">{{ product.name }}</span>
         </div>
         <div class="order-product_quantity">
-            <span>{{ product.quantity }} x {{ product.price }} руб.</span>
+            <span>{{ product.quantity }} x {{ product.price }} р.</span>
         </div>
         <div class="order-product_price">
-            <span>{{ product.quantity * product.price }} руб.</span>
+            <span>{{ product.quantity * product.price }} р.</span>
         </div>
       </div>
       <div class="order-products_price">
-        <span>Cумма заказа</span>
-        <span>{{ order.orderPrice }} руб.</span>
+        <span>Order price</span>
+        <span>{{ order.orderPrice }} р.</span>
       </div>
     </div>
   </div>

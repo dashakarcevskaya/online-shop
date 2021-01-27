@@ -31,22 +31,40 @@ export class SignUpPageComponent implements OnInit {
     this.registerForm = this.fb.group({
       name: [
         '',
-        [
-          Validators.required,
-          Validators.minLength(1),
-          Validators.pattern(/^[А-яA-z]*$/)
-        ]
+        {
+          validators: [
+            (Validators.required,
+            Validators.minLength(1),
+            Validators.pattern(/^[А-яA-z]*$/))
+          ],
+          updateOn: 'blur'
+        }
       ],
       surname: [
         '',
-        [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.pattern(/^[А-яA-z]*$/)
-        ]
+        {
+          validators: [
+            Validators.required,
+            Validators.minLength(3),
+            Validators.pattern(/^[А-яA-z]*$/)
+          ],
+          updateOn: 'blur'
+        }
       ],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(7)]]
+      email: [
+        '',
+        {
+          validators: [Validators.required, Validators.email],
+          updateOn: 'blur'
+        }
+      ],
+      password: [
+        '',
+        {
+          validators: [(Validators.required, Validators.minLength(7))],
+          updateOn: 'blur'
+        }
+      ]
     });
   }
 

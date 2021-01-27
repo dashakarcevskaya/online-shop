@@ -16,9 +16,9 @@
     *ngIf="hasMore$ | async"
     class="product-list_button"
   >
-    Следующие товары
+  Next products
   </button>
 </div>
 <div *ngIf="(products$ | async).length === 0" class="product-list__error">
-  <span>По вашему запросу ничего не найдено</span>
+  <span>No results were found for your search</span>
 </div>

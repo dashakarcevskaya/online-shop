@@ -1,5 +1,5 @@
 <div class="cart-container">
-  <span class="cart-container_title">Корзина</span>
+  <span class="cart-container_title">Cart</span>
   <div class="cart-container_order" [ngClass]="{'cart-container_order__hidden': isEmptyList()}">
     <div class="cart-container_products">
         <div class="cart-container_product"  *ngFor="let item of getCartItems()">
@@ -17,7 +17,7 @@
             <button class="cart-container_quantity-button" (click)="increaseQuantity(item.product.id)">+</button>
           </div>
           <div class="cart-container_product-price">
-            <span >{{ item.product.price }} руб.</span>
+            <span >{{ item.product.price }} р.</span>
           </div>
           <div class="cart-container_button">
               <button class="cart-container_button__remove" (click)="removeItem(item.product)">
@@ -28,20 +28,20 @@
     </div>
     <div class="cart-container_details" >
       <div class="cart-container_details-info">
-        <span class="cart-container_details-info_item">Сумма по товарам: <strong>{{ getCostOfItems() }} руб.</strong></span>
-        <span class="cart-container_details-info_item">Стоимость доставки: <strong>{{ getCostOfDelivery() }} руб.</strong></span>
+        <span class="cart-container_details-info_item">Amount by item: <strong>{{ getCostOfItems() }} р.</strong></span>
+        <span class="cart-container_details-info_item">Cost of delivery: <strong>{{ getCostOfDelivery() }} р.</strong></span>
       </div>
       <div class="cart-container_details-price">
-        <span class="cart-container_details-price-item">Итого: <strong>{{ getFinalyPrice() }} руб.</strong></span>
+        <span class="cart-container_details-price-item">Total: <strong>{{ getFinalyPrice() }} р.</strong></span>
       </div>
       <a routerLink="/order-page" routerLinkActive="active">
-        <button class="cart-container_details-button">Оформить заказ</button>
+        <button class="cart-container_details-button">Сheckout</button>
       </a>
   </div>
   </div>
   <div class="cart-container__message_hidden" [ngClass]="{'cart-container__message_visible': isEmptyList()}">
     <div>
-      <span>Нет товаров в корзине</span>
+      <span>No products in the cart</span>
     </div>
   </div>
 </div>

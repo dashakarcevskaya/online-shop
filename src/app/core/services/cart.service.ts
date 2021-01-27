@@ -86,7 +86,6 @@ export class CartService {
       0
     );
     return this.cartItemsAmount;
-    // this.sync();
   }
 
   public getCostOfCartItems(): number {
@@ -94,14 +93,12 @@ export class CartService {
       (acc, value) => acc + value.product.price * value.quantity,
       0
     );
-    // this.sync();
   }
 
   public getCostOfDelivery(): number {
-    if (this.getCostOfCartItems() <= 500) {
+    if (this.getCostOfCartItems() <= 150) {
       return 50;
     } else return 0;
-    // this.sync();
   }
 
   private sync(): void {

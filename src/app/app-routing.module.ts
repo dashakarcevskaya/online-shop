@@ -77,6 +77,13 @@ const routes: Routes = [
       import('./features/order-history/order-history.module').then(
         (m) => m.OrderHistoryModule
       )
+  },
+  {
+    path: 'about',
+    loadChildren: () =>
+      import('./features/about-page/about-page.module').then(
+        (m) => m.AboutPageModule
+      )
   }
 ];
 

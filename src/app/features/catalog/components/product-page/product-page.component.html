@@ -5,30 +5,13 @@
     </div>
     <div class="product-info">
       <span class="product__brand">{{ product.brand }} {{ product.model }}</span>
-      <span class="product__price">{{ product.price }} руб.</span>
-      <!-- <div class="product__quantity">
-        <button
-          type="button"
-          class="quantity-button"
-          (click)="reduceQuantity()">-</button>
-        <input
-          type="text"
-          value="{{ quantity }}"
-          min="1"
-          max="10"
-          name="quantity"
-          class="quantity-input"/>
-        <button
-          type="button"
-          class="quantity-button"
-          (click)="increaseQuantity()">+</button>
-      </div> -->
-      <button class="product-info__button" (click)="addToCard()">Добавить в корзину</button>
-      <button class="product-info__button" (click)="addToCompare()" [disabled]="!canAddToCompare()">Добавить в сранение</button>
+      <span class="product__price">{{ product.price }} р.</span>
+      <button class="product-info__button" (click)="addToCard()">Add to cart</button>
+      <button class="product-info__button" (click)="addToCompare()" [disabled]="!canAddToCompare()">Add to compare</button>
     </div>
   </div>
   <div class="product-description">
-    <span class="description__title">Описание</span>
+    <span class="description__title">Description</span>
     <div class="product-description__table">
       <div *ngFor="let category of description">
         <div class="product-description__table-title">

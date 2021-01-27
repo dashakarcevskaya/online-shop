@@ -83,8 +83,14 @@ export class OrderPageComponent implements OnInit {
     this.cardForm = this.fb.group(
       {
         cardNumber: ['', [Validators.required]],
-        cardMonth: ['', [Validators.required]],
-        cardYear: ['', [Validators.required]],
+        cardMonth: [
+          '',
+          [Validators.required, Validators.min(1), Validators.max(12)]
+        ],
+        cardYear: [
+          '',
+          [Validators.required, Validators.min(18), Validators.max(25)]
+        ],
         cvvNumber: ['', [Validators.required]]
       },
       { updateOn: 'blur' }

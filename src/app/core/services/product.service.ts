@@ -33,8 +33,6 @@ export class ProductService {
     switch (productType) {
       case ProductType.Phone:
         return '/phones';
-      case ProductType.Tv:
-        return '/TVs';
       case ProductType.Headphones:
         return '/headphones';
       case ProductType.SmartWatch:
@@ -71,13 +69,3 @@ export class ProductService {
     return new Searcher(this.db, this.getDbPath(type), type);
   }
 }
-
-// const filter = {
-//   name: 'Брэнд',
-//   productType: 'phone',
-//   field: 'brand',
-//   options: [
-//     { name: 'Apple', value: 'Apple' },
-//     { name: 'Samsung', value: 'Samsung' }
-//   ]
-// };

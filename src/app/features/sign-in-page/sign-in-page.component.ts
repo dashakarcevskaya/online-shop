@@ -23,8 +23,20 @@ export class SignInPageComponent implements OnInit {
 
   public initForm(): void {
     this.loginForm = this.fb.group({
-      login: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(7)]]
+      login: [
+        '',
+        {
+          validators: [Validators.required, Validators.email],
+          updateOn: 'blur'
+        }
+      ],
+      password: [
+        '',
+        {
+          validators: [Validators.required, Validators.minLength(7)],
+          updateOn: 'blur'
+        }
+      ]
     });
   }
 

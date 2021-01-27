@@ -25,7 +25,13 @@ export class ForgotPasswordPageComponent implements OnInit {
 
   public initForm(): void {
     this.resetPasswordForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]]
+      email: [
+        '',
+        {
+          validators: [Validators.required, Validators.email],
+          updateOn: 'blur'
+        }
+      ]
     });
   }
 

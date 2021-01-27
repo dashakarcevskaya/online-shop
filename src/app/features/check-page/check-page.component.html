@@ -1,45 +1,45 @@
 <div class="check-container">
   <div class="check-container_title">
-    <span>Спасибо! Ваш заказ № {{ order.number }}</span>
+    <span>Thank you! Your order № {{ order.number }}</span>
   </div>
   <div class="check-container_information">
-    <span class="check-container_information_title">Информация о заказе</span>
+    <span class="check-container_information_title">Information about order</span>
     <div class="check-container_information-item">
-        <span class="check-container_information-item_title">Дата оформления</span>
+        <span class="check-container_information-item_title">Date of registration</span>
         <span class="check-container_information-item_date">{{ order.date }} {{ order.time }}</span>
       </div>
       <div class="check-container_information-item">
-        <span class="check-container_information-item_title">Сумма заказа</span>
-        <span class="check-container_information-item_date">{{ order.orderPrice }} руб.</span>
+        <span class="check-container_information-item_title">Order price</span>
+        <span class="check-container_information-item_date">{{ order.orderPrice }} р.</span>
       </div>
       <div class="check-container_information-item">
-        <span class="check-container_information-item_title">Способ оплаты</span>
+        <span class="check-container_information-item_title">Payment method</span>
         <span class="check-container_information-item_date">{{ getPaymentMethodString() }}</span>
       </div>
       <div class="check-container_information-item">
-        <span class="check-container_information-item_title">Адрес доставки</span>
+        <span class="check-container_information-item_title">Delivery address</span>
         <span class="check-container_information-item_date">{{ order | address }}</span>
       </div>
       <div class="check-container_information-item" *ngIf="order.comment">
-        <span class="check-container_information-item_title">Комментарии к заказу</span>
+        <span class="check-container_information-item_title">Comments on the order</span>
         <span class="check-container_information-item_date">{{ order.comment }}</span>
       </div>
   </div>
   <div class="check-container_products">
-    <span class="check-container_products_title">Состав заказа</span>
+    <span class="check-container_products_title">Order list</span>
     <div class="check-container_products_items">
       <div class="check-container_products_header">
-        <span class="item__name">Наименование</span>
-        <span class="item__quantity">Кол-во</span>
-        <span class="item__price">Стоимость</span>
+        <span class="item__name">Name</span>
+        <span class="item__quantity">Quantity</span>
+        <span class="item__price">Cost</span>
       </div>
       <div class="check-container_products_item" *ngFor="let item of productList">
           <span class="item__name">{{ item.product.name  }}</span>
           <span class="item__quantity">{{ item.quantity }}</span>
-          <span class="item__price">{{ item.product.price * item.quantity }} руб.</span>
+          <span class="item__price">{{ item.product.price * item.quantity }} р.</span>
       </div>
       <div class="check-container_products_item item_total-price">
-        <span>Итого: {{ order.orderPrice }} руб.</span>
+        <span>Total: {{ order.orderPrice }} р.</span>
       </div>
     </div>
   </div>

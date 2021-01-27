@@ -1,29 +1,29 @@
 <div class="sign-in_form">
     <div class="sign-in_form-title">
-        <span>Вход в личный кабинет</span>
+        <span>Sign In</span>
     </div>
     <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="login-form_email">
-            <label>E-mail<span class="required-field" title="Обязательно для заполнения">*</span></label>
+            <label>E-mail<span class="required-field" title="Required to fill">*</span></label>
             <input type="email" class="login-form_email-input" formControlName="login" autocomplete="on">
             <div [ngClass]="{'login-form_error': login.errors?.email}">
-                <span class="login-form_error-message" *ngIf="login.errors?.email">Неверный email</span>
+                <span class="login-form_error-message" *ngIf="login.errors?.email">Invalid email</span>
             </div>
         </div>
         <div class="login-form_password">
-            <label>Пароль<span class="required-field" title="Обязательно для заполнения">*</span></label>
+            <label>Password<span class="required-field" title="Required to fill">*</span></label>
             <input type="password" class="login-form_password-input" formControlName="password">
             <div [ngClass]="{'login-form_error': password.errors?.minlength}">
-                <span *ngIf="password.errors?.minlength" class="login-form_error-message">Пароль должен содержать больше 6 символов</span>
+                <span *ngIf="password.errors?.minlength" class="login-form_error-message">Password must be more than 6 characters</span>
             </div>
         </div>
         <div *ngIf="errorMessage">
-            <span class="sign-in_error-message">Неверный логин или пароль</span>
+            <span class="sign-in_error-message">Invalid login or password</span>
         </div>
         <div class="login-form_submit-button">
-            <button type="submit" class="login-form_button" [disabled]="loginForm.invalid" [ngClass]="{'login-form_button__disabled': loginForm.invalid}">Войти</button>
-            <a class="login-form__password-restore" href="/forgot-password-page">Восстановить пароль</a>
-            <a class="login-form__register" href="/sign-up-page">Зарегистрироваться</a>
+            <button type="submit" class="login-form_button" [disabled]="loginForm.invalid" [ngClass]="{'login-form_button__disabled': loginForm.invalid}">Sign In</button>
+            <a class="login-form__password-restore" href="/forgot-password-page">Restore password</a>
+            <a class="login-form__register" href="/sign-up-page">Sign up</a>
         </div>
     </form>
  </div>

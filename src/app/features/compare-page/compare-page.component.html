@@ -26,10 +26,10 @@
       </div>
     </div>
     <button class="compare-container__button" (click)="removeProduct(product)">
-      Удалить из сравнения
+      Remove from compare
     </button>
     <button class="compare-container__button" (click)="addToCart(product)">
-      Добавить в корзину
+      Add to cart
     </button>
   </div>
   <div
@@ -38,7 +38,7 @@
       'compare-container__message_hidden': getProducts().length !== 0
     }"
   >
-    <span>Нет товаров в сравнении</span>
+    <span>No products in compare</span>
   </div>
 </div>
 

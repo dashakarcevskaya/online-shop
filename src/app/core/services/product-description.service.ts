@@ -19,8 +19,6 @@ export class ProductDescriptionService {
     switch (product.type) {
       case ProductType.Phone:
         return this.mapPhoneToDescription(product as Phone);
-      case ProductType.Tv:
-        return;
       case ProductType.SmartWatch:
         return;
       case ProductType.Headphones:
@@ -31,75 +29,75 @@ export class ProductDescriptionService {
   private mapPhoneToDescription(product: Phone): ProductDescription {
     return [
       {
-        title: 'Общая информация',
+        title: 'General information',
         children: [
           {
-            name: 'Дата выхода на рынок',
+            name: 'Market launch date',
             value: product.year
           }
         ]
       },
       {
-        title: 'Основные',
+        title: 'Main',
         children: [
           {
-            name: 'Операционная система',
+            name: 'Operating system',
             value: product.operating_system
           },
           {
-            name: 'Оперативная память',
+            name: 'Memory',
             value: product.memory
           },
           {
-            name: 'Флэш-память',
+            name: 'Storage',
             value: product.storage
           }
         ]
       },
       {
-        title: 'Камера',
+        title: 'Camera',
         children: [
           {
-            name: 'Основная камера',
+            name: 'Main camera',
             value: product.main_camera_mp
           },
           {
-            name: 'Фронтальная камера',
+            name: 'Front-camera',
             value: product.front_camera_mp
           }
         ]
       },
       {
-        title: 'Процессор',
+        title: 'Processor',
         children: [
           {
-            name: 'Процессор',
+            name: 'Processor',
             value: product.processor
           }
         ]
       },
       {
-        title: 'Экран',
+        title: 'Screen',
         children: [
           {
-            name: 'Размер экрана',
+            name: 'Screen size',
             value: product.screen.size
           },
           {
-            name: 'Разрешение экрана',
+            name: 'Screen resolution',
             value: `${product.screen.resolution_w}x${product.screen.resolution_h}`
           },
           {
-            name: 'Технология экрана',
+            name: 'Screen technology',
             value: product.screen.technology
           }
         ]
       },
       {
-        title: 'Аккумулятор и время работы',
+        title: 'Battery and run time',
         children: [
           {
-            name: 'Емкость аккумулятора',
+            name: 'Battery capacity',
             value: `${product.accumulator} мА·ч`
           }
         ]
@@ -110,32 +108,32 @@ export class ProductDescriptionService {
   private mapHeadphonesToDescription(product: Headphones): ProductDescription {
     return [
       {
-        title: 'Общая информация',
+        title: 'General information',
         children: [
           {
-            name: 'Назначение',
+            name: 'Purpose',
             value: `${this.mappingService.mapHeadphonesPurpose(
               product.purpose
             )}`
           },
-          { name: 'Дата выхода на рынок', value: `${product.year}` }
+          { name: 'Market launch date', value: `${product.year}` }
         ]
       },
       {
-        title: 'Основные',
+        title: 'Main',
         children: [
           {
-            name: 'Тип',
+            name: 'Kind',
             value: `${this.mappingService.mapHeadphonesKind(product.kind)}`
           },
           {
-            name: 'Беспроводной интерфейс',
-            value: `${product.wireless_interface ? 'есть' : 'нет'}`
+            name: 'Wireless interface',
+            value: `${product.wireless_interface ? 'yes' : 'no'}`
           },
           ...(product.wireless_interface_type
             ? [
                 {
-                  name: 'Тип беспроводного интерфейса',
+                  name: 'Wireless interface type',
                   value: `${product.wireless_interface_type}`
                 }
               ]
@@ -145,10 +143,10 @@ export class ProductDescriptionService {
       ...(product.hours_capacity
         ? [
             {
-              title: 'Время работы',
+              title: 'Run time',
               children: [
                 {
-                  name: 'Максимальное время работы',
+                  name: 'Maximum run time',
                   value: `${product.hours_capacity}`
                 }
               ]
