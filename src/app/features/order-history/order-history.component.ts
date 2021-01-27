@@ -5,6 +5,7 @@ import { AuthService } from '@core/services/auth.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 import { Order } from '@core/types/order';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-order-history',
@@ -12,18 +13,19 @@ import { Order } from '@core/types/order';
   styleUrls: ['./order-history.component.less']
 })
 export class OrderHistoryComponent implements OnInit {
-  public orders: Array<Order>;
-
   constructor(
     private orderHistoryService: OrderHistoryService,
     private auth: AuthService,
     private db: AngularFirestore
   ) {}
 
+  public orders$: Observable<Order[]>;
+  public hasMore$: Observable<boolean>;
+
   ngOnInit(): void {
-    this.orderHistoryService.getOrders().subscribe((orders) => {
-      this.orders = orders.sort((a, b) => (a.date > b.date ? -1 : 1));
-    });
+    this.orders$ = this.orderHistoryService.getLoadedItems();
+    this.hasMore$ = this.orderHistoryService.hasMore();
+    this.loadMore();
   }
 
   public getPaymentMethod(order: Order): string {
@@ -32,5 +34,9 @@ export class OrderHistoryComponent implements OnInit {
 
   public createUrl(product: any): string {
     return `/catalog/${product.type}/${product.id}`;
+  }
+
+  public loadMore(): void {
+    this.orderHistoryService.loadMore();
   }
 }

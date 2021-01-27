@@ -1,6 +1,6 @@
 <div class="orders-container">
   <span class="orders-container_title">Purchase history</span>
-  <div class="orders-container_order" *ngFor="let order of orders">
+  <div class="orders-container_order" *ngFor="let order of orders$ | async">
     <span class="order-number">Order № {{ order.number }}</span>
     <div class="order-description">
       <span class="order-description_title">Order date:</span>
@@ -37,4 +37,5 @@
       </div>
     </div>
   </div>
+  <button class="orders-container_button" (click)="loadMore()" *ngIf="hasMore$ | async">Load more</button>
 </div>
