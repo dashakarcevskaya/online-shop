@@ -5,14 +5,14 @@
     <form class="register-form" [formGroup]="registerForm" (ngSubmit)="registerUser()">
         <div class="register-form_name">
             <label>Name<span class="required-field" title="Required to fill">*</span></label>
-            <input type="text" formControlName="name" class="register-form_name-input">
+            <input type="text" formControlName="name" class="register-form_name-input" maxlength="20">
             <div [ngClass]="{'register-form_error': name.errors?.pattern}">
                 <span class="register-form_error-message" *ngIf="name.errors?.pattern">The field must contain only letters</span>
             </div>
         </div>
         <div class="register-form_surname">
             <label>Surname<span class="required-field" title="Required to fill">*</span></label>
-            <input type="text" formControlName="surname" class="register-form_surname-input">
+            <input type="text" formControlName="surname" class="register-form_surname-input" maxlength="30">
             <div [ngClass]="{'register-form_error': surname.errors?.minlength || surname.errors?.pattern}">
                 <span class="register-form_error-message" *ngIf="surname.errors?.minlength">The field must contain at least 3 letters</span>
                 <span class="register-form_error-message" *ngIf="surname.errors?.pattern">The field must contain only letters</span>
@@ -21,14 +21,14 @@
 
         <div class="register-form_email">
             <label>E-mail<span class="required-field" title="Required to fill">*</span></label>
-            <input type="email" class="register-form_email-input" formControlName="email">
-            <div [ngClass]="{'register-form_error': email.errors?.email}">
-                <span class="register-form_error-message" *ngIf="email.errors?.email">Invalid email</span>
+            <input type="email" class="register-form_email-input" formControlName="email" maxlength="40">
+            <div [ngClass]="{'register-form_error': email.errors?.pattern}">
+                <span class="register-form_error-message" *ngIf="email.errors?.pattern">Invalid email</span>
             </div>
         </div>
         <div class="register-form_password">
             <label>Password<span class="required-field" title="Required to fill">*</span></label>
-            <input type="password" required class="register-form_password-input" formControlName="password">
+            <input type="password" required class="register-form_password-input" formControlName="password" maxlength="30">
             <div [ngClass]="{'register-form_error': password.errors?.minlength}">
                 <span *ngIf="password.errors?.minlength" class="register-form_error-message">Password must be more than 6 characters</span>
             </div>

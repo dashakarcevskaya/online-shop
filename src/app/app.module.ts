@@ -12,7 +12,6 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 import { environment } from '../environments/environment';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-// import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,10 +25,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     AngularFirestoreModule,
     ReactiveFormsModule,
     CoreModule
-    // NgxUsefulSwiperModule
   ],
   exports: [FormsModule, ReactiveFormsModule],
-  // providers: [CapitalizePipe, AddressPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

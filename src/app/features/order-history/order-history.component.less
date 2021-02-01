@@ -14,7 +14,7 @@
     outline: none;
     cursor: pointer;
     &:hover {
-      background: #e7e7e7;
+      background: @button-color__hover;
     }
   }
 
@@ -30,6 +30,13 @@
     max-width: 700px;
     width: 100%;
   }
+}
+
+.orders-container_message {
+  margin-top: 70px;
+  border: 1px solid @border-color;
+  font-size: 20px;
+  padding: 12px 50px;
 }
 
 .order {
@@ -100,7 +107,15 @@
     &_title {
       font-size: 22px;
     }
+
+    &_order {
+      max-width: 600px;
+    }
   }
+}
+
+.orders-container_message {
+  font-size: 16px;
 }
 
 @media (max-width: 560px) {
@@ -169,6 +184,11 @@
 
   .orders-container {
     padding: 20px 10px;
+  }
+
+  .orders-container_message {
+    font-size: 14px;
+    padding: 12px 18px;
   }
 }
 

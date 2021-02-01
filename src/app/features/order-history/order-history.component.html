@@ -1,6 +1,6 @@
 <div class="orders-container">
   <span class="orders-container_title">Purchase history</span>
-  <div class="orders-container_order" *ngFor="let order of orders$ | async">
+  <div class="orders-container_order" *ngFor="let order of orders$ | async; trackBy: trackByFn">
     <span class="order-number">Order № {{ order.number }}</span>
     <div class="order-description">
       <span class="order-description_title">Order date:</span>
@@ -19,7 +19,7 @@
       <span class="order-time">{{ order.comment }}</span>
     </div>
     <div class="order-products">
-      <div *ngFor="let product of order.products" class="order-product">
+      <div *ngFor="let product of order.products; trackBy: trackByFn" class="order-product">
         <img [src]="product.images" routerLink="{{ createUrl(product) }}" class="order-product_image" />
         <div class="order-product_name">
             <span routerLink="{{ createUrl(product) }}">{{ product.name }}</span>
@@ -38,4 +38,7 @@
     </div>
   </div>
   <button class="orders-container_button" (click)="loadMore()" *ngIf="hasMore$ | async">Load more</button>
+  <div class="orders-container_message" *ngIf="!hasOrders()" >
+    <span>No orders</span>
+  </div>
 </div>

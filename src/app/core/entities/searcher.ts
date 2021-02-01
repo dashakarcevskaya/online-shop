@@ -154,4 +154,11 @@ export class Searcher {
     this.lastItem = null;
     this.load$.next();
   }
+
+  public resetFilters(): void {
+    this.filters = [];
+    this.lastItem = null;
+    this.load$.next();
+    console.log(this.filters);
+  }
 }

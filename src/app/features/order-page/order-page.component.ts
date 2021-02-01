@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
-  // AbstractControl,
   FormBuilder,
   FormGroup,
   Validators
@@ -37,6 +36,7 @@ export class OrderPageComponent implements OnInit {
   public addressForm: FormGroup;
   public orderForm: FormGroup;
   public cardForm: FormGroup;
+  // public cardNumber: string;
 
   public isChangeAddress = false;
 
@@ -89,7 +89,7 @@ export class OrderPageComponent implements OnInit {
         ],
         cardYear: [
           '',
-          [Validators.required, Validators.min(18), Validators.max(25)]
+          [Validators.required, Validators.min(21), Validators.max(25)]
         ],
         cvvNumber: ['', [Validators.required]]
       },
@@ -228,4 +228,18 @@ export class OrderPageComponent implements OnInit {
     this.createNewOrder();
     this.router.navigate(['check-page']);
   }
+
+  public trackByFn(index, item) {
+    return item.id;
+  }
+
+  // public isValidCardNumber(): void {
+  //   console.log(
+  //     isNaN(
+  //       this.cardForm.value.cardNumber
+  //         ? this.cardForm.value.cardNumber
+  //         : +this.cardForm.value.cardNumber
+  //     )
+  //   );
+  // }
 }

@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { Product } from '@core/types/product';
 import { ProductDescription } from '@core/types/product-description';
-// import { SwiperCore } from 'swiper/core';
-// import { SwiperOptions } from 'swiper';
 
 import { CompareService } from '@services/compare.service';
 import { CartService } from '@services/cart.service';
@@ -58,5 +56,9 @@ export class ComparePageComponent {
 
   public addToCart(product: Product): void {
     this.cartService.addProduct(product);
+  }
+
+  public trackByFn(index, item) {
+    return item.id;
   }
 }

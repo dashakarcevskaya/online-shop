@@ -7,7 +7,7 @@ export class ModalService {
   public isVisible = false;
   public message: string;
 
-  public showModalWindow(message: string) {
+  public showModalWindow(message: string): void {
     this.isVisible = !this.isVisible;
     this.message = message;
     setTimeout(() => {

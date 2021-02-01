@@ -64,4 +64,8 @@ export class CatalogComponent implements OnInit {
   public updateSearchValue(value: string): void {
     this.searcher.changeSearchString(value);
   }
+
+  public resetFilters(): void {
+    this.searcher.resetFilters();
+  }
 }

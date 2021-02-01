@@ -14,6 +14,7 @@
   <app-filter
     [productType]="productType"
     (changedFilter)="onChangeFilters($event)"
+    (resetedFilters)="resetFilters()"
   ></app-filter>
   <app-product-list
     [products$]="products$"

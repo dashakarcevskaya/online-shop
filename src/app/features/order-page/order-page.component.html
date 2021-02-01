@@ -51,24 +51,28 @@
           formControlName="city"
           placeholder="City"
           class="order-container_address-form_input"
+          maxlength="30"
         />
         <input
           type="text"
           formControlName="street"
           placeholder="Street"
           class="order-container_address-form_input"
+          maxlength="40"
         />
         <input
           type="text"
           formControlName="house"
           placeholder="House"
           class="order-container_address-form_input"
+          maxlength="4"
         />
         <input
           type="text"
           formControlName="apartment"
           placeholder="Apartment"
           class="order-container_address-form_input"
+          maxlength="4"
         />
         <button
           type="submit"
@@ -182,7 +186,7 @@
   </div>
   <div class="order-container_products">
     <span class="order-container_products-title">Your order</span>
-    <div class="order-container_product" *ngFor="let item of getCartItems()">
+    <div class="order-container_product" *ngFor="let item of getCartItems(); trackBy: trackByFn">
       <div class="order-container_image-container">
         <img
           class="order-container_product-image"

@@ -5,7 +5,7 @@
   position: relative;
   flex-wrap: nowrap;
   padding: 20px;
-  box-shadow: 0 0 10px 5px #dddddd;
+  box-shadow: 0 0 10px 5px @box-shadow-color;
 }
 
 .catalog-item__image-container {
@@ -25,14 +25,23 @@
 
 .catalog-item__description-container {
   display: flex;
+  justify-content: space-between;
+  width: 85%;
 }
 
 .catalog-item__description {
   display: flex;
   flex-direction: column;
   width: 620px;
-  margin-left: 20px;
-  margin-right: 20px;
+  margin: 0 20px;
+
+  &-text {
+    margin: 0;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 }
 
 .catalog-item_notice {
@@ -44,7 +53,7 @@
     font-size: 16px;
   }
   &-title {
-    color: #fc0e0e;
+    color: @notice-color;
   }
 }
 
@@ -72,6 +81,9 @@
   margin-bottom: 20px;
   font-weight: bold;
   text-decoration: none;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .catalog-item__button {
@@ -83,11 +95,11 @@
   width: 150px;
   padding-left: 10px;
   padding-right: 10px;
-  background: #faebd7;
+  background: @product-cart-button;
   text-align: center;
   cursor: pointer;
   &:hover {
-    background: #f0d2aa;
+    background: @product-cart-button__hover;
   }
   &:focus {
     outline: none;
@@ -102,10 +114,6 @@
 }
 
 @media (max-width: 1280px) {
-  // .catalog-item__description {
-  //   width: 320px;
-  //   margin-right: 0px;
-  // }
 
   .catalog-item__price-container {
     max-width: 53px;
@@ -122,11 +130,7 @@
     padding: 20px 10px;
   }
 
-  // .catalog-item__description {
-  //   width: 270px;
-  // }
   .catalog-item_notice {
-
     &-title {
       font-size: 12px;
     }
@@ -142,15 +146,14 @@
     img {
       width: 100%;
       height: 100%;
-      max-height: 130px;
-      min-width: 100px;
+      max-height: 110px;
+      min-width: 80px;
     }
   }
 
   .catalog-item__price-container {
     max-width: 46px;
     width: 100%;
-    margin-right: 0px;
   }
 
   .catalog-item__buttons {
@@ -161,7 +164,7 @@
 
   .catalog-item__button {
     width: 110px;
-    font-size: 14px;
+    font-size: 12px;
   }
 
   .catalog-item__description-text {
@@ -172,7 +175,7 @@
   }
 
   .catalog-item__title {
-    font-size: 16px;
+    font-size: 14px;
   }
 }
 
@@ -190,7 +193,7 @@
 
   .catalog-item__button {
     font-size: 12px;
-    width: 95px;
+    width: 110px;
   }
 
   .catalog-item__description-text {

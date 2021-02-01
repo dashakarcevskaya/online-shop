@@ -24,7 +24,6 @@ export class ProductPageComponent {
   public description: ProductDescription;
 
   public productId$: Observable<string>;
-  // public product$: Observable<Product>;
   public product: Product;
   public description$: Observable<ProductDescription>;
 
@@ -74,5 +73,9 @@ export class ProductPageComponent {
 
   public addToCard(): void {
     this.cartService.addProduct(this.product);
+  }
+
+  public trackByFn(index, item) {
+    return item.id;
   }
 }

@@ -5,14 +5,14 @@
     <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="login-form_email">
             <label>E-mail<span class="required-field" title="Required to fill">*</span></label>
-            <input type="email" class="login-form_email-input" formControlName="login" autocomplete="on">
-            <div [ngClass]="{'login-form_error': login.errors?.email}">
-                <span class="login-form_error-message" *ngIf="login.errors?.email">Invalid email</span>
+            <input type="email" class="login-form_email-input" formControlName="login" autocomplete="on" maxlength="40">
+            <div [ngClass]="{'login-form_error': login.errors?.pattern}">
+                <span class="login-form_error-message" *ngIf="login.errors?.pattern">Invalid email</span>
             </div>
         </div>
         <div class="login-form_password">
             <label>Password<span class="required-field" title="Required to fill">*</span></label>
-            <input type="password" class="login-form_password-input" formControlName="password">
+            <input type="password" class="login-form_password-input" formControlName="password" maxlength="30">
             <div [ngClass]="{'login-form_error': password.errors?.minlength}">
                 <span *ngIf="password.errors?.minlength" class="login-form_error-message">Password must be more than 6 characters</span>
             </div>

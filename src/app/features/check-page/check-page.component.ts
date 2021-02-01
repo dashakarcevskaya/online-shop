@@ -27,6 +27,10 @@ export class CheckPageComponent implements OnInit {
   }
 
   public getPaymentMethodString(): string {
-    return this.order.paymentMethod === 'cash' ? 'Наличные' : 'Карта';
+    return this.order.paymentMethod === 'cash' ? 'Cash' : 'Card';
+  }
+
+  public trackByFn(index, item) {
+    return item.id;
   }
 }

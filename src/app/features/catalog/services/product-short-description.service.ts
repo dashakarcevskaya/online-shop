@@ -3,8 +3,9 @@ import { ProductType } from '@core/enums/product-type';
 import { HeadphonesPurpose } from '@core/enums/headphones-purpose';
 import { Product } from '@core/types/product';
 import { Phone } from '@core/types/phone';
-import { SmartWatches } from '@core/types/smartwatches';
+import { SmartWatch } from '@core/types/smartwatches';
 import { Headphones } from '@core/types/headphones';
+import { Laptop } from '@core/types/laptop';
 
 @Injectable()
 export class ProductShortDescriptionService {
@@ -13,10 +14,17 @@ export class ProductShortDescriptionService {
       case ProductType.Phone:
         return this.mapPhoneToShortDescription(product as Phone);
       case ProductType.SmartWatch:
-        return this.mapSmartWatchesToShortDescription(product as SmartWatches);
+        return this.mapSmartWatchesToShortDescription(product as SmartWatch);
       case ProductType.Headphones:
         return this.mapHeadphonesToShortDescription(product as Headphones);
+      case ProductType.Laptop:
+        return this.mapLaptopToShortDescription(product as Laptop);
     }
+  }
+
+  private mapLaptopToShortDescription(product: Laptop): string {
+    return `${product.screenSize}" ${product.screen_resolution_w} x ${product.screen_resolution_h} ${product.screenTechnology},
+     ${product.processor} ${product.clockFrequency} MHz, SSD ${product.memory} GB`;
   }
 
   private mapPhoneToShortDescription(product: Phone): string {
@@ -25,8 +33,9 @@ export class ProductShortDescriptionService {
       storage ${product.storage}, camera ${product.main_camera_mp} Mp, accumulator ${product.accumulator} mAh`;
   }
 
-  private mapSmartWatchesToShortDescription(product: SmartWatches): string {
-    return `${product.name}`;
+  private mapSmartWatchesToShortDescription(product: SmartWatch): string {
+    return `${product.typeOfWatch}, support ${product.support}, screen ${product.screenTechnology} ${product.screenSize}"
+     (${product.resolution_h}x${product.resolution_w}), working hours: ${product.hours} h`;
   }
 
   private mapHeadphonesToShortDescription(product: Headphones): string {
@@ -34,11 +43,15 @@ export class ProductShortDescriptionService {
       product.kind === 'headphones_with_mic'
         ? 'headphones with microphone'
         : 'headphones'
-    }, ${this.getHeadphonesPurpose(product.purpose)}
+    }, ${product.design}, ${this.getHeadphonesPurpose(product.purpose)},
+
     ${
-      product.wireless_interface ? `, ${product.wireless_interface_type} ,` : ''
-    } 
-    ${product.hours_capacity ? `run time ${product.hours_capacity} h.` : ''}`;
+      product.wireless_interface ? ` ${product.wireless_interface_type} ,` : ''
+    } ${product.frequencyRange ? `${product.frequencyRange} Hz, ` : ''}
+    ${product.hours_capacity ? `run time ${product.hours_capacity} h.` : ''} ${
+      product.cable ? `cable ${product.cable} m` : ''
+    }
+     `;
   }
 
   private getHeadphonesPurpose(purpose: string): string {

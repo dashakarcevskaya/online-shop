@@ -29,7 +29,7 @@ export class OrderHistoryComponent implements OnInit {
   }
 
   public getPaymentMethod(order: Order): string {
-    return order.paymentMethod === 'cash' ? 'Наличные' : 'Карта';
+    return order.paymentMethod === 'cash' ? 'Cash' : 'Card';
   }
 
   public createUrl(product: any): string {
@@ -38,5 +38,17 @@ export class OrderHistoryComponent implements OnInit {
 
   public loadMore(): void {
     this.orderHistoryService.loadMore();
+  }
+
+  public trackByFn(index, item) {
+    return item.id;
+  }
+
+  public hasOrders(): boolean {
+    let hasOrders: boolean;
+    this.orders$.subscribe((orders) =>
+      orders.length === 0 ? (hasOrders = false) : (hasOrders = true)
+    );
+    return hasOrders;
   }
 }

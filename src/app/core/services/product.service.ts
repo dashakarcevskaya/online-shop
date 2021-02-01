@@ -37,6 +37,8 @@ export class ProductService {
         return '/headphones';
       case ProductType.SmartWatch:
         return '/smartwatches';
+      case ProductType.Laptop:
+        return '/laptops';
     }
   }
 

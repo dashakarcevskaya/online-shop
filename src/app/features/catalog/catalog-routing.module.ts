@@ -16,8 +16,20 @@ const routes: Routes = [
     data: { productType: ProductType.Phone }
   },
   {
+    path: 'phone/:id',
+    component: ProductPageComponent,
+    data: {
+      productType: ProductType.Phone
+    }
+  },
+  {
     path: 'headphones',
     component: CatalogComponent,
+    data: { productType: ProductType.Headphones }
+  },
+  {
+    path: 'headphones/:id',
+    component: ProductPageComponent,
     data: { productType: ProductType.Headphones }
   },
   {
@@ -31,16 +43,14 @@ const routes: Routes = [
     data: { productType: ProductType.SmartWatch }
   },
   {
-    path: 'phone/:id',
-    component: ProductPageComponent,
-    data: {
-      productType: ProductType.Phone
-    }
+    path: 'laptops',
+    component: CatalogComponent,
+    data: { productType: ProductType.Laptop }
   },
   {
-    path: 'headphones/:id',
+    path: 'laptop/:id',
     component: ProductPageComponent,
-    data: { productType: ProductType.Headphones }
+    data: { productType: ProductType.Laptop }
   }
 ];
 

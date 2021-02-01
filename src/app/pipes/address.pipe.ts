@@ -17,13 +17,13 @@ export class AddressPipe implements PipeTransform {
       return '--';
     } else {
       if (value?.apartment === null) {
-        return `г.${capitalize(value?.city)}, ул.${capitalize(
+        return `s.${capitalize(value?.city)}, st.${capitalize(
           value?.street
-        )}, д.${value?.house}`;
+        )}, h.${value?.house}`;
       } else {
-        return `г.${capitalize(value?.city)}, ул.${capitalize(
+        return `s.${capitalize(value?.city)}, st.${capitalize(
           value?.street
-        )}, д.${value?.house}, кв.${value?.apartment}`;
+        )}, h.${value?.house}, ap.${value?.apartment}`;
       }
     }
   }

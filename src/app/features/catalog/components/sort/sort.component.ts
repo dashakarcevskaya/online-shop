@@ -19,4 +19,8 @@ export class SortComponent {
   public onChange(value) {
     this.changed.emit(value);
   }
+
+  public trackByFn(index, item) {
+    return item.id;
+  }
 }

@@ -1,3 +1,4 @@
+@import 'variables';
 .product-list {
   position: relative;
   width: 100%;
@@ -7,7 +8,6 @@
 }
 
 .product-list__error {
-  // width: 1150px;
   display: flex;
   justify-content: center;
   padding: 40px 0;
@@ -37,12 +37,12 @@ app-product-card {
   font-weight: bold;
   cursor: pointer;
   border: none;
-  background: #f3f3f3;
+  background: @product-list_button;
   max-width: 500px;
   width: 100%;
   margin-bottom: 10px;
   &:hover {
-    background: #e6e5e5;
+    background: @button-color__hover;
   }
   &:focus {
     outline: none;
@@ -56,12 +56,6 @@ app-product-card {
   }
 }
 
-@media (max-width: 1024px) {
-  // app-product-card {
-  //   max-width: 630px;
-  //   width: 100%;
-  // }
-}
 
 @media (max-width: 768px) {
   .product-list_button {
@@ -104,5 +98,9 @@ app-product-card {
 @media (max-width: 420px) {
   app-product-card {
     max-width: 300px;
+  }
+
+  .product-list_button {
+    max-width: 280px;
   }
 }

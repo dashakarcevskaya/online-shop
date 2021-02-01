@@ -8,6 +8,8 @@ import { Headphones } from '@core/types/headphones';
 import { MappingTextService } from './mapping-text.service';
 
 import { ProductDescription } from '../types/product-description';
+import { SmartWatch } from '@core/types/smartwatches';
+import { Laptop } from '@core/types/laptop';
 
 @Injectable({
   providedIn: 'root'
@@ -20,10 +22,77 @@ export class ProductDescriptionService {
       case ProductType.Phone:
         return this.mapPhoneToDescription(product as Phone);
       case ProductType.SmartWatch:
-        return;
+        return this.mapSmartWatchToDescription(product as SmartWatch);
       case ProductType.Headphones:
         return this.mapHeadphonesToDescription(product as Headphones);
+      case ProductType.Laptop:
+        return this.mapLaptopToDescription(product as Laptop);
     }
+  }
+
+  private mapSmartWatchToDescription(product: SmartWatch): ProductDescription {
+    return [
+      {
+        title: 'General information',
+        children: [
+          {
+            name: 'Market launch date',
+            value: product.year
+          },
+          {
+            name: 'Flash Memory',
+            value: `${product.flashMemory} GB`
+          },
+          {
+            name: 'Type',
+            value: product.typeOfWatch
+          },
+          {
+            name: 'Platform support',
+            value: product.support
+          }
+        ]
+      },
+      {
+        title: 'Screen',
+        children: [
+          {
+            name: 'Screen technology',
+            value: product.screenTechnology
+          },
+          {
+            name: 'Screen size',
+            value: `${product.screenSize}"`
+          },
+          {
+            name: 'Screen resolution',
+            value: `${product.resolution_h}x${product.resolution_w}`
+          }
+        ]
+      },
+      {
+        title: 'Sensors',
+        children: [
+          {
+            name: 'Pedometer',
+            value: product.pedometer ? 'yes' : 'no'
+          },
+          {
+            name: 'Pulsometer',
+            value: product.pulsometer ? 'yes' : 'no'
+          }
+        ]
+      },
+      {
+        title: 'Working hours',
+        children: [
+          {
+            name: 'Working hours',
+            value: product.hours
+          }
+        ]
+      }
+    ];
   }
 
   private mapPhoneToDescription(product: Phone): ProductDescription {
@@ -105,6 +174,71 @@ export class ProductDescriptionService {
     ];
   }
 
+  private mapLaptopToDescription(product: Laptop): ProductDescription {
+    return [
+      {
+        title: 'General information',
+        children: [
+          {
+            name: 'Market launch date',
+            value: product.year
+          },
+          {
+            name: 'Type',
+            value: product.laptopType
+          },
+          {
+            name: 'Purpose',
+            value: product.purpose
+          }
+        ]
+      },
+      {
+        title: 'Processor',
+        children: [
+          {
+            name: 'Processor',
+            value: product.processor
+          },
+          {
+            name: 'Number of Cores',
+            value: product.numberOfCores
+          },
+          {
+            name: 'Clock frequency',
+            value: `${product.clockFrequency} MHz`
+          }
+        ]
+      },
+      {
+        title: 'Screen',
+        children: [
+          {
+            name: 'Screen diagonal',
+            value: `${product.screenSize}"`
+          },
+          {
+            name: 'Screen resolution',
+            value: `${product.screen_resolution_w}x${product.screen_resolution_h}`
+          },
+          {
+            name: 'Matrix frequency',
+            value: `${product.matrixFrequency} Hz`
+          }
+        ]
+      },
+      {
+        title: 'Data storage',
+        children: [
+          {
+            name: 'Drive configuration',
+            value: `SSD ${product.memory} GB`
+          }
+        ]
+      }
+    ];
+  }
+
   private mapHeadphonesToDescription(product: Headphones): ProductDescription {
     return [
       {
@@ -137,7 +271,11 @@ export class ProductDescriptionService {
                   value: `${product.wireless_interface_type}`
                 }
               ]
-            : [])
+            : []),
+          {
+            name: 'Design',
+            value: product.design
+          }
         ]
       },
       ...(product.hours_capacity

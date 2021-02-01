@@ -13,11 +13,11 @@
   <div class="product-description">
     <span class="description__title">Description</span>
     <div class="product-description__table">
-      <div *ngFor="let category of description">
+      <div *ngFor="let category of description; trackBy: trackByFn">
         <div class="product-description__table-title">
           <span>{{ category.title }}</span>
         </div>
-        <div *ngFor="let property of category.children">
+        <div *ngFor="let property of category.children; trackBy: trackByFn">
           <div class="product-description__table-item">
             <span>{{ property.name }}</span>
             <span>{{ property.value }}</span>

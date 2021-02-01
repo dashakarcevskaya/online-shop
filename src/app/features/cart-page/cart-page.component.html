@@ -1,8 +1,8 @@
 <div class="cart-container">
-  <span class="cart-container_title">Cart</span>
+  <span class="cart-container_title" *ngIf="!isEmptyList()">Cart</span>
   <div class="cart-container_order" [ngClass]="{'cart-container_order__hidden': isEmptyList()}">
     <div class="cart-container_products">
-        <div class="cart-container_product"  *ngFor="let item of getCartItems()">
+        <div class="cart-container_product"  *ngFor="let item of getCartItems(); trackBy: trackByFn">
           <div class="cart-container_image-container">
             <img class="cart-container_product-image" [src]="item.product.images[0]" />
           </div>
@@ -39,9 +39,10 @@
       </a>
   </div>
   </div>
-  <div class="cart-container__message_hidden" [ngClass]="{'cart-container__message_visible': isEmptyList()}">
-    <div>
+  <div *ngIf="isEmptyList()" class='cart-container__message_visible'>
+    <div class="cart-container__message">
       <span>No products in the cart</span>
     </div>
   </div>
 </div>
+

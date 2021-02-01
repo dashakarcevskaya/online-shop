@@ -42,4 +42,8 @@ export class CartPageComponent {
   public isEmptyList(): boolean {
     return this.getCartItems().length === 0;
   }
+
+  public trackByFn(index, item) {
+    return item.id;
+  }
 }

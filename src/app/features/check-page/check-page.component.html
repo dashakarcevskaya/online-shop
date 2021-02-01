@@ -33,7 +33,7 @@
         <span class="item__quantity">Quantity</span>
         <span class="item__price">Cost</span>
       </div>
-      <div class="check-container_products_item" *ngFor="let item of productList">
+      <div class="check-container_products_item" *ngFor="let item of productList; trackBy: trackByFn">
           <span class="item__name">{{ item.product.name  }}</span>
           <span class="item__quantity">{{ item.quantity }}</span>
           <span class="item__price">{{ item.product.price * item.quantity }} р.</span>

@@ -1,5 +1,6 @@
 export enum ProductType {
   Phone = 'phone',
   Headphones = 'headphones',
-  SmartWatch = 'smartWatch'
+  SmartWatch = 'smartWatch',
+  Laptop = 'laptop'
 }

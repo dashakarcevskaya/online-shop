@@ -1,5 +1,4 @@
 .content {
-  // height: 100%;
   min-height: 520px;
   max-width: 1400px;
   width: 100%;
@@ -24,4 +23,70 @@ router-outlet {
   position: fixed;
   margin-left: 600px;
   margin-top: 300px;
+}
+
+@media (max-width: 1366px) {
+  .content {
+    min-height: 791px;
+  }
+}
+
+@media (max-width: 1280px) {
+  .modal-container__visible {
+    margin-left: 400px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .content {
+    min-height: 535px;
+  }
+}
+
+@media (max-width: 860px) {
+  .modal-container__visible {
+    margin-left: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .content {
+    min-height: 569px;
+  }
+
+  .modal-container__visible {
+    margin-left: 200px;
+   }
+}
+
+@media (max-width: 670px) {
+  .modal-container__visible {
+    margin-left: 150px;
+   }
+}
+
+@media (max-width: 560px) {
+  .content {
+    min-height: 588px;
+  }
+
+  .modal-container__visible {
+    margin-left: 90px;
+   }
+}
+
+@media (max-width: 420px) {
+  .content {
+    min-height: 605px;
+  }
+
+  .modal-container__visible {
+    margin-left: 40px;
+   }
+}
+
+@media (max-width: 375px) {
+  .modal-container__visible {
+    margin-left: 20px;
+  }
 }

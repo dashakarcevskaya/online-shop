@@ -44,7 +44,7 @@ export class CartService {
 
   public canAddProduct(product: CartItem): boolean {
     if (product.quantity === this.maxProductAmount) {
-      this.message = 'Вы можете добавить не более 10 единиц одного товара';
+      this.message = 'You can add no more than 10 units of one product';
       return false;
     }
     return true;

@@ -38,14 +38,15 @@ export class CompareService {
   public canAddProduct(product: Product): boolean {
     const item = this.products.find((el) => el.id === product.id);
     if (!this.products.every((item: Product) => item.type === product.type)) {
+      this.message = 'You can only add products from one category';
       return false;
     }
     if (this.products.length === this.maxProductAmount) {
-      this.message = 'Вы можете добавить не более 3 товаров в сравнение';
+      this.message = 'You can add up to 3 products to compare';
       return false;
     }
     if (item) {
-      this.message = 'Товар уже в сравнении!';
+      this.message = 'The product is already in comparison!';
       return false;
     }
     return true;

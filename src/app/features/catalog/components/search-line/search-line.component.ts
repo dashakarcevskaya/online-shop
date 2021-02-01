@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search-line',
@@ -8,7 +10,13 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class SearchLineComponent {
   @Output()
   changed = new EventEmitter<string>();
-  public onChange(value) {
-    this.changed.emit(value);
+
+  public userQuestion: string;
+  userQuestionUpdate = new Subject<string>();
+
+  constructor() {
+    this.userQuestionUpdate
+      .pipe(debounceTime(500), distinctUntilChanged())
+      .subscribe((value) => this.changed.emit(value));
   }
 }

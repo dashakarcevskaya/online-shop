@@ -21,11 +21,11 @@ header {
   display: flex;
   justify-content: space-between;
   &__quantity {
-    color: white;
+    color: @header-item_quantity;
     &-item {
       width: 15px;
       height: 15px;
-      background: #ff4a04;
+      background: @header-item_quantity-circle;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -33,7 +33,7 @@ header {
       font-size: 10px;
       margin-left: 16px;
       position: absolute;
-      border: 1px solid #ffffff;
+      border: 1px solid @header-item_quantity;
     }
   }
 }
@@ -117,7 +117,7 @@ ul {
   li {
     margin: 16px;
   }
-  box-shadow: 0 0 10px 5px #dddddd;
+  box-shadow: 0 0 10px 5px @box-shadow-color;
   position: absolute;
   left: 0;
   top: 40px;
@@ -146,13 +146,13 @@ ul {
 @media (max-width: 1024px) {
   header {
     padding: 0px 20px;
-    border-bottom: 1px solid #dddddd;
+    border-bottom: 1px solid @box-shadow-color;
   }
 }
 
 @media (max-width: 768px) {
   header {
-    border-bottom: 1px solid #dddddd;
+    border-bottom: 1px solid @box-shadow-color;
   }
 
   .header-navigation {
@@ -182,7 +182,7 @@ ul {
   }
 
   .navigation-menu__mobile {
-    width: 300px;
+    width: 250px;
     background-color: @menu-color;
     height: 100%;
     position: absolute;
@@ -193,7 +193,7 @@ ul {
   }
 
   .navigation-menu__mobile-overlay {
-    background: grey;
+    background: @mobile-menu;
     position: absolute;
     width: 100vw;
     height: 100vh;
@@ -237,7 +237,7 @@ ul {
 
 @media (max-width: 420px) {
   .logo {
-    height: 23px;
+    height: 18px;
   }
 
   .header-actions__icon {
@@ -256,4 +256,5 @@ ul {
     height: 18px;
     width: 18px;
   }
+
 }
