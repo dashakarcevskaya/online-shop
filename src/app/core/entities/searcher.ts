@@ -58,7 +58,10 @@ export class Searcher {
               }
               if (this.filters.length > 0) {
                 query = this.filters.reduce(
-                  (acc, item) => acc.where(item.field, '==', item.value),
+                  (acc, item) =>
+                    item.value === null
+                      ? acc
+                      : acc.where(item.field, '==', item.value),
                   query
                 );
               }
@@ -148,9 +151,12 @@ export class Searcher {
     const existingFilter = this.filters.find((el) => el.field === filter.field);
     if (existingFilter) {
       existingFilter.value = filter.value;
+    } else if (filter.value === null) {
+      return;
     } else {
       this.filters.push(filter);
     }
+
     this.lastItem = null;
     this.load$.next();
   }
@@ -159,6 +165,5 @@ export class Searcher {
     this.filters = [];
     this.lastItem = null;
     this.load$.next();
-    console.log(this.filters);
   }
 }

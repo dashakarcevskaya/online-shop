@@ -63,6 +63,9 @@ export class OrderPageComponent implements OnInit {
     this.initOrderForm();
     this.initAddressForm();
     this.initCardform();
+    this.cardForm.valueChanges.subscribe((res) => {
+      console.log(res);
+    });
   }
 
   public initOrderForm(): void {
@@ -232,14 +235,4 @@ export class OrderPageComponent implements OnInit {
   public trackByFn(index, item) {
     return item.id;
   }
-
-  // public isValidCardNumber(): void {
-  //   console.log(
-  //     isNaN(
-  //       this.cardForm.value.cardNumber
-  //         ? this.cardForm.value.cardNumber
-  //         : +this.cardForm.value.cardNumber
-  //     )
-  //   );
-  // }
 }

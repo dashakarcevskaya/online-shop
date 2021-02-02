@@ -3,6 +3,7 @@
   max-width: 1400px;
   width: 100%;
   margin: 0 auto 0 auto;
+  flex-grow: 1;
 }
 
 router-outlet {
@@ -25,21 +26,9 @@ router-outlet {
   margin-top: 300px;
 }
 
-@media (max-width: 1366px) {
-  .content {
-    min-height: 791px;
-  }
-}
-
 @media (max-width: 1280px) {
   .modal-container__visible {
     margin-left: 400px;
-  }
-}
-
-@media (max-width: 1024px) {
-  .content {
-    min-height: 535px;
   }
 }
 
@@ -50,39 +39,27 @@ router-outlet {
 }
 
 @media (max-width: 768px) {
-  .content {
-    min-height: 569px;
-  }
-
   .modal-container__visible {
     margin-left: 200px;
-   }
+  }
 }
 
 @media (max-width: 670px) {
   .modal-container__visible {
     margin-left: 150px;
-   }
+  }
 }
 
 @media (max-width: 560px) {
-  .content {
-    min-height: 588px;
-  }
-
   .modal-container__visible {
     margin-left: 90px;
-   }
+  }
 }
 
 @media (max-width: 420px) {
-  .content {
-    min-height: 605px;
-  }
-
   .modal-container__visible {
     margin-left: 40px;
-   }
+  }
 }
 
 @media (max-width: 375px) {

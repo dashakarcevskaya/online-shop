@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { CatalogRoutingModule } from './catalog-routing.module';
 
@@ -13,7 +14,6 @@ import { CatalogComponent } from './components/catalog/catalog.component';
 import { ProductPageComponent } from './components/product-page/product-page.component';
 import { SortComponent } from './components/sort/sort.component';
 import { SearchLineComponent } from './components/search-line/search-line.component';
-import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,6 +26,11 @@ import { FormsModule } from '@angular/forms';
     SearchLineComponent
   ],
   providers: [ProductShortDescriptionService, MappingTextService],
-  imports: [CommonModule, CatalogRoutingModule, FormsModule]
+  imports: [
+    CommonModule,
+    CatalogRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
+  ]
 })
 export class CatalogModule {}

@@ -24,6 +24,14 @@ export class FilterComponent implements OnInit {
 
   public filters: Filter[] = [];
   public display = false;
+  public checkboxes: {
+    [field: string]: {
+      [option: string]: {
+        value: string | number;
+        checked: boolean;
+      };
+    };
+  };
 
   ngOnInit(): void {
     this.filterService.getFilters(this.productType).subscribe((filters) => {
@@ -32,10 +40,44 @@ export class FilterComponent implements OnInit {
         filter.options.sort((a, b) => (a.name > b.name ? 1 : -1))
       );
       console.log(this.filters);
+      this.checkboxes = this.filters.reduce(
+        (filters, filter) => ({
+          ...filters,
+          [filter.field]: filter.options.reduce(
+            (options, option) => ({
+              ...options,
+              [option.value]: {
+                value: option.value,
+                checked: false
+              }
+            }),
+            {}
+          )
+        }),
+        {}
+      );
+      console.log(this.checkboxes);
     });
   }
 
-  public onChangeFilers(value: string | number, field: string): void {
+  public onChangeFilers(
+    value: string | number,
+    checked: boolean,
+    field: string
+  ): void {
+    if (checked === false) {
+      this.changedFilter.emit({ field, value: null });
+      this.checkboxes[field][value].checked = false;
+      return;
+    }
+
+    const alreadyCheckedOption = Object.values(this.checkboxes[field]).find(
+      ({ checked }) => checked
+    )?.value;
+    if (alreadyCheckedOption) {
+      this.checkboxes[field][alreadyCheckedOption].checked = false;
+    }
+    this.checkboxes[field][value].checked = true;
     this.changedFilter.emit({ field, value: isNaN(+value) ? value : +value });
   }
 

@@ -2,21 +2,30 @@
   <div class="filter-list" *ngFor="let filter of filters; trackBy: trackByFn">
     <span class="filter-list_title">{{ filter.name }}</span>
     <ul class="filter-list">
-      <li *ngFor="let option of filter.options; trackBy: trackByFn" class="filter-list__item">
+      <li
+        *ngFor="let option of filter.options; trackBy: trackByFn"
+        class="filter-list__item"
+      >
         <label>
           <input
-            type="radio"
+            type="checkbox"
             name="{{ filter.field }}"
             class="filter-list__item-name"
             value="{{ option.value }}"
-            (change)="onChangeFilers($event.target.value, filter.field)"
+            [checked]="checkboxes[filter.field][option.value].checked"
+            (change)="
+              onChangeFilers(
+                option.value,
+                !checkboxes[filter.field][option.value].checked,
+                filter.field
+              )
+            "
           />
           {{ option.value }}
         </label>
       </li>
     </ul>
   </div>
-  <button class="reset-button" (click)="resetFilters()">Reset filters</button>
 </div>
 <div
   *ngIf="display"
@@ -30,14 +39,24 @@
   <div class="filter-list" *ngFor="let filter of filters; trackBy: trackByFn">
     <span class="test">{{ filter.name }}</span>
     <ul class="filter-list">
-      <li *ngFor="let option of filter.options; trackBy: trackByFn" class="filter-list__item">
+      <li
+        *ngFor="let option of filter.options; trackBy: trackByFn"
+        class="filter-list__item"
+      >
         <label>
           <input
-            type="radio"
+            type="checkbox"
             name="{{ filter.field }}"
             class="filter-list__item-name"
             value="{{ option.value }}"
-            (change)="onChangeFilers($event.target.value, filter.field)"
+            [checked]="checkboxes[filter.field][option.value].checked"
+            (change)="
+              onChangeFilers(
+                option.value,
+                !checkboxes[filter.field][option.value].checked,
+                filter.field
+              )
+            "
           />
           {{ option.value }}
         </label>
@@ -48,5 +67,7 @@
 <div class="filter-container__default" *ngIf="filters.length === 0"></div>
 
 <div class="filter-container__button">
-  <button class="filter-container_button__mobile" (click)="toggle()">Filters</button>
+  <button class="filter-container_button__mobile" (click)="toggle()">
+    Filters
+  </button>
 </div>
