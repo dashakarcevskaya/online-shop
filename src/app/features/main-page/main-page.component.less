@@ -16,7 +16,6 @@
   &:hover {
     opacity: 0.6;
   }
-  // box-shadow: 0 0 10px 5px #dddddd;
 }
 
 .container__category__phones {
@@ -63,10 +62,18 @@ a {
   &:extend(.category-title);
 }
 
+@media (max-width: 768px) {
+  .container {
+    &__category {
+      margin: 15px 10px;
+    }
+  }
+}
+
 @media (max-width: 560px) {
   .container__category {
-    width: 420px;
-    height: 278px;
+    width: 385px;
+    height: 253px;
   }
 }
 
@@ -81,9 +88,13 @@ a {
   }
 }
 
+@media (max-width: 375px) {
+
+}
+
 @media (max-width: 320px) {
   .container__category {
-    width: 280px;
-    height: 190px;
+    width: 270px;
+    height: 180px;
   }
 }

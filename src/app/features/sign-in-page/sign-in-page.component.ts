@@ -21,10 +21,28 @@ export class SignInPageComponent implements OnInit {
     this.initForm();
   }
 
-  public initForm() {
+  public initForm(): void {
     this.loginForm = this.fb.group({
-      login: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(7)]]
+      login: [
+        '',
+        {
+          validators: [
+            Validators.required,
+            Validators.email,
+            Validators.pattern(
+              /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            )
+          ],
+          updateOn: 'blur'
+        }
+      ],
+      password: [
+        '',
+        {
+          validators: [Validators.required, Validators.minLength(7)],
+          updateOn: 'blur'
+        }
+      ]
     });
   }
 
@@ -50,8 +68,4 @@ export class SignInPageComponent implements OnInit {
   get errorMessage(): string {
     return this.authService.errorMessage;
   }
-
-  // logOut(): void {
-  //   this.authService.logOut();
-  // }
 }

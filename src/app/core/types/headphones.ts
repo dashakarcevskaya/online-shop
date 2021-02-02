@@ -9,4 +9,7 @@ export type Headphones = Product & {
   wireless_interface: boolean;
   wireless_interface_type: string;
   hours_capacity: number;
+  design: string;
+  frequencyRange: string;
+  cable: string;
 };

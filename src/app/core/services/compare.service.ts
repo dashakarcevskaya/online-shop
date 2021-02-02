@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Product } from '@core/types/product';
+import { ModalService } from '@services/modal.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,9 @@ export class CompareService {
     localStorage.getItem(this.lsKey) || '[]'
   );
   private maxProductAmount = 3;
+  private message: string;
 
-  constructor() {
+  constructor(private modalService: ModalService) {
     this.init();
   }
 
@@ -25,20 +27,36 @@ export class CompareService {
 
   public addProduct(product: Product): void {
     if (!this.canAddProduct(product)) {
+      this.modalService.showModalWindow(this.message);
       return;
     }
+
     this.products = [...this.products, product];
     this.sync();
   }
 
   public canAddProduct(product: Product): boolean {
-    if (!this.products.every((item) => item.type === product.type)) {
+    const item = this.products.find((el) => el.id === product.id);
+    if (!this.products.every((item: Product) => item.type === product.type)) {
+      this.message = 'You can only add products from one category';
       return false;
     }
     if (this.products.length === this.maxProductAmount) {
+      this.message = 'You can add up to 3 products to compare';
+      return false;
+    }
+    if (item) {
+      this.message = 'The product is already in comparison!';
       return false;
     }
     return true;
+  }
+
+  public inProductsList(product: Product): boolean {
+    const item = this.products.find((el) => el.id === product.id);
+    if (item) {
+      return true;
+    } else return false;
   }
 
   public removeAllProducts(): void {

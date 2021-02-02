@@ -9,21 +9,21 @@ export class MappingTextService {
   public mapHeadphonesPurpose(purpose: HeadphonesPurpose) {
     switch (purpose) {
       case HeadphonesPurpose.Sport:
-        return 'спортивные';
+        return 'sport';
       case HeadphonesPurpose.Gaming:
-        return 'геймерские';
+        return 'gaming';
       case HeadphonesPurpose.Portable:
-        return 'портативные';
+        return 'portable';
     }
   }
 
   public mapHeadphonesKind(kind: HeadphonesKind) {
     switch (kind) {
       case HeadphonesKind.Headphones:
-        return 'наушники';
+        return 'headphones';
 
       case HeadphonesKind.headphonesWithMic:
-        return 'наушники с микрофоном';
+        return 'headphones with microphone';
     }
   }
 }

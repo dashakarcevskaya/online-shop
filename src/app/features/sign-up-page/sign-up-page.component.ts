@@ -27,12 +27,49 @@ export class SignUpPageComponent implements OnInit {
     this.initRegisterForm();
   }
 
-  public initRegisterForm() {
+  public initRegisterForm(): void {
     this.registerForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(3)]],
-      surname: ['', [Validators.required, Validators.minLength(3)]],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(7)]]
+      name: [
+        '',
+        {
+          validators: [
+            (Validators.required,
+            Validators.minLength(1),
+            Validators.pattern(/^[А-яA-z]*$/))
+          ],
+          updateOn: 'blur'
+        }
+      ],
+      surname: [
+        '',
+        {
+          validators: [
+            Validators.required,
+            Validators.minLength(3),
+            Validators.pattern(/^[А-яA-z]*$/)
+          ],
+          updateOn: 'blur'
+        }
+      ],
+      email: [
+        '',
+        {
+          validators: [
+            Validators.required,
+            Validators.pattern(
+              /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            )
+          ],
+          updateOn: 'blur'
+        }
+      ],
+      password: [
+        '',
+        {
+          validators: [(Validators.required, Validators.minLength(7))],
+          updateOn: 'blur'
+        }
+      ]
     });
   }
 
@@ -51,8 +88,8 @@ export class SignUpPageComponent implements OnInit {
       });
   }
 
-  get login(): AbstractControl {
-    return this.registerForm.get('login');
+  get email(): AbstractControl {
+    return this.registerForm.get('email');
   }
 
   get password(): AbstractControl {

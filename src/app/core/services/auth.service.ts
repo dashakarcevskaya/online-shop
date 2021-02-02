@@ -3,18 +3,20 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import 'firebase/auth';
 import { Router } from '@angular/router';
 
+import { ReplaySubject, Observable } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   constructor(private firebaseAuth: AngularFireAuth, private router: Router) {
     this.firebaseAuth.user.subscribe((user) => {
-      this.currentUserId = user?.uid || null;
+      this.currentUserId.next(user?.uid || null);
       this.currentUserEmail = user?.email || null;
     });
   }
   public errorMessage = '';
-  public currentUserId: string;
+  public currentUserId = new ReplaySubject<string>();
   public currentUserEmail: string;
 
   public signIn(email: string, password: string): void {
@@ -56,11 +58,15 @@ export class AuthService {
     return this.firebaseAuth.currentUser !== null;
   }
 
-  public getUserId(): string {
+  public getUserId(): Observable<string> {
     return this.currentUserId;
   }
 
   public getUserEmail(): string {
     return this.currentUserEmail;
+  }
+
+  public resetPassword(email: string) {
+    return this.firebaseAuth.sendPasswordResetEmail(email);
   }
 }

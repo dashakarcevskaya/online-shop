@@ -9,8 +9,7 @@ import { map, switchMap, scan } from 'rxjs/operators';
 import { Product } from '@core/types/product';
 import { ProductType } from '@core/enums/product-type';
 import { SortType } from '@core/enums/sort-type';
-
-type FilterQuery = { field: string; value: any };
+import { FilterQuery } from '@core/types/filterQuery';
 
 export class Searcher {
   private lastItem: QueryDocumentSnapshot<Product> = null;
@@ -29,11 +28,13 @@ export class Searcher {
 
   private filters: Array<FilterQuery> = [];
 
+  public isSortingDisabled = false;
+
   constructor(
     private db: AngularFirestore,
     private dbPath: string,
     private productType: ProductType,
-    private limit = 7
+    private limit = 5
   ) {
     this.init();
   }
@@ -45,15 +46,22 @@ export class Searcher {
           return this.db
             .collection<Product>(this.dbPath, (ref) => {
               let query = ref.limit(this.limit + 1);
-              if (this.orderBy) {
-                query = query.orderBy(this.orderBy, this.orderDirection);
+              if (this.orderBy || this.searchString !== '') {
+                const orderBy =
+                  this.searchString !== '' ? this.searchField : this.orderBy;
+                const orderDirection =
+                  this.searchString !== '' ? 'asc' : this.orderDirection;
+                query = query.orderBy(orderBy, orderDirection);
               }
               if (this.lastItem) {
                 query = query.startAfter(this.lastItem);
               }
               if (this.filters.length > 0) {
                 query = this.filters.reduce(
-                  (acc, item) => acc.where(item.field, '==', item.value),
+                  (acc, item) =>
+                    item.value === null
+                      ? acc
+                      : acc.where(item.field, '==', item.value),
                   query
                 );
               }
@@ -73,8 +81,12 @@ export class Searcher {
 
     this.items$.subscribe(({ items }) => {
       if (items.length > 0) {
-        this.lastItem = items[items.length - 2].payload.doc;
         this.hasMore$.next(items.length === this.limit + 1);
+        this.lastItem = (
+          items[items.length - 2] || items[items.length - 1]
+        ).payload.doc;
+      } else {
+        this.hasMore$.next(false);
       }
     });
 
@@ -129,14 +141,29 @@ export class Searcher {
   }
 
   public changeSearchString(value: string): void {
+    this.isSortingDisabled = !!value;
     this.searchString = value.toLocaleLowerCase();
     this.lastItem = null;
     this.load$.next();
   }
 
-  // public setFilters(filters: FilterQuery[]): void {
-  //   this.filters = filters;
-  //   this.lastItem = null;
-  //   this.load$.next();
-  // }
+  public setFilters(filter: FilterQuery): void {
+    const existingFilter = this.filters.find((el) => el.field === filter.field);
+    if (existingFilter) {
+      existingFilter.value = filter.value;
+    } else if (filter.value === null) {
+      return;
+    } else {
+      this.filters.push(filter);
+    }
+
+    this.lastItem = null;
+    this.load$.next();
+  }
+
+  public resetFilters(): void {
+    this.filters = [];
+    this.lastItem = null;
+    this.load$.next();
+  }
 }

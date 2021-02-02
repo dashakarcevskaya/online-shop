@@ -1,5 +1,5 @@
 <div class="catalog-item">
-    <div class="catalog-item__image-container">
+    <div class="catalog-item__image-container" routerLink="{{ href }}">
         <img [src]="image">
     </div>
     <div class="catalog-item__description-container">
@@ -11,12 +11,15 @@
             <span class="catalog-item__price">{{ price }} р.</span>
         </div>
         <div class="catalog-item__buttons">
-            <button class="catalog-item__button">
-                В корзину
+            <button class="catalog-item__button" (click)="addToCart()">
+                Add to cart
             </button>
-            <button class="catalog-item__button" (click)="addToCompare()" [disabled]="!canAddToCompare">
-                В сравнение
+            <button class="catalog-item__button" (click)="addToCompare()">
+                Add to compare
             </button>
+            <div class="catalog-item_notice" [ngClass]="{'catalog-item_notice__visible': hasProduct(product)}">
+                <span class="catalog-item_notice-title">Product in compare</span>
+            </div>
         </div>
     </div>
 </div>

@@ -1,13 +1,13 @@
 <div class="compare-container">
-  <div *ngFor="let product of getProducts()" class="compare-container__product">
+  <div *ngFor="let product of getProducts(); trackBy: trackByFn" class="compare-container__product">
     <div class="compare-container__image">
       <img class="compare-container__product-image" [src]="product.images[0]" />
     </div>
-    <div *ngFor="let category of getProductDescription(product)">
+    <div *ngFor="let category of getProductDescription(product); trackBy: trackByFn">
       <div class="compare-container__table-title">
         <span>{{ category.title }}</span>
       </div>
-      <div *ngFor="let property of category.children">
+      <div *ngFor="let property of category.children; trackBy: trackByFn">
         <div
           class="compare-container__table-item"
           [ngClass]="{
@@ -16,16 +16,20 @@
             )
           }"
         >
-          <span>{{ property.name }}</span>
-          <span>{{ property.value }}</span>
+          <span class="compare-container__table-item__name">{{
+            property.name
+          }}</span>
+          <span class="compare-container__table-item__value">{{
+            property.value
+          }}</span>
         </div>
       </div>
     </div>
-    <button
-      class="compare-container__button_clear"
-      (click)="removeProduct(product)"
-    >
-      Удалить из сравнения
+    <button class="compare-container__button" (click)="removeProduct(product)">
+      Remove from compare
+    </button>
+    <button class="compare-container__button" (click)="addToCart(product)">
+      Add to cart
     </button>
   </div>
   <div
@@ -34,6 +38,9 @@
       'compare-container__message_hidden': getProducts().length !== 0
     }"
   >
-    <span>Нет товаров в сравнении</span>
+  <div class="message">
+    <span>No products in compare</span>
+  </div>
   </div>
 </div>
+

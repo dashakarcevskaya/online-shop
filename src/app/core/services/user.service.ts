@@ -1,13 +1,9 @@
-import { DebugEventListener, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { User } from '@core/types/user';
 import { AuthService } from '@core/services/auth.service';
-import {
-  AngularFirestore // AngularFirestoreCollection
-} from '@angular/fire/firestore';
-import { map } from 'rxjs/operators';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { map, mergeMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-// import { map } from 'rxjs/operators';
-// import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,31 +13,37 @@ export class UserService {
   constructor(private db: AngularFirestore, private auth: AuthService) {}
 
   public getUser(): Observable<User[]> {
-    return this.db
-      .collection<User>('/users', (ref) => {
-        return ref.where('uid', '==', this.auth.getUserId());
-      })
-      .snapshotChanges()
-      .pipe(
-        map((items) =>
-          items.map((item) => {
-            const data = item.payload.doc.data();
-            const id = item.payload.doc.id;
-            this.id = id;
-            return { id, ...data } as User;
+    return this.auth.getUserId().pipe(
+      mergeMap((id) => {
+        return this.db
+          .collection<User>('/users', (ref) => {
+            return ref.where('uid', '==', id);
           })
-        )
-      );
-  }
-
-  public getId(): string {
-    return this.auth.getUserId();
+          .snapshotChanges()
+          .pipe(
+            map((items) =>
+              items.map((item) => {
+                const data = item.payload.doc.data();
+                const id = item.payload.doc.id;
+                this.id = id;
+                return { id, ...data } as User;
+              })
+            )
+          );
+      })
+    );
   }
 
   public addNewUser(name: string, surname: string, id: string): void {
-    this.db
-      .collection<User>('/users')
-      .add({ uid: id, name: name, surname: surname });
+    this.db.collection<User>('/users').add({
+      uid: id,
+      name: name,
+      surname: surname,
+      city: '',
+      street: '',
+      house: null,
+      apartment: null
+    });
   }
 
   public changeName(name: string): void {
@@ -50,5 +52,16 @@ export class UserService {
 
   public changeSurname(surname: string): void {
     this.db.doc<User>(`users/${this.id}`).update({ surname: surname });
+  }
+
+  public changeAddress(
+    city: string,
+    street: string,
+    house: number,
+    apartment: number
+  ): void {
+    this.db
+      .doc<User>(`users/${this.id}`)
+      .update({ city, street, house, apartment });
   }
 }

@@ -3,11 +3,19 @@
     <app-search-line (changed)="updateSearchValue($event)"></app-search-line>
   </div>
   <div class="catalog_item__sort">
-    <app-sort (changed)="onChange($event)"></app-sort>
+    <app-sort
+      (changed)="onChange($event)"
+      [value]="sortType"
+      [disabled]="isSortingDisabled()"
+    ></app-sort>
   </div>
 </div>
 <div class="catalog">
-  <app-filter></app-filter>
+  <app-filter
+    [productType]="productType"
+    (changedFilter)="onChangeFilters($event)"
+    (resetedFilters)="resetFilters()"
+  ></app-filter>
   <app-product-list
     [products$]="products$"
     [hasMore$]="hasMore$"
@@ -16,7 +24,7 @@
 </div>
 <div class="compare-notification" *ngIf="getCompareItemsAmount() > 0">
   <button routerLink="/compare-page" class="compare-notification__button">
-    Товаров в сравнении: {{ getCompareItemsAmount() }}
+    Products in compare: {{ getCompareItemsAmount() }}
   </button>
   <button class="compare-notification__button" (click)="clearCompareList()">
     <div class="icon-trash"></div>

@@ -1,7 +1,6 @@
 export const catalog = [
-  { name: 'Телефоны', href: 'catalog/phone' },
-  { name: 'Ноутбуки', href: '#' },
-  { name: 'Умные часы', href: '#' },
-  { name: 'Наушники', href: 'catalog/headphones' },
-  { name: 'Скидки', href: '#' }
+  { name: 'Phones', href: 'catalog/phone' },
+  { name: 'Laptops', href: 'catalog/laptops' },
+  { name: 'Smart watches', href: 'catalog/smartwatches' },
+  { name: 'Headphones', href: 'catalog/headphones' }
 ];

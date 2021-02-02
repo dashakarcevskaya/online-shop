@@ -1,6 +1,9 @@
+@import 'variables';
+
 .catalog {
   display: flex;
   justify-content: center;
+  padding: 20px;
 }
 
 .catalog_item__sort {
@@ -8,23 +11,23 @@
   margin-left: 40px;
   display: flex;
   justify-content: center;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 20px;
+}
+app-filter {
+  max-width: 250px;
+  width: 100%;
+  margin-right: 10px;
+}
+app-product-list {
+  width: 100%;
+  max-width: 1150px;
 }
 
 .catalog-item__header {
   display: flex;
   justify-content: flex-end;
-}
-
-@media (max-width: 768px) {
-  .catalog {
-    flex-direction: column;
-  }
-}
-
-.catalog_item__sort {
-  display: flex;
-  justify-content: flex-end;
-  margin-right: 20px;
 }
 
 .compare-notification {
@@ -33,18 +36,18 @@
   align-items: center;
   right: 20px;
   bottom: 30px;
-  background: #DEB887;
+  background: @compare-notification;
   z-index: 1;
-  box-shadow: 0 0 5px 2px #dddddd;
+  box-shadow: 0 0 5px 2px @box-shadow-color;
   &__button {
     border: none;
     padding: 10px;
-    background: #DEB887;
+    background: @compare-notification_button;
     cursor: pointer;
-    border-right: 1px solid #8b8787;
+    border-right: 1px solid @border-color;
     outline: none;
     &:hover {
-      background: #d6a86b;
+      background: @compare-notification_button__hover;
     }
   }
 }
@@ -56,4 +59,74 @@
   opacity: 0.6;
   cursor: pointer;
   outline: none;
+}
+
+@media (max-width: 1280px) {
+  .catalog_item__sort {
+    margin-right: 100px;
+  }
+  .catalog-item__header {
+    margin-top: 15px;
+  }
+  .compare-notification {
+    height: 38px;
+    font-size: 14px;
+  }
+
+  .icon-trash {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media (max-width: 978px) {
+  app-filter {
+    max-width: 230px;
+  }
+}
+
+@media (max-width: 768px) {
+  .catalog {
+    flex-direction: column;
+  }
+  .catalog-item__header {
+    justify-content: end;
+    padding-left: 29px;
+  }
+}
+
+@media (max-width: 560px) {
+  .catalog_item__sort {
+    margin-right: 0;
+    margin-left: 0;
+    display: block;
+  }
+
+  .catalog-item__header {
+    display: block;
+  }
+  .compare-notification {
+    font-size: 12px;
+  }
+
+  .icon-trash {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+@media (max-width: 420px) {
+  .catalog-item__header {
+    padding-left: 19px;
+  }
+}
+
+@media (max-width: 320px) {
+  .compare-notification {
+    height: 34px;
+
+    &__button {
+      padding: 6px;
+    }
+  }
 }

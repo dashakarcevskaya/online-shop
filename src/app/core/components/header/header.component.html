@@ -1,16 +1,18 @@
 <header class="header">
   <div class="header__logo">
     <a routerLink="/main-page" routerLinkActive="active">
-      <img src="assets/images/logo.svg" class="logo"/></a>
+      <img src="assets/images/logo.svg" class="logo"
+    /></a>
   </div>
   <div class="header-navigation">
     <ul class="header-navigation__list">
       <li class="header-navigation__list-items">
-        <a href="/catalog" class="header-navigation__item">Каталог</a>
+        <a href="/catalog" class="header-navigation__item">Catalog</a>
         <ul class="header-navigation__catalog">
           <li
-            *ngFor="let item of catalog"
-            class="header-navigation__catalog-item">
+            *ngFor="let item of catalog; trackBy: trackByFn"
+            class="header-navigation__catalog-item"
+          >
             <a routerLink="/{{ item.href }}" routerLinkActive="active">{{
               item.name
             }}</a>
@@ -18,36 +20,69 @@
         </ul>
       </li>
       <li>
-        <a href="#" class="header-navigation__item header-navigation__delivery">Доставка</a>
+        <a
+          routerLink="/about"
+          routerLinkActive="active"
+          class="header-navigation__item header-contacts__contacts"
+          >About</a
+        >
       </li>
-      <li>
-        <a href="#" class="header-navigation__item header-contacts__contacts">Контакты</a>
-      </li>
-      <li>
-        <a href="#" class="header-navigation__item header-contacts__contacts">О нас</a>
-      </li>      
     </ul>
   </div>
-  <div *ngIf="display" class="navigation-menu__mobile-overlay" (click)="toggle()"></div>
-  <div [ngClass]="{'navigation-menu__mobile--visible': display}" class="navigation-menu__mobile">
+  <div
+    *ngIf="display"
+    class="navigation-menu__mobile-overlay"
+    (click)="toggle()"
+  ></div>
+  <div
+    [ngClass]="{ 'navigation-menu__mobile--visible': display }"
+    class="navigation-menu__mobile"
+  >
     <ul class="navigation-menu__items-mobile">
-      <li *ngFor="let item of catalog" class="navigation-menu__item-mobile">
-        <a href="{{item.href}}">{{ item.name }}</a>
+      <li *ngFor="let item of catalog; trackBy: trackByFn" class="navigation-menu__item-mobile">
+        <a href="{{ item.href }}">{{ item.name }}</a>
       </li>
     </ul>
   </div>
   <div class="header-actions">
-    <!-- <a href="#">
-      <div class="header-actions__icon header-actions__icon-search"></div>
-    </a> -->
-    <a routerLink="/compare-page" routerLinkActive="active">
-      <!-- <div class="header-actions__compare-quantity"></div> -->
-      <div class="header-actions__icon header-actions__icon-compare"></div>
+    <a
+      routerLink="/compare-page"
+      routerLinkActive="active"
+      class="header-actions_link"
+      title="Compare"
+    >
+      <div class="header-actions__icon header-actions__icon-compare">
+        <div class="header-actions__quantity-item">
+          <span class="header-actions__quantity">{{
+            getCompareItemsAmount()
+          }}</span>
+        </div>
+      </div>
     </a>
-    <a routerLink="/user-account" routerLinkActive="active">
+    <a
+      routerLink="/user-account"
+      routerLinkActive="active"
+      title="User account"
+    >
       <div class="header-actions__icon header-actions__icon-user"></div>
     </a>
-    <div class="header-actions__icon header-actions__icon-cart"></div>
-    <div class="header-actions__icon header-actions__mobile-menu" (click)="toggle()"></div>
+    <a
+      routerLink="/cart-page"
+      routerLinkActive="active"
+      class="header-actions_link"
+      title="Cart"
+    >
+      <div class="header-actions__icon header-actions__icon-cart">
+        <div class="header-actions__quantity-item">
+          <span class="header-actions__quantity">{{
+            getCartItemsAmount()
+          }}</span>
+        </div>
+      </div>
+    </a>
+    <div
+      class="header-actions__icon header-actions__mobile-menu"
+      (click)="toggle()"
+    ></div>
   </div>
 </header>

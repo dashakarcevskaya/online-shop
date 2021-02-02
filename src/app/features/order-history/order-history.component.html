@@ -1,0 +1,44 @@
+<div class="orders-container">
+  <span class="orders-container_title">Purchase history</span>
+  <div class="orders-container_order" *ngFor="let order of orders$ | async; trackBy: trackByFn">
+    <span class="order-number">Order № {{ order.number }}</span>
+    <div class="order-description">
+      <span class="order-description_title">Order date:</span>
+      <span class="order-date">{{ order.date }}</span>
+    </div>
+    <div class="order-description">
+      <span class="order-description_title">Order time:</span>
+      <span class="order-time">{{ order.time }}</span>
+    </div>
+    <div class="order-description">
+      <span class="order-description_title">Payment method:</span>
+      <span class="order-time">{{ getPaymentMethod(order) }}</span>
+    </div>
+    <div *ngIf="order.comment" class="order-description">
+      <span class="order-description_title">Comments on the order:</span>
+      <span class="order-time">{{ order.comment }}</span>
+    </div>
+    <div class="order-products">
+      <div *ngFor="let product of order.products; trackBy: trackByFn" class="order-product">
+        <img [src]="product.images" routerLink="{{ createUrl(product) }}" class="order-product_image" />
+        <div class="order-product_name">
+            <span routerLink="{{ createUrl(product) }}">{{ product.name }}</span>
+        </div>
+        <div class="order-product_quantity">
+            <span>{{ product.quantity }} x {{ product.price }} р.</span>
+        </div>
+        <div class="order-product_price">
+            <span>{{ product.quantity * product.price }} р.</span>
+        </div>
+      </div>
+      <div class="order-products_price">
+        <span>Order price</span>
+        <span>{{ order.orderPrice }} р.</span>
+      </div>
+    </div>
+  </div>
+  <button class="orders-container_button" (click)="loadMore()" *ngIf="hasMore$ | async">Load more</button>
+  <div class="orders-container_message" *ngIf="!hasOrders()" >
+    <span>No orders</span>
+  </div>
+</div>
